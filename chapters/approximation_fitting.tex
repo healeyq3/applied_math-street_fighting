@@ -1,0 +1,79 @@
+\begin{chapter}{Approximation and Fitting}
+
+    % norm approximation => a way of measuring closeness
+
+    First use that
+
+    \[\text{minimize} \; f_0(x) = \left\lVert Ax - b  \right\rVert_{2}\]
+    is equivalent to (since $f_0$ is nonnegative) 
+
+    \[\text{minimize} \; f_0(x)^2  = \left\lVert Ax - b  \right\rVert_{2}^2, \]
+    where $f_0(x) = \left\lVert Ax - b \right\rVert_{2}^2 = \left(Ax-b\right)^T\left(Ax-b\right)$. Important observations
+    \begin{itemize}
+        \item $f_0$ is convex.
+        \item The problem is unconstrained.
+    \end{itemize}
+    Furthermore, we know that the globally optimal solution, $x^*$, satisfies $\nabla f_0(x^*) = 0$. We use this as an opportunity
+    to practice matrix calculus. Specifically, we will use differentials to derive $\nabla f_0$. Start by writing out
+
+    \[df_0 = d \left( \left(Ax-b\right)^T\left(Ax-b\right) \right) = \left(A(x+dx)-b\right)^T\left(A(x+dx)-b\right) - \left(Ax-b\right)^T\left(Ax-b\right). \]
+    Recall that we wish to transform this equation into the form $df_0 = Df_0(x)dx$. Or rather,
+    we want to re-arrange the expression for $df_0$ so that the $dx$ terms are collected in one place and there's a clear expression for $Df_0(x)$. 
+    (Remember that depending on the complexity of the function, it's not always the case that the $dx$s will be collected on the right, as implied above.)
+    Of course, because we've already developed matrix calculus
+    atoms and compositions, we can take a shortcut. Rewrite $f_0(x) = g(h(x))$ where $g: \mathbf{R}^m \to \mathbf{R}$ and $h: \mathbf{R}^n \to \mathbf{R}^m$ are defined as
+    \[g(x) = x^T x \quad \text{and} \quad h(x) = Ax - b,\]
+    with corresponding matrix calculus atoms
+    \[Dg(x) = 2x^T \quad \text{and} \quad Dh(x) = A.\]
+    Also observe what this implies about $f_0$. Instead of being a mapping from $n$-dimensional Euclidean
+    space to the real line, it is actually the composition mapping $f_0: \mathbf{R}^n \to \mathbf{R}^m \to \mathbf{R}$.
+    This isn't profound, but it can be helpful to keep in mind when performing a derivation such as this one
+    since it reinforces the danger of absentmindedly commuting terms. Employing the chain rule, $Df_0(x) = Dg(h(x)Dh(x))$,
+    \[Df_0(x) = 2(Ax - b)^T A, \quad \text{so} \quad \nabla f_0(x) = \left(2(Ax - b)^T A \right)^T = 2A^T(Ax-b).\]
+    % In your optimality conditions section, specifically say that you are no longer going to walk through the steps
+    % of what needs to be done to find the optimal solution of an unconstrained convex problem => it is assumed.
+    Equating $\nabla f_0(x) = 0$, we arrive at the normal equations 
+    \[A^TAx = A^Tb,\]
+    with associated solution
+    \[x^* = (A^TA)^{-1} A^T b.\]
+
+\section{Forecasting}
+% Low rank forecasting: https://web.stanford.edu/~boyd/papers/pdf/low_rank_forecasting.pdf
+% PyTorch forecasting: https://medium.com/@mnitin3/pytorch-forecasting-introduction-to-time-series-forecasting-706cbc48768
+% multi variate time series forescasting with LTSM using Python: https://www.youtube.com/watch?v=ODEGJ_kh2aA
+    Sources:
+    \begin{itemize}
+        \item AR Model (page 28 VMLS)
+        \item RMS Prediction Error (page 50 VMLS)
+        \item Dirichlet energy page 66 VMLS
+        \item Finance example page 67 VMLS
+        \item Time series auto-correlation page 67
+        \item back-test timing page 127
+        \item Time series smoothing page 138 VMLS (convolution)
+        \item Markov model page 164
+        \item Regularizing time series (also Laplacian regularization) page 317 VMLS
+        \item Estimating a periodic time series page 318 VMLS (example of regularization)
+        \item Example of periodic time series to work on page 15.10 VMLS
+        \item de meaned return time series page 378 VMLS
+        \item feature matrix page 257 VMLS
+    \end{itemize}
+
+    \section{Least Squares Data Fitting}
+    \begin{itemize}
+        \item ``Least squares is widely used to construct a mathematical model from some data, experiments, or observations.''
+        \item Note how least squares is approached before fitting to data.
+        \item How to relate to a statistical approach
+        \item Is least squares part of the approximation and fitting chapter?
+    \end{itemize}
+
+    \section{Recurrent Neural Networks}
+    Source: Intro Statistical Learning with Python
+    \begin{itemize}
+        \item Used when data arise as sequences (so we are considering time series data)
+        \item RNNs build models that take into account this sequential nature of the data and build a memory of the past
+        \item The feature for each observation is a sequence of vectors
+            \[x_t \in \mathbf{R}^n, \quad t=1, \ldots, L\]
+    \end{itemize}
+
+    
+\end{chapter}

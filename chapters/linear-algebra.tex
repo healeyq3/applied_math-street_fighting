@@ -1,0 +1,90 @@
+\begin{chapter}{Linear Algebra}
+
+    % add Markov and Stochastic matrices. Relation to eigenvalues
+
+    % EE363 Lecture and HW breakdown
+        % L9 has monte Carlo based updates
+
+        % L17 has Markov 
+        
+        % Hw1 shur complement, determinant identity, lqr state tracking, lqr trip accumulator
+        
+        % HW2 derivative of matrix inverse, infinite horizon LQR for periodic system, LQR for mechanical system, hamiltonian matrices, value function for infinite horizon LQR, closed loop stability for receding horizon LQR, LQR with exponential weighting
+        
+        % HW3 solution of two point boundary value problem, controllability of feedback connection, another controllability question, matrix criterion for A-invariance of nullspace, complex eigenvalues and invariant planes, stochastic LQR for a supply chain with manufacturing delay
+        
+        % HW4 estimating unknown constant from repeated measurements, estimator error variance and correlation coefficient, MMSE predictor and interpolator, estimating initial subpopulations from total growth observations, sensor selection, MMSE estimation example, cholesky decomposition and estimation, hadmard product
+        
+        % HW5 one step ahead prediction of an autoregressive time series, Performance of Kalman filter when system dynamics change (Gauss Markov system), open loop control, simulation of gauss Markov system from statistical steady-state, implementing a Kalman Filter, Simultaneous sensor selection and state estimation
+        
+        % Hw6 constant norm and constant speed systems, iterative method for solving the ARE, Lyapunov condition for attraction, invariant ellipsoid for a linear system, global asymptotic stability for a system with small nonlinearity, stability analysis of system with intermittent failures
+        
+        % HW7 gain margin for LQR, gradient systems, bound on peaking factor via Lyapunov theory, digital filter with saturation, boundary of sub level sets and Lasalle’s theorem, LQR control with quantized gain matrix, schur complements and matrix inequalities (HERE)
+        
+        % HW8 Lyapunov condition for passivity, discrete time diagonal Lyapunov function, stabilizing state feedback via LMIs, stability of a switching system, Perron-Frobenius theorem for nonnegative but not regular matrices, bound on Perron Frobenius eigenvalue, relations between a matrix and its absolute value, weighted maximum Lyapunov function, iterative power control with receiver noise
+
+    % MATH 3406 lecture breakdown
+        % Lecture 18 of MATH 3406 for diagonalization proof
+        % Also same lecture for a good induction proof
+        
+        % Lecture 23 for A^TA and AA^T having the same non-zero eigenvalues
+        
+        % LEC 7 for graphs
+        
+        % LEC 9 for null space and inverse proofs
+        
+        % LEC 9 also for projections
+        
+        % LEC 10 for Cauchy Schwarz inequality, triangle inequality, and good projection intuition
+    
+    to adds:
+    \begin{itemize}
+        \item incidence matrix page 132 VMLS (networks there too)
+        \item bidiagonal matrix page 312~\cite{boyd_convex_optimization}
+    \end{itemize}
+
+    % Boyd lecture 9 has good linearization explanation => see hws
+
+    % CLEAN UP LDI SIMULATOR
+
+    % SCHUR
+
+    % GENERALIZED EIGEN
+
+    % JORDAN FORM
+
+    % 363 exercises
+
+    \section{Eigenvalues and Eigenvectors}
+
+    \subsection{Stability}
+
+    \subsubsection{Continuous Time Systems}
+
+    \subsubsection{Discrete Time Systems}
+
+    ~\cite{AA203} \textbf{HW0 Q1}. \textit{Discrete-time LTI stability}. Consider the system $x_{t+1} = Ax_t + Bu_t$, where
+    \[A = \begin{bmatrix}
+        4/5 & 0 & 0 \\
+        0 & \sqrt{3} & 1 \\
+        0 & -1 & \sqrt{3}
+    \end{bmatrix}, \quad 
+    B = \begin{bmatrix}
+        0 & 0 \\ 1 & 1 \\ 1 & 0
+    \end{bmatrix}.
+    \]
+
+    \noindent (a) Explain whether or not this sytem is ``open-loop stable'' (asymptotically stable for $u_t \equiv 0$).\\
+    \noindent \textbf{Response.} This sytem is unstable. To see this, note $\left| \lambda_1 \right| = \left| \lambda_2 \right| \approx 2$.
+    (Most likely they equal two, the numerical computation via Python yields a magnitude of 1.99... with 15 trailing 9s). Recall
+    that for a discrete time LTI system to be open-loop stable, the magnitude of all eigenvalues must be less than one.\\
+    \noindent (b) Design a linear feedback controller $u_t = Kx_t$ with fixed gain matrix $K \in \mathbf{R}^{2 \times 3}$ such
+    that the closed-loop system is asymptotically stable.\\
+    \textbf{Response.} This is a \textbf{state feedback control} problem where $K$ is the \textbf{state-feedback gain matrix}.
+    In this setting, we can rewrite the LTI system as % link way of doing it in Boyd, but also do scikit way 
+    % chatGPT suggested. Link more advanced sources too
+    \[x_{t+1} = Ax_t + Bu_t = Ax_t + B(Kx_t) = (A + BK)x_t, \quad t=1, 2, \ldots\]
+
+    \section{Linear Transformations}
+    
+\end{chapter}

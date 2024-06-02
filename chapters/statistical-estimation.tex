@@ -1,0 +1,110 @@
+\begin{chapter}{Statistical Estimation}
+
+    % have to assume things: simplest assumption is independent.
+    % more advanced assumption would be a bayesian network
+
+    % ISYE 6412 Problems
+    % === HOMEWORK 1 ===
+        % single Gaussian RV. Risk function work and some procedures
+        % vector of Gaussian RVs. Procedures mapping to R.
+        % Binomial RV with risk functions, procedures, and admissibility
+    % === HOMEWORK 2 ===
+        % confidence interval of i.i.d. Gaussian. Risk function perspective.
+        % hypothesis testing with binary coin. Bayes.
+        % Hypothesis testing and bayes procedures
+        % *** bayesian point estimation broad results ***
+    % === HOMEWORK 3 ===
+        % i.i.d. gaussian bayes procedure
+        % i.i.d. uniform and pareto prior with different losses
+        % LINEX loss; no data problem. Gaussian and Bayes procedure with LINEX loss
+        % single var Gamma distribution with gamma prior. posterior distribution. point estimation. CI
+        % Bayes with constant risk. i.i.d. Ber with square loss, beta prior, different procedures
+    % === HOMEWORK 4 ===
+        % minimax. single ber var under square loss and restricted domain
+        % another single ber minimax problem with nonsymmetric restricted domain
+        % another restriction to the original problem
+        % sequence of priors to find minimax
+        % minimax properties extended from smaller domain to a larger domain
+        % impact of loss function on minimax properties
+
+    % === HOMEWORK 5 ===
+        %  homework on relation between procedures and admissibility
+    % === HOMEWORK 6 ===
+
+    % === HOMEWORK 7 ===
+
+    % === HOMEWORK 8 ===
+
+    % === HOMEWORK 9 ===
+
+    % === HOMEWORK 10 ===
+
+    % === HOMEWORK 11 ===
+
+    % === HOMEWORK 12 ===
+
+    Unlike in the probability chapter, we
+
+    \section{Parametric Distribution Estimation}
+
+    My notation
+    \begin{itemize}
+        \item likelihood function will use the same notation as the probability density function: $p_{\theta}(x)$.
+    \end{itemize}
+
+    % can always just have this less stat theory chapter and then later have a SDT chapter
+
+    \subsection{Maximum Likelihood}
+
+    \subsubsection{Poisson Maximum Likelihood}
+    % add picture of Poisson
+    % 6412 HW8 Q6 is a Poisson problem: best unbiased estimator
+    % 6412 HW10 Q3 is Poisson MLE, cramer-rao, etc.
+
+    Suppose we are a store owner. It is obviously desireable to have an estimate for the number of customers
+    that might come to our store on any given day. In the Approximation and Fitting chapter, we addressed this type
+    of problem with \textbf{forecasting}. More specifically, if we had a dataset containing the number of customers
+    who came into our store each day, we could fit a time series model (perhaps an AR model or a model with trend and seasonal components) to attempt to predict the 
+    customer demand over some time horizon (the next week, perhaps).
+
+    In this chapter, we take an alternative approach. Specifically, $y \approx f(x)$. (Although it is worth mentioning that more often than not,
+    forecasting problems )
+    
+    While \textbf{predicting or forecasting demand} is a 
+    difficult problem with complications such as seasonality, perhaps we do not yet have any demand data and we just
+    want some baseline model which can help inform our inventory ordering. Furthermore, for the next $N$ days we count the number
+    of customers who visit our store \textit{each day}. We can pose our estimation problem as follows:
+    \begin{itemize}
+        \item Let $x \in \mathbf{R}$ be a random variable representing the number of customers who visit
+        the store on any given day.
+        \item Since the Poisson distribution is often used to count the number of random arrivals to
+        a system within a given amount of time, we assume that $x \sim \text{Poisson}(\lambda)$.
+        \item Having collected $N$ instances of $x$ %mention Bayesian networks
+    \end{itemize}
+    
+    % add number of parameters
+    
+    \[p_{\lambda}(x) = \prod_{t=1}^{T}\frac{e^{-\lambda}\lambda^x_{t}}{x_t!}\]
+
+    The corresponding log-likelihood function
+
+    \[\begin{aligned}
+        l(\lambda) &= \left(\sum_{t=1}^{T} -\lambda + x_t \log \lambda - \log(x_t!) \right) \\
+        &= -T\lambda + \log \lambda \left(\sum_{t=1}^{T}x_t  \right) - \left( \sum_{t=1}^{T} \log (x_t!) \right)
+    \end{aligned}\]
+
+    \[\text{maximize} \; -T \lambda + \log \lambda \sum_{t=1}^{T}x_t - \sum_{t=1}^{T}\log(x_t!) \]
+
+    Equivalent to (and have written $\lambda$ under maximize to emphasize). Also note that unlike in other contexts,
+    we have not specified that $\lambda > 0$. I want to stress the reason: we have adopted the notation of CVX 
+    and use problem domain. $\lambda > 0$ is not really a constraint on our maximization problem, if you were to 
+    give this problem a non-positive lambda, we couldn't even evaluate the problem.
+
+    \[ \underset{\lambda}{\text{maximize}}  \; -T\lambda + \left( \sum_{t=1}^{T}x_t \right)\log \lambda.\]
+
+    \[\hat{\lambda} = \text{argmax}_{\lambda} \; l(\lambda) = \frac{1}{T}\sum_{t=1}^{T}x_t\]
+
+    which of course is just the sample mean of the $T$ observations in the sample.
+
+
+\end{chapter}

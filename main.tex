@@ -1,0 +1,113 @@
+\documentclass[12pt,reqno]{report}
+
+\usepackage{amsmath, amssymb, amsfonts, amsbsy, amsthm, latexsym, graphicx, mathrsfs}
+\usepackage{bbm}
+\usepackage{bm}
+\usepackage{forest}
+\usepackage{caption}
+\usepackage{algorithm2e}
+\usepackage{tikz}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=red,
+    urlcolor=blue,
+    citecolor=green,
+}
+\RestyleAlgo{ruled}
+
+\usepackage[backend=biber,style=alphabetic]{biblatex}
+% Add your .bib file
+\addbibresource{refs.bib}
+
+
+\oddsidemargin  0.0in
+\evensidemargin 0.0in
+\setlength{\topmargin}{.0in}
+\setlength{\textheight}{8.75 true in}
+\setlength{\textwidth}{6.5 true in}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem} [section]
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+\numberwithin{equation}{section}
+
+\title{Convex Optimization Street Fighting}
+\author{Quill Healey}
+% \date{January 19, 2024}
+
+\begin{document}
+\maketitle
+
+\include{chapters/chapter1}
+
+\part{Theory}
+
+% CHAPTER: LINEAR ALGEBRA
+\include{chapters/linear-algebra}
+% CHAPTER: DIFFERENTIAL CALCULUS
+\include{chapters/matrix-calculus}
+% CHAPTER: NUMERICS
+% Chapter Convexity (probably separate into sets and functions)
+    % first go through the most basic convex theory problems. Avoid
+    % application areas. Also avoid the more convex topics such as
+    % the conjugate function. Instead put this with duality
+    % Where to put GEOMETRY (convex sets?)
+    % MOVE BACK AND FORTH BETWEEN 2&3 BASED ON WHAT YOU NEED FOR 4
+% Mathematical Optimization (mainly convex)
+% Duality
+\include{chapters/prob-theory}
+
+
+\part{Applications Part I}
+
+\include{chapters/}
+
+\include{chapters/approximation_fitting}
+
+% forecasting will probably be moved to approximation and fitting for now
+
+\include{chapters/statistical-estimation}
+
+% GEOMETRY/CLASSIFICATION CHAPTER
+
+% Robust Optimization (or is this covered in function fitting...probably not everything since some robustis stochastic)
+    % disciplined stochastic programming https://web.stanford.edu/~boyd/papers/pdf/dcsp_uai.pdf
+
+
+\part{Applications Part II}
+
+% might need to change ordering, specify classic control versus new control
+% eventually need to have some high level on neural architectures (practical DL for coders: https://course.fast.ai/)
+
+\include{chapters/control}
+
+% Statistical Decision Theory
+
+% Bayesian networks inference (CS221): https://www.youtube.com/watch?v=U23yuPEACG0&t=394s
+% sparse Bayes network identification (ex 11.2) https://stanford.edu/class/ee364b/364b_exercises.pdf
+
+% Markov Decision Processes
+
+\part{Algorithms}
+
+% Linear Algebra
+% Sampling and Inference
+% Convex Optimization
+% Modern (remember that you saw modern Boyd algos in Strang's book)
+    % EE364 has GREAT material
+
+% \section*{References}
+% \bibliographystyle{apalike}
+% \bibliography{refs}
+\printbibliography
+
+\appendix
+
+\include{chapters/appendixA}
+% Remember to add a section with links to things such as "linearizing LPs"
+
+\end{document}

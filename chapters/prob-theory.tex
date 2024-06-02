@@ -1,0 +1,125 @@
+\begin{chapter}{Probability Theory}
+
+    About:
+    \begin{itemize}
+        \item chapter will examine probability theory through the lense of convex optimization.
+        Probability theory itself is not the main focus. 
+    \end{itemize}
+
+    \noindent Todos
+    \begin{itemize}
+        \item Where to add chebychev
+        \item simple chebychev example page 54 VMLS
+        \item correlation coefficient page 60 VMLS
+        \item 
+    \end{itemize}
+
+    \noindent Outline
+    \begin{itemize}
+        \item Basics (what you need probabilistically to proceed) subsection 1: the probability theory.
+        subsection 2: Viewing the probabilistic objects through the lense of convex optimization
+        \item Sets: Exercise 2.15
+        \item Functions: Exercise 3.24.
+        \item Basic Problems
+    \end{itemize}
+    
+    \section{Basics}
+    \subsection{Probabilistics Objects and Notation}
+    I will adopt the notation used by the source material. % here are some premises
+    \begin{itemize}
+        \item Unlike in statistical texts, random variables (RVs) will not by default be a capital letter.
+        That is, never assume that a capital lettered variable (or any other variable, for that matter) is a random variable, even in a statistical
+        context. If $x$ or $X$ is a random variable, it will be declared as such.
+        \item A random variable, $x$, may be real valued or it may be vector valued. That is to say, the notation for a random variable or a \textit{random vector}
+        will amost always be the same. However, it will always be specified upon instantiation (using computer science/software engineering dialect) whether $x$ is a random variable or whether it
+        is a random vector. 
+        \item In this chapter, we will primarily work with random variables which takes on discrete values. That is,
+        $x \sim (\Omega_x, E_x, \mathbf{Prob}_x)$ where $\Omega_x = \left\{ a_1, a_2, \ldots, a_n \right\} \subset \mathbf{R}^n$ and
+        it is assumed that $a_1 < a_2 < \cdots < a_n$.
+        \item The fundamental probability space $(\Omega_\omega, E_\omega, \mathbf{Prob}_\omega)$ which induces the random variable's
+        probability space via the relation $x: \Omega_\omega \to \Omega_x$ is irrelevant to our analysis.
+        \item The probability of an outcome $a_i$ in $\Omega_x$ ocurring will be denoted in the following ways:
+        \[p_x(a_i) = \mathbf{Prob}_{x}\left(a_i\right) = \mathbf{Prob}\left(x = a_i\right) = p_i.\]
+        We'll refer to $p_x(\cdot)$ as the \textit{probability mass function} (PMF) for the random variable $x$ and to $\left\{ p_i \right\}_{i=1}^n$ as the
+        RV's distribution.
+        \item We'll let $F_x(\alpha) = \mathbf{Prob}\left(x \le \alpha\right)$ be the \textit{cumulative distribution function} (CDF) for the random variable $x$.
+    \end{itemize}
+
+    \subsection{Discrete Probabilistic Objects through a Convex Lens}
+
+    % which together illuminate interesting results in convex analysis, probability theory, and the interplay between the two,
+
+    Before proceeding to exercises and, it is helpful to collect the above objects 
+    
+    Before proceeding to exercises it is helpful to collect some objects. We take $x$ to be a
+    discrete random variable on a finite sample space, as defined above.
+
+    % PROBABILITY SIMPLEX: INCLUDE THE BREAKDOWN YOU DID IN YOUR HANDWRITTEN NOTES
+
+    \begin{itemize}
+        \item The CDF of $x$ can be expanded as
+        \[F_x(\alpha) = \mathbf{Prob}\left(x \le \alpha\right) = \mathbf{Prob}\left(x \le \alpha_k\right) = \sum_{i=1}^{k}p_i,\]
+        where $k = \max \left\{ j \mid a_j \le \alpha \right\}$. It is \textbf{critical} to note that $k$ is a fixed integer,
+        \textbf{independent of} $p$. Furthermore, the CDF is just a linear function of $p$.
+        \item The \textit{expectation} (or weighted average) of $x$, $\mathbf{E} \, x = \sum_{i=1}^{n}p_ia_i = p^Ta$, is a linear function of $p$.
+        % TODO: in your math section note how you notation for operators and how they will use brackets or not use brackets 
+        % TODO: check VMLS for definition of variance 
+        % TODO: somewhere in your note system you should have common expectation properties
+        % TODO: should write down in your note system how x^2 is a transformation of the original random variable. When and how this works. See Murphy. 
+        \item When we transform a random variable, $x \to f(x)$,
+        the expectation becomes
+        \[\mathbf{E}\, f(x) = \sum_{i=1}^{n}p_if(a_i),\]
+        which \textbf{is still a linear function of} $p$.
+        (A curious reader may wonder what types of transformations are valid and how this works.
+        Since probability theory is not the focus of these notes, accept the above statement as true since
+        it will be true for all examples and exercises in these notes. However, to answer this question I recommend Murphy and Lay). % TODO: add reference
+        \item The \textit{variance} of $x$, which can be thought of as a measure of how much $x$ typically deviates from its expectation,
+        is defined as $\mathbf{Var} \, x  = \mathbf{E}\left[ (x - \mathbf{E}\, x)^2 \right]$. However, we can rewrite the variance
+        using common properties of the expectation operator as
+        \[\begin{aligned}
+            \mathbf{Var}\, x &= \mathbf{E}\left[ (x - \mathbf{E} \, x)^2\right] \\
+            &= \mathbf{E}\left[ x^2 - 2 x \mathbf{E}\, x + (\mathbf{E}\, x)^2 \right] \\
+            &= \mathbf{E}\, x^2 - 2 (\mathbf{E}\, x)(\mathbf{E}\, x) + (\mathbf{E}\, x)^2 = \mathbf{E}\, x^2 - (\mathbf{E}\, x)^2.
+        \end{aligned}\]
+        To remember this more tractable expression, firstly note that the variance of a random variable is nonnegative. This can be seen
+        mathematically from the definition of $\mathbf{Var}$, and it should also be intuitive when thinking of the variance \textit{as a measure}.
+        Furthermore, recall the general form of Jensen's inequality: $f(\mathbf{E}\, x) \le \mathbf{E}\, f(x)$, where $f$ is a convex function. Moving
+        the left hand side to the right hand side and using $x \overset{f}{\to} x^2$ yields our desired expression.
+        % explain an easy way to remember the alternative form of variance
+        \item The quartile of $x$ 
+    \end{itemize}
+    
+    \section{Sets}
+
+    
+    
+    
+    With these objects at our disposal, most of the solutions to problems in \textbf{Exercise 2.15}
+    are immediately apparent. Furthermore, we just address the following.
+    %The key to any problem is recognizing that we are simply intersecting additional constraints on $p$ 
+
+    \begin{itemize}
+        \item[(a-e)] Note that each operator on $x$ is linear in $p$. Furthermmore, the
+        mixing of linear expressions in $p$ with inequalities ($\le$ or $\ge$) does not result in
+        nonconvex conditions on $P$.
+        \item[(f-g)] Firstly, let's utilize Chapter Three composition techniques:
+            \begin{itemize}
+                \item $\mathbf{E}\, x^2$, as already established, is linear in $p$. %TODO: make sure linear in p is proper way of saying that
+                \item $f: \mathbf{R} \to \mathbf{R}$ defined as $f(x) = x^2$ is convex. When $g: \mathbf{R} \to \mathbf{R}$ is also convex,
+                $f(g(x)) = (g(x))^2$ is convex. Furthermore, $(\mathbf{E}\, x)^2$ is a convex quadratic in $p$.
+                \item The expression (\textit{linear function} $-$ \textit{convex quadratic function}) is a \textit{concave quadratic expression}.
+            \end{itemize}
+            Using $f(p) = \mathbf{Var}\, x = \mathbf{E}\, x^2 - (\mathbf{E}\, x)^2$ to emphasize that the variance is a concave quadratic function of $p$,
+            (f) and (g) follow 
+            from the recollection that $\left\{ p \in P \mid f(p) \ge \alpha \right\}$ is a convex set
+            while $\left\{ p \in P \mid f(p) \le \alpha \right\}$ is not. Additonally, note that the expression in the answer key
+            for $(\mathbf{E}\, x)^2$ can be derived as follows:
+            \[(\mathbf{E}\, x)^2 = (p^Ta)^2 = (p^T a) (p^T a) = (p^T a) (p^T a)^T = (p^T a )(a^T p) = p^T A p.\]
+        \item[(h)] The picture in the solutions posted to EE364a's Stanford Engineering Everywhere page is very useful. % todo: give link
+    \end{itemize}
+
+    % make sure to give upshot about why these sets and functions are important (probably at end)
+    % before moving to functions note the difference in exercises: intersecting the probability simplex with additonal constraints in p
+    % versus having functions on the probability simplex
+
+\end{chapter}

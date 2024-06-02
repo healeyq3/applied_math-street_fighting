@@ -1,0 +1,70 @@
+\begin{chapter}{Implementation}
+
+    \begin{itemize}
+        \item For now setting is Python.
+        \item Will include C++ gradually.
+        \item Especially how to generate C optimization solvers from CVXPY.
+    \end{itemize}
+
+    \section{CVXPY}
+    % my most used library
+    % things to keep in mind
+
+    \section{C++}
+    % sliding window: https://www.geeksforgeeks.org/window-sliding-technique/
+    % disjoint sets of vertices in a given graph: https://www.geeksforgeeks.org/find-two-disjoint-good-sets-of-vertices-in-a-given-graph/
+    % multi threading C++ https://www.geeksforgeeks.org/multithreading-in-cpp/
+
+    % \section{Basic Algebra}
+
+    % \section{Linear Algebra}
+
+    % \begin{itemize}
+    %     \item Proof of Cauchy Schwarz
+    % \end{itemize}
+
+    % \section{Derivatives}
+    % (As a foreward, if it is not said so, assume that a given function is differentiable. When defining new
+    % rules and objects I'll attempt to be precise, but elsewhere I may not specify.)
+
+    % \subsection{Matrix Calculus}
+    % \subsubsection{Rules}
+    % For all the following, assume that $f$ and $g$ are differentiable functions which \textit{make sense} (e.g $f(x)g(x)$
+    % where $f$ and $g$ are maps from $\mathbf{R}^n$ to $\mathbf{R}^n$ \textit{would not} make sense
+    % as the product of two column vectors is not defined. However, in the same setting $f(x)^T g(x)$ would make sense.)
+    % Also, please be careful to remember the notation defined above (In some rules I'll give more context)
+    % \begin{enumerate}
+    %     \item \textit{Sum Rule}. For $\mathbf{h(x) = f(x) + g(x)}$, $dh = df + dg\; \implies \; Dh(x)dx = Df(x)dx + Dg(x)dx \; \implies \; Dh(x)dx = (Df(x) + Dg(x))dx \; \implies \; \mathbf{Dh(x) = Df(x) + Dg(x)}$
+    % \end{enumerate}
+    
+    % \subsection{Chain rule for second derivative}
+    % We'll work on deriving the following case using \textit{matrix calculus} techniques (differentials).
+    % \subsubsection*{Composition with scalar function}
+    % Suppose $f: \mathbf{R}^n \to \mathbf{R},\; g : \mathbf{R} \to \mathbf{R}$ and $h(x) = g(f(x))$.
+    % Finding the first derivative is straightforward: we just utilize the generalized chain rule
+    
+    % \begin{align*}
+    %     Dh(x) = Dg(f(x)) = g'(f(x))Df(x), \label{eq:chain-comp}
+    % \end{align*}
+    % which implies
+    % \begin{align}
+    %     \nabla h(x) = g'(f(x))\nabla f(x).
+    % \end{align}
+    
+    % \noindent We now wish to find the \textit{Hessian} of $h$. Recall that for scalar-valued, differentiable functions such as $f$,
+    % \[D \nabla f(x) = \nabla^{2}f(x), \]
+    % where $\nabla f : \mathbf{R}^n \to \mathbf{R}^n$ is the \textit{gradient mapping} with $\textbf{dom} \, \nabla f = \textbf{dom} \, f$,
+    % with value $\nabla f(x)$ at $x$. Furthermore, it's intuitive that the derivative of this gradient mapping is the original function's Hessian.
+    % \begin{enumerate}
+    %     \item \textit{Intuition Check One} (picture). 
+    %     \item \textit{Intuition Check Two} (dimensions). Since the derivative of a function is an (first-order linear approximation)
+    %     operator which when given a change in input, outputs the approximate change in the function's input
+    % \end{enumerate}
+
+    % We return to \eqref{eq:chain-comp}
+    
+    % \begin{align*}
+    %     d \nabla h = d((g' \circ f) \nabla f )
+    % \end{align*}
+
+\end{chapter}

@@ -1,0 +1,146 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.1 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{anyt/global//global/global}
+    \entry{EE364b}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=ec94d94cc487dd71939a90cbeaaf47d0}{%
+           family={Boyd},
+           familyi={B\bibinitperiod},
+           given={Stephen},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{ec94d94cc487dd71939a90cbeaaf47d0}
+      \strng{fullhash}{ec94d94cc487dd71939a90cbeaaf47d0}
+      \strng{bibnamehash}{ec94d94cc487dd71939a90cbeaaf47d0}
+      \strng{authorbibnamehash}{ec94d94cc487dd71939a90cbeaaf47d0}
+      \strng{authornamehash}{ec94d94cc487dd71939a90cbeaaf47d0}
+      \strng{authorfullhash}{ec94d94cc487dd71939a90cbeaaf47d0}
+      \field{labelalpha}{Boy-8}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{EE36b: Convex Optimization II}
+      \field{year}{2007-8}
+      \verb{urlraw}
+      \verb https://see.stanford.edu/Course/EE364B
+      \endverb
+      \verb{url}
+      \verb https://see.stanford.edu/Course/EE364B
+      \endverb
+    \endentry
+    \entry{boyd_convex_optimization}{book}{}
+      \name{author}{2}{}{%
+        {{hash=ec94d94cc487dd71939a90cbeaaf47d0}{%
+           family={Boyd},
+           familyi={B\bibinitperiod},
+           given={Stephen},
+           giveni={S\bibinitperiod}}}%
+        {{hash=2608d599a0bc2a784c301329a8da5f7b}{%
+           family={Vandenberghe},
+           familyi={V\bibinitperiod},
+           given={Lieven},
+           giveni={L\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Cambridge, UK}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge University Press}%
+      }
+      \strng{namehash}{436abed3bce8d1b1d30640d4e5ff3d58}
+      \strng{fullhash}{436abed3bce8d1b1d30640d4e5ff3d58}
+      \strng{bibnamehash}{436abed3bce8d1b1d30640d4e5ff3d58}
+      \strng{authorbibnamehash}{436abed3bce8d1b1d30640d4e5ff3d58}
+      \strng{authornamehash}{436abed3bce8d1b1d30640d4e5ff3d58}
+      \strng{authorfullhash}{436abed3bce8d1b1d30640d4e5ff3d58}
+      \field{labelalpha}{BV04}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{978-0521833783}
+      \field{title}{Convex Optimization}
+      \field{year}{2004}
+    \endentry
+    \entry{AA203}{misc}{}
+      \name{author}{2}{}{%
+        {{hash=35318fcd7c56edabda1a4c70f2174048}{%
+           family={Pavone},
+           familyi={P\bibinitperiod},
+           given={Marco},
+           giveni={M\bibinitperiod}}}%
+        {{hash=0cc33a05dea81b0382f0588fcb1c69f0}{%
+           family={Gammelli},
+           familyi={G\bibinitperiod},
+           given={Daniele},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{bf4b7e3839f594286a357051733a95f0}
+      \strng{fullhash}{bf4b7e3839f594286a357051733a95f0}
+      \strng{bibnamehash}{bf4b7e3839f594286a357051733a95f0}
+      \strng{authorbibnamehash}{bf4b7e3839f594286a357051733a95f0}
+      \strng{authornamehash}{bf4b7e3839f594286a357051733a95f0}
+      \strng{authorfullhash}{bf4b7e3839f594286a357051733a95f0}
+      \field{labelalpha}{PG24}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{AA203: Optimal and Learning-Based Control}
+      \field{year}{2024}
+      \verb{urlraw}
+      \verb https://stanfordasl.github.io/aa203/sp2324/
+      \endverb
+      \verb{url}
+      \verb https://stanfordasl.github.io/aa203/sp2324/
+      \endverb
+    \endentry
+    \entry{actuator_youtube}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=b9df0dbecb64f85910957f3e8b1242a0}{%
+           family={RealPars},
+           familyi={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{b9df0dbecb64f85910957f3e8b1242a0}
+      \strng{fullhash}{b9df0dbecb64f85910957f3e8b1242a0}
+      \strng{bibnamehash}{b9df0dbecb64f85910957f3e8b1242a0}
+      \strng{authorbibnamehash}{b9df0dbecb64f85910957f3e8b1242a0}
+      \strng{authornamehash}{b9df0dbecb64f85910957f3e8b1242a0}
+      \strng{authorfullhash}{b9df0dbecb64f85910957f3e8b1242a0}
+      \field{labelalpha}{Rea20}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{What is an Actuator}
+      \field{year}{2020}
+      \verb{urlraw}
+      \verb https://www.youtube.com/watch?v=LHn7O6PUaoY
+      \endverb
+      \verb{url}
+      \verb https://www.youtube.com/watch?v=LHn7O6PUaoY
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

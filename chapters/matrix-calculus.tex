@@ -1,0 +1,113 @@
+\begin{chapter}{Matrix Calculus}
+
+    % matrix calc MIT website is VERY useful - many good links
+
+    \section{Notation}
+    
+    \section{Rethinking the Derivative}
+
+    \section{Some Analysis}
+
+    % include relation to gradient 
+    % include how to use dimensionality to check validity of derivative and gradient
+    % using d() as an operator
+
+    \section{Some Geometry}
+    % include useful pictures Boyd gives and/or links to pictures
+    
+    \section{Calculus Composition Rules}
+    % when does associativity not hold
+    \begin{itemize}
+        \item be careful with composing differentials versus derivatives versus gradients
+        \item Move right to ``beyond high school calculus,'' most importantly now must be careful with commuting.
+        \item We are assuming differentiability throughout.
+    \end{itemize}
+
+    \subsubsection{Sum Rule}
+    The generalized matrix calculus sum rule is exactly what you would think it would be. Given
+    $f: \mathbf{R}^n \to \mathbf{R}^m$ where $f(x) = g(x) + h(x)$,
+    \[df = dg + dh,\]
+    which can be expanded (according to the definition of a differential) as 
+    \[Df(x)dx = Dg(x)dx + Dh(x)dx = (Dg(x) + Dh(x))dx.\] Therefore,
+    \[Df(x) = Dg(x) + Dh(x).\]
+
+    \subsubsection{Product Rule}
+    Consider $f: \mathbf{R}^n \to \mathbf{R}^m$ defined as $f(x) = g(x)h(x)$. The product rule
+    derivation is as follows.
+    \[df = f(x + dx) - f(x) = g(x + dx)h(x + dx) - g(x)h(x).\]
+    Using that $g(x + dx) = g(x) + Dg(x)dx$ and $h(x + dx) = h(x) + Dh(x)dx$, 
+    the differential $df$ can be expanded as
+    \[\begin{aligned}
+        df &= \left(g(x) + Dg(x)dx \right) \left(h(x) + Dh(x)dx\right) - g(x)h(x) \\
+        &= g(x)h(x) + g(x)Dh(x)dx + Dg(x)dxh(x) + Dg(x)dxDh(x)dx - g(x)h(x),
+    \end{aligned}\]
+    ignoring the higher order terms, removing like terms, and being mindful \textit{to not commute terms},
+    we are left with
+    \[\begin{aligned}
+        df &= g(x)Dh(x)dx + Dg(x)dxh(x).
+    \end{aligned}\]
+    This of course should look like the typical product rule seen for Calculus I derivatives,
+    but we have mixed differentials and derivatives. 
+    \[df = g (dh) + (dg)h \quad \text{and} \quad Df(x)dx = g(x)\left(Dh(x)dx\right) + \left(Dg(x)dx\right) h(x).\]
+    \begin{itemize}
+        \item Notice that we have not written that $Df(x) = g(x)Dh(x) + Dg(x) h(x)$.
+    \end{itemize}
+
+    \section{Calculus Atoms}
+    % remember that higher order terms vanish
+
+    % \subsection{Calculus I}
+
+    \subsection{Vector Functions}
+
+    \subsubsection*{Linear and Affine Functions}
+    Take $f: \mathbf{R}^n \to \mathbf{R}^m$ defined as $f(x) = Ax - b$ for some $A \in \mathbf{R}^{m \times n}$
+    and $b \in \mathbf{R}^m$.
+    \[df = d(Ax - b) = A(x + dx) - b - (Ax - b) = Adx,\]
+    so
+    \[Df(x) = A \quad \text{and} \quad \nabla f(x) = A^T.\]
+
+    \subsubsection*{Euclidean Inner Product}
+    Take $f: \mathbf{R}^n \to \mathbf{R}$ defined as $f(x) = x^T x$.
+
+    \[\begin{aligned}
+        df = d(x^T x) &= (x + dx)^T (x + dx) - x^T x \\
+        &= x^T x + x^T dx + (dx)^T x + (dx)^2 - x^Tx \\
+        &= 2x^T dx,
+    \end{aligned}\]
+    where the last equality holds because $a$ is always equal to $a^T$ when $a \in \mathbf{R}$. 
+    Therefore,
+    \[Df(x) = 2x^T \quad \text{and} \quad \nabla f(x) = 2x.\]
+
+    \subsubsection*{Quadratic Form}
+    Consider $f: \mathbf{R}^n \to \mathbf{R}$ defined as $f(x) = x^T A x$ for some $A \in \mathbf{R}^{n \times n}$.
+    \[\begin{aligned}
+        df = d(x^TAx) &= (x + dx)^T A (x + dx) - x^T A x \\
+        &= x^T A x + x^T A dx + (dx)^TAx + (dx)^T A dx - x^T A x \\
+        &= x^T A dx + x^TA^Tdx \\
+        &= x^T(A + A^T)dx,
+    \end{aligned}\]
+    so 
+    \[Df(x) = x^T(A + A^T) \quad \text{and} \quad \nabla f(x) = \left(x^T(A + A^T) \right)^T = (A + A^T)x.\]
+    (Note that $(A + A^T)^T = (A + A^T) \Leftrightarrow A + A^T \in \mathbf{S}^{n}$.)
+
+    \subsubsection{Quadratic Form Restricted Case}
+    Consider the same function $f: \mathbf{R}^n \to \mathbf{R}$ where $f(x) = x^T A x$, but now
+    $A \in \textbf{S}^{n}$. The above differential derivation still holds:
+    \[df = x^T(A + A^T)dx,\]
+    but because $A = A^T$, we can further simplify the differential to
+    \[df = 2x^T A dx.\]
+    Consequently,
+    \[Df(x) = 2x^T A \quad \text{and} \quad \nabla f(x) = 2A^Tx = 2Ax,\]
+    where we again use that $A^T = A$.
+    \noindent 
+
+    \subsection{Matrix Functions}
+
+    \subsection{Summary}
+
+    \section{(Bonus) Automatic Differentiation}
+    
+    % Just list out derivatives
+    
+\end{chapter}
