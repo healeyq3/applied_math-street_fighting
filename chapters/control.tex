@@ -14,6 +14,12 @@
 
     % Need to add AA203 overview to this
 
+    % PROBLEMS TO FINISH PRE 6/07/24    
+        % Just put in the boeing control problem from VMLS
+        % Robot manipulator exercise 18.7 VMLS
+        % Boyd 16.2 Optimal Spacecraft landing 
+        % path planning with contingencies
+
     \begin{figure}[h!]
         \centering
         \begin{forest}
@@ -74,8 +80,120 @@
         \item Open Loop
     \end{itemize}
 
-    % \section{Optimal Design}
+    \section{Optimal Design}
 
+    \textbf{Note to Readers:} The following exercise uses Geometric Programming (GP). Please note that
+    the language of GPs has their own definition of \textit{monomials}, which does not agree with the 
+    algebraic definition of a monomial. There is also an object known as a \textit{posynomial}.
+
+    \vspace{0.2cm}
+    \noindent~\cite{EE364a-extra} \textbf{Exercise 18.14}. \textit{Design of an unmanned aerial vehicle}.
+    You are tasked with developing the high-level design for an electric unmanned aerial vehicle (UAV). The goal is to design the least expensive UAV that is able to complete $K$ missions, labeled $k=1, \ldots, K$. Mission $k$ involves transporting a payload of weight $W_k^{\text {pay }}>0$ (in kilograms) over a distance $D_k>0$ (in meters), at a speed $V_k>0$ (in meters per second). These mission quantities are given.
+    The high-level design consists of choosing the engine weight $W^{\text {eng }}$ (in kilograms), the battery weight $W^{\text {bat }}$ (in kilograms), and the wing area $S$ (in $\mathrm{m}^2$ ), within the given limits
+    \[
+    W_{\min }^{\mathrm{eng}} \leq W^{\mathrm{eng}} \leq W_{\max }^{\mathrm{eng}}, \quad W_{\min }^{\mathrm{bat}} \leq W^{\mathrm{bat}} \leq W_{\max }^{\mathrm{bat}}, \quad S_{\min } \leq S \leq S_{\max } .
+    \]
+    (The lower limits are all positive.) We refer to the variables $W^{\text {eng }}, W^{\text {bat }}$, and $S$ as the design variables.
+    In addition to choosing the design variables, you must choose the power $P_k>0$ (in watts) that flows from the battery to the engine, and the angle of attack $\alpha_k>0$ (in degrees) of the UAV during mission $k$, for $k=1, \ldots, K$. These must satisfy
+    \[
+    0 \leq P_k \leq P_{\max }, \quad 0 \leq \alpha_k \leq \alpha_{\max },
+    \]
+    where $\alpha_{\max }$ is given, and $P_{\max }$ depends on the engine weight as described below. We refer to these $2 K$ variables as the mission variables. The engine weight, battery weight, and wing area are the same for all $k$ missions; the power and angle of attack can change with the mission.
+    The weight of the wing is $W^{\text {wing }}$ (in kilograms) is given by $W^{\text {wing }}=C_W S^{1.2}$, where $C_W>0$ is given. The total weight of the UAV during mission $k$, denoted $W_k$, is the sum of the battery weight, engine weight, wing weight, the payload weight, and a baseline weight $W^{\text {base }}$, which is given. The total weight depends on the mission, via the payload weight, and so is subscripted by $k$.
+    The lift and drag forces acting on the UAV in mission $k$ are
+    \[
+    F_k^{\text {lift }}=\frac{1}{2} \rho V_k^2 C_L\left(\alpha_k\right) S, \quad F_k^{\text {drag }}=\frac{1}{2} \rho V_k^2 C_D\left(\alpha_k\right) S
+    \]
+
+    (in newtons), where $C_L$ and $C_D$ are the lift and drag coefficients as functions of the angle of attack $\alpha_k$, and $\rho>0$ is the (known) air density (in kilograms per cubic meter). We will use the simple functions
+    \[
+    C_L(\alpha)=c_L \alpha, \quad C_D(\alpha)=c_{D 1}+c_{D 0} \alpha^2,
+    \]
+    where $c_L>0, c_{D 0}>0$, and $c_{D 1}>0$ are given constants.
+    To maintain steady level flight, the lift must equal the weight, and the drag must equal the thrust from the propeller, denoted $T_k$ (in newtons), i.e.,
+    \[
+    F_k^{\text {lift }}=W_k, \quad F_k^{\mathrm{drag}}=T_k .
+    \]
+
+    The thrust force, power $P_k$ (in watts), and the UAV speed are related via $P_k=T_k V_k$. The engine maximum power is related to its weight by $W^{\text {eng }}=C_P P_{\max }^{0.803}$ where $C_P>0$ is given.
+    The battery capacity $E$ (in joules) is equal to $C_E W^{\text {bat }}$, where $C_E>0$ is given. The total energy expended over mission $k$, with speed $V_k$, power output $P_k$, and distance $D_k$ is $P_k D_k / V_k$. This must not exceed the battery capacity $E$.
+    The overal cost of the UAV is the sum of a design cost and a mission cost. The design cost $C_{\mathrm{des}}$, which is an approximation of the cost of building the UAV, is given by
+    \[
+    C_{\text {des }}=100 W^{\text {eng }}+45 W^{\text {bat }}+2 W^{\text {wing }} \text {. }
+    \]
+
+    \noindent The mission cost $C_{\text {mis }}$ is given by
+    \[
+    C_{\mathrm{mis}}=\sum_{k=1}^K\left(T_k+10 \alpha_k\right),
+    \]
+    which captures our desire that the thrust and angle of attack be small.
+    In summary, $W_{\min }^{\text {eng }}, W_{\max }^{\mathrm{eng}}, W_{\min }^{\mathrm{bat}}, W_{\max }^{\mathrm{bat}}, S_{\min }, S_{\max }, \alpha_{\max }, W_{\text {base }}, C_W, c_L, c_{D 0}, c_{D 1}, C_P, C_E$, and $\rho$ are given. Additionally, $D_k, V_k$, and $W_k^{\text {pay }}$ are given for $k=1, \ldots, K$.
+    
+    \vspace{0.1cm}
+    \noindent(a) The problem as stated is almost a geometric problem (GP). By relaxing two constraints it becomes a GP,
+    and therefore readily solved.
+    Identify these constraints and give the relaxed versions. Briefly explain why the relaxed constraints will be tight at the solution,
+    which means by solving the GP, you've actually solved the original problem.
+    You do not need to reduce the relaxed problem to a standard form GP, or the equivalent convex problem; it's enough to express is in DGP compatible form.
+    
+    \vspace{0.1cm}
+    \noindent(b) Solve the relaxed problem you formulate in part (a) with data given in the provided python file.
+    Give the optimal costs $C_{\text{des}}^{*}$ and $C_{\text{mis}}^{*}$, and the values of all design and mission variables. 
+    Check that at your solution the relaxed constraints are tight.
+    
+    \vspace{0.1cm}
+    \noindent \textbf{Response.}
+    Recall that an optimization problem of the form
+    
+    \[
+    \begin{array}{lll}
+    \text{minimize} \; & f_0(x) & \\
+    \text{subject to} & f_i(x) \le 1, \; & i = 1, \ldots, m \\
+    & h_i(x) = 1, \; & i = 1, \ldots, p,
+    \end{array}
+    \]
+    where $f_0, \ldots f_m$ are posynomials and $h_1, \ldots h_p$ are monomials is a \textit{geometric program} (GP)
+    in \textit{standard form}. (Note that $\mathcal{D} = \mathbf{R}^n_{++}$; the constraint $x \succ 0$ is implicit.)
+    
+    \textbf{Most importantly}, note that the equality constraint functions must be monomials. This requirement helps direct
+    our search for non-GP compliant constraints, \textit{i.e.}, we should look for constraints, which as formulated ``verbally,''
+    would require posynomial equalities. The first such constraint is
+
+    \[F_k^{\mathrm{lift}} = W_k,\]
+    since 
+    \[\begin{aligned}
+        W_k &= W^{\mathrm{bat}} + W^{\mathrm{eng}} + W^{\mathrm{wing}} + W^{\mathrm{pay}_k} + W^{\mathrm{base}} \\
+        &=W^{\mathrm{bat}} + W^{\mathrm{eng}} + C_W S^{1.2} + W^{\mathrm{pay}_k} + W^{\mathrm{base}},
+    \end{aligned}\]
+    is a \textit{posynomial} and $F_k^{\mathrm{lift}}$ is a \textit{monomial}. Because posynomials are
+    \textit{closed under division}, the proposed constraint \[F_k^{\mathrm{lift}} = W_k \Longleftrightarrow \left(F_k^{\mathrm{lift}}\right)^{-1}W_k = 1,\]
+    is a posynomial equality constraint function, which to emphasize again, is invalid for GP formulation.
+
+    For the same reason, the constraint
+    \[F_k^{\mathrm{drag}} = T_k\]
+    is also invalid. However, in this case, it is the force term, $F_{k}^{\mathrm{drag}}$, which is the posynomial
+    and $T_k = (1/V_k)P_k$ which is the monomial. To formulate a proper GP, we therefore make the following two relaxations
+    % add a hat?
+    \[\begin{aligned}
+        &F_{k}^{\mathrm{lift}} = W_k \Longrightarrow F_{k}^{\mathrm{lift}} \ge W_k \\
+        &F_{k}^{\mathrm{drag}} = T_k \Longrightarrow F_{k}^{\mathrm{drag}} \le T_k.
+    \end{aligned}\]
+
+    Relaxed UAV design problem
+
+    \[\begin{array}{lll}
+    \text{minimize} \; & C_{\mathrm{des}} + C_{\mathrm{mis}} = 100W^{\mathrm{eng}} + 45W^{\mathrm{bat}} + 2W^{\mathrm{wing}} + \sum_{k=1}^{K}\left(V_k^{-1}P_k + 10\alpha_k \right) &  \\
+    \text{subject to} 
+                      & W_{\min }^{\mathrm{eng}} \leq W^{\mathrm{eng}} \leq W_{\max }^{\mathrm{eng}},
+                      \quad W_{\min }^{\mathrm{bat}} \leq W^{\mathrm{bat}} \leq W_{\max }^{\mathrm{bat}}, 
+                      \quad S_{\min } \leq S \leq S_{\max } & \\
+                      & 0 \le P_k \le P_{\mathrm{max}}, \quad 0 \le \alpha_k \le \alpha_{\mathrm{max}} \quad k = 1, \ldots, K & \\
+                      & W^{\mathrm{wing}} = C_{W}S^{1.2}, \quad W^{\mathrm{eng}} = C_P P_{\mathrm{max}}^{0.803} & \\
+                      & \frac{1}{2} \rho V_k^2 C_L\left(\alpha_k\right) S \ge W_k, \quad k = 1, \ldots K & (F_{k}^{\mathrm{lift}} \ge W_k) \\
+                      & \frac{1}{2} \rho V_k^2 C_D\left(\alpha_k\right) S \le (1/V_k)P_k, \quad k = 1, \ldots K & (F_{k}^{\mathrm{drag}} \le T_k) \\
+                    %   & \sum_{k=1}^{K} (1/V_k) P_k D_k \le C_{E}W^{\mathrm{bat}} & (\text{energy cap}) \\
+                    & (1/V_k) P_k D_k \le C_{E}W^{\mathrm{bat}}, \quad k = 1, \ldots K & (\text{energy cap})
+    \end{array}\]
     % % non stochastic closed loop control
     % \noindent~\cite*{boyd_convex_optimization} \textbf{Exercise 4.17}. \textit{Optimal Activity Levels}.We consider an alternative control application: central planning of some economic activity. It's straightforward to formulate the problem as
 
@@ -95,8 +213,8 @@
     % this 
 
     \section{Basic Examples}
-
-    ~\cite{boyd_convex_optimization} \textbf{Exercise 4.16}. \textit{Minimum fuel optimal control}.
+    \label{rocket-lp-example}
+    \noindent~\cite{boyd_convex_optimization} \textbf{Exercise 4.16}. \textit{Minimum fuel optimal control}.
     Consider the LTI dynamical system with state $x_t \in \mathbf{R}^n$, $t = 0, \ldots, N$, and actuator
     or input signal $u_t \in \mathbf{R}$, for $t = 0, \ldots, N-1$. The dynamics of the system are governed by the
     linear recurrence
@@ -150,14 +268,26 @@
                 \end{itemize}
         \end{itemize}
     % perhaps note that once you establish techniques, you'll stop being explicit with formulations.
-     Naive formulation of this problem 
+     We want to write this minimum
+     fuel optimal control problem as a LP. However, a LP formulation is rather restrictive,
+     so let's begin by formulating this problem as a convex optimization problem. It is tempting
+     to naively claim that the formulation
     \[\begin{array}{lll}
     \text{minimize} \; & \sum_{t=0}^{N-1} f(u_t) & \\
-    \text{subject to} & x_{t+1} = Ax_t + bu_t \; & t=0, \ldots, N-1 \\
+    \text{subject to} & x_{t+1} = Ax_t + bu_t, \; & t=0, \ldots, N-1 \\
     & x_0 = 0, \quad x_{N} = x_{\text{des}}.
     \end{array}\]
-    
-    Consider the graph of the fuel use map~\ref{fig:fuel-map}
+    is a convex. However, we must remember that $f$ is a piecewise function (that we are unfamiliar with \textit{e.g.}
+    it isn't a piecwise linear function). Furthermore, this proprosed formulation is not a conex optimization
+    problem. Of course, observing that the components of $f$ are indeed convex, it seems highly
+    plausible there's a way that $f$ can be reformulated such that the optimization problem is convex.
+    (Note that this is similar to having to formulate the Huber penalty approximation problem
+    as a convex problem,~\cite{boyd_convex_optimization} \textbf{Exercise 6.2}.)
+    Consider the graph of the fuel use map in figure~\ref{fig:fuel-map}. As stated in the legend of this figure,
+    and clearly seen when observing the graph,
+    the piecewise function $f$ is equivalent to $\max\{\left| a \right|, 2 \left| a \right| - 1\}$.
+    (Of course one could also provide an algebraic argument if so desired). Furthermore, 
+    the optimal fuel control problem can be formulated as
 
     % Important/Helpful to map this back to 4.11
     % Actually, how would you map this to ||Ax-b||_1 approximation
@@ -170,54 +300,70 @@
 
     \[\begin{array}{lll}
         \text{minimize} \; & \sum_{t=0}^{N-1} \max \left\{ \left| u_t \right|, 2 \left| u_t \right| - 1 \right\} & \\
-        \text{subject to} & x_{t+1} = Ax_t + bu_t \; & t=0, \ldots, N-1 \\
-        & x_0 = 0, \quad x_{N} = x_{\text{des}}.
+        \text{subject to} & x_{t+1} = Ax_t + bu_t, \; & t=0, \ldots, N-1 \\
+        & x_0 = 0, \quad x_{N} = x_{\text{des}},
         \end{array}\]
+    which is a valid convex optimization problem. With that being said, if our goal was
+    simply to find the optimal solution to this fuel problem and we didn't care about 
+    formulating the problem as a LP, \textbf{we could end our reformulating here.} In fact,
+    the optimal solution $u^* \in \mathbf{R}^{Nm}$, where $Nm = N1 = N$, plotted in figure~\ref{fig:4-16_min-fuel}
+    was obtained by solving this convex problem. 
+    Nonetheless, we trudge forward with our LP formulation.\\
+    For the time being, to be more concise, let's drop the linear dynamical system constraints
+    \[x_0 = 0, \; x_N = x_{\text{des}}, \; \text{ and } \; x_{t+1} = Ax_t + bu_t, \quad t = 0, \ldots N-1\]
+    and just consider the unconstrained problem
+    \[\text{minimize} \; \sum_{t=0}^{N-1} \max \left\{ \left| u_t \right|, 2 \left| u_t \right| - 1 \right\}.\]
+    It is highly tempting to attempt to map the objective to a $\ell_1$- or $\ell_\infty$-norm
+    approximation problem and use the reformulation techniques detailed in \hyperref[subsubsec:lp-norm-reformulation]{\ref{subsubsec:lp-norm-reformulation}},
+    however, the objective function is neither a sum of (pure) absolute values (like $\left\lVert Ax - b \right\rVert_{1}$)
+    nor the maximum of absolute values (like $\left\lVert Ax - b \right\rVert_{\infty}$).
+    It is instead a sum of maximums of linear functions of absolute values.
+    Furthermore, while there is perhaps a way to map $f_0$ directly into some composition of the two norms,
+    instead of trying to use these ``atoms'' directly, we can propose a reformulation
+    for our convex problem using the same derivation \textit{techniques} discussed in \hyperref[subsubsec:lp-norm-reformulation]{\ref{subsubsec:lp-norm-reformulation}}.
+
+    Our first reformulation uses that an objective function defined as the sum of absolute value/maximum expressions can be rewritten
+    as a sum of auxilary variables, $s \in \mathbf{R}^N$ here, with each summand being less than
+    or equal to an element in the auxilary variable vector. To simplify the problem further we can also 
+    remove the max operator from each summand using that if the maximum element in the set
+    being operated on by $\max$ is less than or equal to $s_t$, then so must every other element.
+    These two reformulation techniques yield the problem
 
     \[\begin{array}{lll}
-        \text{minimize} \; & \bm{1}^T t & \\
-        \text{subject to} & x_{t+1} = Ax_t + bu_t \; & t=0, \ldots, N-1 \\
-        & x_0 = 0, \quad x_{N} = x_{\text{des}}, & \\
-        & \max \left\{ \left| u_i \right|, 2 \left| u_i \right| - 1 \right\} \le t_i, & i = 0, \ldots, N-1
-        \end{array}\]
-
-    \[\begin{array}{lll}
-        \text{minimize} \; & \bm{1}^T t & \\
-        \text{subject to} & x_{t+1} = Ax_t + bu_t \; & t=0, \ldots, N-1 \\
-        & x_0 = 0, \quad x_{N} = x_{\text{des}}, & \\
-        & \left| u_i \right| \le t_i, & i = 0, \ldots, N-1 \\
-        & 2 \left| u_i \right| - 1 \le t_i & i = 0, \ldots, N-1 \\
-        \end{array}\]
-    
-    \[\begin{array}{lll}
-    \text{minimize} \; & \bm{1}^T t & \\
-    \text{subject to} & x_{t+1} = Ax_t + bu_t \; & t=0, \ldots, N-1 \\
-    & x_0 = 0, \quad x_{N} = x_{\text{des}}, & \\
-    & y_i \le t_i, & i = 0, \ldots, N-1 \\
-    & 2 y_i - 1 \le t_i & i = 0, \ldots, N-1 \\
-    & \left| u_i \right| \le y_i & i = 0, \ldots, N-1 \\
+    \text{minimize} \; & \bm{1}^T s & \\
+    \text{subject to} & \left| u_t \right| \le s_t, & t = 1, \ldots N \\
+    & 2 \left| u_t \right| - 1 \le s_t, & t = 1, \ldots N.
     \end{array}\]
-    Important/helpful to remeber the definition of absolute value: $\left| a \right| = \max\{a, -a\}$
+    To fully linearize the problem, note that if the constraints
+    \[ 2 \left| u_t \right| - 1 \le s_t, \quad t = 1, \ldots N\]
+    were not present then 
+    \[\left| u_t \right| \le s_t, \quad t = 1, \ldots N\]
+    could just be reformulated as 
+    $-s \preceq u \preceq s$.
+    Furthermore, thinking again about how in the reformulations derived in \hyperref[subsubsec:lp-norm-reformulation]{\ref{subsubsec:lp-norm-reformulation}}
+    we introduced new auxilary variables to remove nonlinearities from expressions, consider $y \in \mathbf{R}^N$ and the problem
 
     \[\begin{array}{lll}
-        \text{minimize} \; & \bm{1}^T t & \\
-        \text{subject to} & x_{t+1} = Ax_t + bu_t \; & t=0, \ldots, N-1 \\
-        & x_0 = 0, \quad x_{N} = x_{\text{des}}, & \\
-        & y_i \le t_i, & i = 0, \ldots, N-1 \\
-        & 2 y_i - 1 \le t_i & i = 0, \ldots, N-1 \\
-        & -y_i \le u_i \le y_i & i = 0, \ldots, N-1 \\
-        \end{array}\]
-    Write more compactly as
+    \text{minimize} \; & \bm{1}^T s & \\
+    \text{subject to} & y \preceq s & \\
+    & 2y - \bm{1} \preceq s \\
+    & -y \preceq u \preceq y, & 
+    \end{array}\]
+    which uses this new variable to ``pull out'' the absolute value from the two other sets
+    of constraints and then is restricted in the same way we would've restricted $\left| u_t \right| \le s_t$.
+    Now, returning our LDS constraints to the formulation we have the problem
 
     \[\begin{array}{lll}
-        \text{minimize} \; & \bm{1}^T t & \\
-        \text{subject to} & x_{t+1} = Ax_t + bu_t \; & t=0, \ldots, N-1 \\
-        & x_0 = 0, \quad x_{N} = x_{\text{des}}, & \\
-        & y \preceq t & \\
-        & 2y - \bm{1} \preceq t & \\
-        & -y \preceq u \preceq y_i & 
+        \text{minimize} \; & \bm{1}^T s & \\
+        \text{subject to} & x_{t+1} = Ax_t + bu_t, \; & t=0, \ldots, N-1 \\
+        & x_0 = 0, \quad x_{N} = x_{\text{des}} & \\
+        & y \preceq s & \\
+        & 2y - \bm{1} \preceq s & \\
+        & -y \preceq u \preceq y; & 
         \end{array}\]
-    Still not ideal form because of the linear recurrence. Use control theory result.
+    however, note that while all problem functions are linear (affine), the LDS constraints 
+    are still in the form of a linear recurrence.
+    % appears that actuator keeps steady and then at the end moves to destination
     
     \begin{figure}[h]
         \centering
@@ -232,16 +378,16 @@
 
     % Fast MPC: https://web.stanford.edu/~boyd/papers/fast_mpc.html
 
-    \subsection{Overview and Basic Formulations}
+    % \subsection{Overview and Basic Formulations}
+    % list out different variations of MPC
 
     \subsection{Examples}
 
     % mention that this is a pre real MPC example: no stochasticity
-    % list out different variations of MPC
 
     \subsubsection*{Almost MPC}
     We apply MPC to the following output tracking example. The purpose of this exercise is simply to show
-    how sequentially solving receeding horizon problems can converge to the agnostic control problem (where
+    how sequentially solving receeding horizon problems can converge to the prescient control problem (where
     the problem is solved with full access to the desired output) as the horizon is increased.
     Note that this example \textbf{does not} demonstrate the power of using MPC in a stochastic setting.
 

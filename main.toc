@@ -1,0 +1,115 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {1}Introduction}{3}{chapter.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1.1}What are These Notes?}{3}{section.1.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {part}{I\hspace {1em}Theory}{4}{part.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {2}Linear Algebra}{5}{chapter.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.1}Eigenvalues and Eigenvectors}{5}{section.2.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.1.1}Stability}{5}{subsection.2.1.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Continuous Time Systems}{5}{section*.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Discrete Time Systems}{5}{section*.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.2}Linear Transformations}{6}{section.2.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {3}Matrix Calculus}{7}{chapter.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.1}Notation}{7}{section.3.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.2}Rethinking the Derivative}{7}{section.3.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.3}Some Analysis}{7}{section.3.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.4}Some Geometry}{7}{section.3.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.5}Calculus Composition Rules}{7}{section.3.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Sum Rule}{7}{section*.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Product Rule}{8}{section*.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.6}Calculus Atoms}{8}{section.3.6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.6.1}Vector Functions}{8}{subsection.3.6.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Quadratic Form Restricted Case}{9}{section*.9}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.6.2}Matrix Functions}{9}{subsection.3.6.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.6.3}Summary}{9}{subsection.3.6.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.7}(Bonus) Automatic Differentiation}{9}{section.3.7}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {4}Mathematical Optimization}{10}{chapter.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.1}Optimization Problems}{10}{section.4.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.2}Basic Optimality Conditions}{10}{section.4.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.3}Linear Optimization}{10}{section.4.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.3.1}Reformulations}{10}{subsection.4.3.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Problems Involving $\ell _1$- and $\ell _\infty $- norms}{10}{section*.10}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {5}Probability Theory}{14}{chapter.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.1}Basics}{14}{section.5.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.1.1}Probabilistics Objects and Notation}{14}{subsection.5.1.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.1.2}Discrete Probabilistic Objects through a Convex Lens}{15}{subsection.5.1.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.2}Sets}{16}{section.5.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {part}{II\hspace {1em}Applications Part I}{18}{part.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {6}Approximation and Fitting}{19}{chapter.6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.1}Forecasting}{20}{section.6.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.2}Least Squares Data Fitting}{21}{section.6.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.3}Recurrent Neural Networks}{21}{section.6.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {7}Statistical Estimation}{22}{chapter.7}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {7.1}Parametric Distribution Estimation}{22}{section.7.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {7.1.1}Maximum Likelihood}{22}{subsection.7.1.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Poisson Maximum Likelihood}{22}{section*.15}%
+\defcounter {refsection}{0}\relax 
+\contentsline {part}{III\hspace {1em}Applications Part II}{24}{part.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {8}Control}{25}{chapter.8}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {8.1}Overview}{25}{section.8.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {8.2}Optimal Design}{26}{section.8.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {8.3}Basic Examples}{28}{section.8.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {8.4}Model Predictive Control}{32}{section.8.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {8.4.1}Examples}{32}{subsection.8.4.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {part}{IV\hspace {1em}Algorithms}{36}{part.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {9}Numerical Linear Algebra}{37}{chapter.9}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {9.1}QR Factorization}{37}{section.9.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {A}Implementation}{39}{appendix.A}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {A.1}CVXPY}{39}{section.A.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {A.1.1}Simulating (Linear) Dynamical Systems}{39}{subsection.A.1.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {A.2}C++}{39}{section.A.2}%

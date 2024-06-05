@@ -72,6 +72,7 @@
       \strng{authorbibnamehash}{436abed3bce8d1b1d30640d4e5ff3d58}
       \strng{authornamehash}{436abed3bce8d1b1d30640d4e5ff3d58}
       \strng{authorfullhash}{436abed3bce8d1b1d30640d4e5ff3d58}
+      \field{extraname}{1}
       \field{labelalpha}{BV04}
       \field{sortinit}{B}
       \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
@@ -80,6 +81,40 @@
       \field{isbn}{978-0521833783}
       \field{title}{Convex Optimization}
       \field{year}{2004}
+    \endentry
+    \entry{EE364a-extra}{misc}{}
+      \name{author}{2}{}{%
+        {{hash=ec94d94cc487dd71939a90cbeaaf47d0}{%
+           family={Boyd},
+           familyi={B\bibinitperiod},
+           given={Stephen},
+           giveni={S\bibinitperiod}}}%
+        {{hash=2608d599a0bc2a784c301329a8da5f7b}{%
+           family={Vandenberghe},
+           familyi={V\bibinitperiod},
+           given={Lieven},
+           giveni={L\bibinitperiod}}}%
+      }
+      \strng{namehash}{436abed3bce8d1b1d30640d4e5ff3d58}
+      \strng{fullhash}{436abed3bce8d1b1d30640d4e5ff3d58}
+      \strng{bibnamehash}{436abed3bce8d1b1d30640d4e5ff3d58}
+      \strng{authorbibnamehash}{436abed3bce8d1b1d30640d4e5ff3d58}
+      \strng{authornamehash}{436abed3bce8d1b1d30640d4e5ff3d58}
+      \strng{authorfullhash}{436abed3bce8d1b1d30640d4e5ff3d58}
+      \field{extraname}{2}
+      \field{labelalpha}{BV24}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Additional Exercises for Convex Optimization}
+      \field{year}{2024}
+      \verb{urlraw}
+      \verb https://github.com/cvxgrp/cvxbook_additional_exercises
+      \endverb
+      \verb{url}
+      \verb https://github.com/cvxgrp/cvxbook_additional_exercises
+      \endverb
     \endentry
     \entry{AA203}{misc}{}
       \name{author}{2}{}{%

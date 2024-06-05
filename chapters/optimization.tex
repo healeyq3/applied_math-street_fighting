@@ -1,0 +1,174 @@
+\begin{chapter}{Mathematical Optimization}
+
+    % more examples here: https://inst.eecs.berkeley.edu/~ee127/sp21/livebook/l_circuit_main.html
+
+    \section{Optimization Problems}
+
+    % need to mention that whe you say optimization problem you are assuming minimization.
+
+    \section{Basic Optimality Conditions}
+    
+    \section{Linear Optimization}
+
+    \subsection{Reformulations}
+    % one whould also think about Constructive Convexity Analysis
+    % important to remember that equivalent problems need implication both ways
+    \label{subsubsec:lp-norm-reformulation}
+    \subsubsection{Problems Involving $\ell_1$- and $\ell_\infty$- norms}
+    Just as one learns to see a sum of squares as the squared $\ell_2$-norm of the vector whose entries are
+    the expressions in the sum of squares being squared, for formulating LPs it is critical to develop
+    the habit of seeing the sum of absolute values as the $\ell_1$-norm and the maximum of absolute
+    values as the $\ell_{\infty}$-norm. While non-trivial LPs have objective functions and constraint functions
+    which can be harder to write in matrix-vector notation, these problems can be reformulated using the same techniques
+    shown below for optimization problems which are written in matrix-vector notation.
+    Furthermore, the following exercise proves the equivalence between basic norm optimization problem
+    (originally written in matrix-vector notation) and their corresponding LPs. 
+    These results provide the mathematical grounding that guarantees we can rewrite more exotic
+    mathematical optimization problems involving compositions of maximums, sums, and absolute values as LPs,
+    and they also provide a roadmap for deriving LP reformulations ourselves. An applied reformulation example
+    can be found on page \hyperref[rocket-lp-example]{\pageref{rocket-lp-example}}.
+    % mention why you'd want an LP when you already have a convex problem
+    
+    The following exercise proves the equivalence between norm minimization problems and their
+    corresponding LPs. However, because (in general) showing problem equivalence can be tricky,
+    we'll use the simplicity of these LP equivalencies to work through two equivalence approaches for each subproblem. Firstly, we'll \textit{derive}
+    the LP by starting with its equivalent norm problem and then creating a \textit{sequence} of equivalent problems
+    until we arrive at the LP. This is a valid approach to showing equivalency. This is also a
+    \textit{first principles} approach, which can be useful for reformulating optimization problems as LPs
+    when the original problem is harder to write in matrix-vector notation.
+    Once we have the final LP, we'll then directly show its equivalence to the original norm problem. 
+    Being able to provide this type of detailed explanation for the relation between two problem's optimal solutions
+    is also a vital skill % because
+    and has its own stylistic approach.
+    % we can also apply a convex-calculus/calculus-calculus approach where we think
+    % of the objects we are about to derive as atoms
+    
+    \noindent ~\cite{boyd_convex_optimization} \textbf{Exercise 4.11}. Formulate the following problems as LPs.
+    Explain in detail the relation between the optimal solution of each problem and the solution of its equivalent LP.\\
+    (a) Minimize $\left\lVert Ax - b \right\rVert_{\infty}$ ($\ell_\infty$-norm approximation).
+    
+    \vspace{0.1cm}
+    \noindent\textbf{Response.} \\
+    \noindent \textit{(Approach 1)}. Our initial problem is the unconstrained problem
+    \begin{equation}\text{minimize} \; \left\lVert Ax - b \right\rVert_{\infty} = \max_k \left\{ \left| a_k^Tx - b_k \right| \right\}.
+    \tag{$\mathcal{P}_1$}
+    \label{eq:P1}
+    \end{equation}
+    We can rewrite this problem in \textit{epigraph form}, 
+    \begin{equation}\begin{array}{lll}
+    \text{minimize} \; & t & \\
+    \text{subject to} & \max_k \left\{ \left| a_k^Tx - b_k \right| \right\} \le t,
+    \end{array}
+    \tag{$\mathcal{P}_2$}
+    \label{eq:P2}
+    \end{equation}
+    which is always an equivalent transformation. Next, we use that the single constraint
+    \[\max_k \left\{ \left| a_k^Tx - b_k \right| \right\} \le t\] implies that 
+    each of the expressions
+    \[\left| a_k^Tx - b_k \right|, \quad k = 1, \ldots, m\]
+    must also be less than or equal to $t$, \textit{i.e}., we have the third problem
+    \begin{equation}
+        \begin{array}{lll}
+            \text{minimize} \; & t & \\
+            \text{subject to} & \left| a_k^Tx - b_k \right| \le t, & k = 1, \ldots, m.
+            \end{array}
+            \tag{$\mathcal{P}_3$}
+            \label{eq:P3}
+    \end{equation}
+    Finally, using the definition of the absolute value (which I've found very useful to 
+    keep at the front of one's mind when working on these problems), $\left| a \right| = \max \{a, -a\}$,
+    we have that the constraints in (\ref{eq:P3}) can be rewritten as
+    \[a_k^Tx - b_k \le t, \; -(a_k^Tx - b_k) \le t, \quad k = 1, \ldots m,\]
+    since if the maximum of $a_k^Tx  - b_k$ and $b_k - a^T_kx$ is less than or equal to $t$ then
+    both the terms must be. We therefore arrive at the following LP
+    \begin{equation}
+        \begin{array}{lll}
+            \text{minimize} \; & t & \\
+            \text{subject to} & -t \bm{1} \preceq Ax - b \preceq t \bm{1},
+            \end{array}
+            \tag{$\mathcal{P}_4$}
+            \label{eq:P4}
+    \end{equation}
+    which we've written more compactly in matrix-vector notation where $\bm{1} \in \mathbf{R}^m$.
+    We also know that this LP is equivalent to the original problem because every problem transformation
+    we performed is reversible, \textit{i.e.}, we have equivalency through the following problem transformation
+    sequence
+    \[\mathcal{P}_1 \Longleftrightarrow \mathcal{P}_2 \Longleftrightarrow \mathcal{P}_3 \Longleftrightarrow \mathcal{P}_4.\]
+    \noindent \textit{(Approach 2)}. We want to show that the optimal solution of
+    \[\text{minimize} \; \left\lVert Ax - b \right\rVert_{\infty}\]
+    is also an optimal solution of 
+    \[\begin{array}{lll}
+        \text{minimize} \; & t & \\
+        \text{subject to} & -t \bm{1} \preceq Ax - b \preceq t \bm{1},
+        \end{array}\]
+    and vice-versa. To see this, we first need to address that the LP
+    has the additional optimization variable, $t$. Because we wish to show
+    that optimizing the two problems \textit{over} $x$ produces the same solution,
+    it's practical to consider the optimal value of the LP as a function of $x$, \textit{i.e.},
+    consider the LP and \textit{optimize over} $t$, with corresponding optimal cost $p^*(x)$. 
+    % feels like marginalizing out in probability theory
+    Using the same transformations as performed above, the constraints in the LP can be written as
+    \[\left| a_k^Tx - b_k \right| \le t, \quad k = 1, \ldots, m.\]
+    Obviously, if $x$ is fixed and we are minimizing over $t$, the optimal value of the LP is
+    $\max_k \left\{ \left| a_k^Tx - b_k \right| \right\}$, since this is the greatest lower bound that
+    $t$ is constrained to. In other words, $p^*(x) = \left\lVert Ax - b \right\rVert_{\infty}$.
+    Therefore, optimizing over $t$ and $x$ simultaneously is equivalent to the original problem.
+    
+    \vspace{0.3cm}
+    \noindent (b) Minimize $\left\lVert Ax - b \right\rVert_{1}$ ($\ell_1$-norm approximation).
+    
+    \vspace{0.1cm}
+    \noindent \textbf{Response.}  \\
+    % Let's take a hybrid approach this time: we'll perform some manipulations
+    % which won't be given enough reasoning to be considered proper transformations (although it wouldn't
+    % be hard to do so), use these. 
+    \noindent \textit{(Approach 1)}. 
+    Consider the unconstrained problem
+    \[\text{minimize} \; \left\lVert Ax - b \right\rVert_{1} = \sum_{i=1}^{m}\left| a_i^Tx - b_i \right|,\]
+    which can be written in the equivalent epigraph form
+    \[
+        \begin{array}{lll}
+        \text{minimize} \; & t & \\
+        \text{subject to} & \sum_{i=1}^{m}\left| a_i^Tx - b_i \right| \le t. \; &  
+        \end{array}
+    \]
+    Now, introduce a new optimization variable $s \in \mathbf{R}^m$, which is to be optimized over
+    along with $x$ and $t$,
+    and consider 
+    \[
+        \begin{array}{lll}
+        \text{minimize} \; & t & \\
+        \text{subject to} & \bm{1}^Ts \le t \; &  \\
+        & \left| a_i^Tx - b_i \right| \le s_i, & i = 1, \ldots m.
+        \end{array}
+    \]
+    Fixing $x$, the previous two problems can be seen as equivalent by imagining $t$ pushing 
+    the sum $\bm{1}^Ts$ to be as small as possible, and because all $s_i$ entries are \textbf{uncoupled}
+    from one another, minimizing $t$ will push each $s_i$ to its lower bound $\left| a_i^Tx - b_i \right|$.
+
+    From here, reaching an LP requires the same transformations as performed in (a), so we will not perform them. However,
+    it is worth noting the constraint
+    \[\bm{1}^Ts \le t,\]
+    which consists entirely of \textit{auxilary} optimization variables. Since the objective of 
+    the most recent optimization problem is to minimize $t$, clearly this is equivalent to minimizing $\bm{1}^Ts$.
+    We therefore have found our final form equivalent LP
+    \[
+        \begin{array}{lll}
+        \text{minimize} \; & \bm{1}^Ts & \\
+        \text{subject to} & -s \preceq Ax - b \preceq s. &
+        \end{array}
+    \]
+    \noindent \textit{(Approach 2)}. We will show that the solution to
+    \[\text{minimize} \; \left\lVert Ax - b \right\rVert_{1} = \sum_{i=1}^{m}\left| a_i^Tx - b_i \right|,\]
+    is equivalent to
+    \[
+        \begin{array}{lll}
+        \text{minimize} \; & \bm{1}^Ts & \\
+        \text{subject to} & -s \preceq Ax - b \preceq s, &
+        \end{array}
+    \]
+    and vice-versa.
+    The most important observation
+    % Sequential Convex Optimization
+
+\end{chapter}

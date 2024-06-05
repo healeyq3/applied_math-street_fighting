@@ -2348,8 +2348,11 @@
     <bcf:citekey order="2">boyd_convex_optimization</bcf:citekey>
     <bcf:citekey order="3">AA203</bcf:citekey>
     <bcf:citekey order="4">boyd_convex_optimization</bcf:citekey>
-    <bcf:citekey order="5">actuator_youtube</bcf:citekey>
-    <bcf:citekey order="6">EE364b</bcf:citekey>
+    <bcf:citekey order="5">EE364a-extra</bcf:citekey>
+    <bcf:citekey order="6">boyd_convex_optimization</bcf:citekey>
+    <bcf:citekey order="7">actuator_youtube</bcf:citekey>
+    <bcf:citekey order="8">boyd_convex_optimization</bcf:citekey>
+    <bcf:citekey order="9">EE364b</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="anyt">

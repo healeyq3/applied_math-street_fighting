@@ -35,12 +35,15 @@
 
 \numberwithin{equation}{section}
 
-\title{Convex Optimization Street Fighting}
+\title{Applied Mathematics Street Fighting}
 \author{Quill Healey}
 % \date{January 19, 2024}
 
 \begin{document}
 \maketitle
+\tableofcontents
+
+% \include{chapters/pointers}
 
 \include{chapters/chapter1}
 
@@ -58,6 +61,7 @@
     % Where to put GEOMETRY (convex sets?)
     % MOVE BACK AND FORTH BETWEEN 2&3 BASED ON WHAT YOU NEED FOR 4
 % Mathematical Optimization (mainly convex)
+\include{chapters/optimization.tex}
 % Duality
 \include{chapters/prob-theory}
 
@@ -73,6 +77,9 @@
 \include{chapters/statistical-estimation}
 
 % GEOMETRY/CLASSIFICATION CHAPTER
+    % PROBLEMS TO FINISH PRE 6/07/24    
+            % Boyd ADE 8.8 Bounding object position from multiple camera views
+            % Boyd ADE 8.9 Traingulation from multiple camera views
 
 % Robust Optimization (or is this covered in function fitting...probably not everything since some robustis stochastic)
     % disciplined stochastic programming https://web.stanford.edu/~boyd/papers/pdf/dcsp_uai.pdf
@@ -85,6 +92,9 @@
 
 \include{chapters/control}
 
+% Optimal Design
+    % Boyd ADE 18.14 Design of an unmanned aerial vehicle
+
 % Statistical Decision Theory
 
 % Bayesian networks inference (CS221): https://www.youtube.com/watch?v=U23yuPEACG0&t=394s
@@ -94,11 +104,12 @@
 
 \part{Algorithms}
 
-% Linear Algebra
+\include{chapters/linear-algebra-algos}
+
 % Sampling and Inference
 % Convex Optimization
 % Modern (remember that you saw modern Boyd algos in Strang's book)
-    % EE364 has GREAT material
+    % EE364b has GREAT material
 
 % \section*{References}
 % \bibliographystyle{apalike}
