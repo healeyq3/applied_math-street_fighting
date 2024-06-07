@@ -1,0 +1,17 @@
+[0] Config.pm:311> INFO - This is Biber 2.16
+[0] Config.pm:314> INFO - Logfile is 'main.blg'
+[86] biber-darwin:340> INFO - === Fri Jun  7, 2024, 15:04:34
+[102] Biber.pm:415> INFO - Reading 'main.bcf'
+[194] Biber.pm:952> INFO - Found 3 citekeys in bib section 0
+[206] Biber.pm:4340> INFO - Processing section 0
+[215] Biber.pm:4531> INFO - Looking for bibtex format file 'refs.bib' for section 0
+[216] bibtex.pm:1689> INFO - LaTeX decoding ...
+[224] bibtex.pm:1494> INFO - Found BibTeX data source 'refs.bib'
+[285] Utils.pm:395> WARN - legacy year field '2007-8' in entry 'EE364b' is not an integer - this will probably not sort properly.
+[295] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[295] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[295] Biber.pm:4168> INFO - Sorting list 'anyt/global//global/global' of type 'entry' with template 'anyt' and locale 'en-US'
+[296] Biber.pm:4174> INFO - No sort tailoring available for locale 'en-US'
+[302] bbl.pm:654> INFO - Writing 'main.bbl' with encoding 'UTF-8'
+[304] bbl.pm:757> INFO - Output to main.bbl
+[304] Biber.pm:128> INFO - WARNINGS: 1
