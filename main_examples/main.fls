@@ -1037,6 +1037,12 @@ INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/listings/listings.cfg
 INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/listings/listings.cfg
 INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/listings/listings.cfg
 INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/xcolor/xcolor.sty
+INPUT /usr/local/texlive/2021/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryarrows.code.tex
+INPUT /usr/local/texlive/2021/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryarrows.code.tex
+INPUT /usr/local/texlive/2021/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.code.tex
+INPUT /usr/local/texlive/2021/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.code.tex
+INPUT /usr/local/texlive/2021/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarypositioning.code.tex
+INPUT /usr/local/texlive/2021/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarypositioning.code.tex
 INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/biblatex/biblatex.sty
 INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/biblatex/biblatex.sty
 INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/biblatex/biblatex.sty
@@ -1317,8 +1323,12 @@ INPUT /Users/q3/Documents/Memex2/Optimization/convex-notes/main_examples/main.to
 INPUT /Users/q3/Documents/Memex2/Optimization/convex-notes/main_examples/main.toc
 OUTPUT /Users/q3/Documents/Memex2/Optimization/convex-notes/main_examples/main.toc
 INPUT /usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map
-INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/jknappen/ec/tcrm1200.tfm
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmti12.tfm
+INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/jknappen/ec/tcrm1200.tfm
+INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/listings/lstlang1.sty
+INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/listings/lstlang1.sty
+INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/listings/lstlang1.sty
+INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/listings/lstlang1.sty
 INPUT /Users/q3/Documents/Memex2/Optimization/convex-notes/main_examples/../examples/364a/cvx-ch7/gen_add_regr_fit.png
 INPUT /Users/q3/Documents/Memex2/Optimization/convex-notes/main_examples/../examples/364a/cvx-ch7/gen_add_regr_fit.png
 INPUT /Users/q3/Documents/Memex2/Optimization/convex-notes/main_examples/../examples/364a/cvx-ch7/gen_add_regr_fit.png
@@ -1357,10 +1367,6 @@ INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/jknappen/ec/tcrm0800.tfm
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/jknappen/ec/tcrm0600.tfm
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/jknappen/ec/tcrm0500.tfm
-INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/listings/lstlang1.sty
-INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/listings/lstlang1.sty
-INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/listings/lstlang1.sty
-INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/listings/lstlang1.sty
 INPUT /Users/q3/Documents/Memex2/Optimization/convex-notes/main_examples/../examples/364a/rocket_min_fuel.pdf
 INPUT /Users/q3/Documents/Memex2/Optimization/convex-notes/main_examples/../examples/364a/rocket_min_fuel.pdf
 INPUT /Users/q3/Documents/Memex2/Optimization/convex-notes/main_examples/../examples/364a/rocket_min_fuel.pdf

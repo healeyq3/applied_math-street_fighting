@@ -23,6 +23,8 @@
 }
 \RestyleAlgo{ruled}
 
+\usetikzlibrary{arrows, positioning}
+
 % \lstset{
 %   basicstyle=\ttfamily,
 %   keywordstyle=\color[rgb]{0.13, 0.13, 0.38}, % Keywords in navy blue
@@ -81,7 +83,7 @@
 
 \numberwithin{equation}{section}
 
-\title{Sample Background}
+\title{Sample Engineering Background}
 % selected examples
 \author{Quill Healey}
 
@@ -93,6 +95,11 @@
 
 % Power in approaching problems with an optimization POV
 % comment on the part of each problem and knowing when it is appropriate to talk about math
+% mention markov chains and MDPs
+% problem explanation depends on length of problem solution
+% (the first problem description is long...not all are like this)
+% feel free to use the table of contents to find and example that catches your eye
+% demonstrates what I know; for more technical readers
 
 \section*{Notation}
 
@@ -104,11 +111,88 @@
 
 \subsubsection*{Problem Overview and Upshot}
 
-\textbf{Notes}
+Markov chains are an important, probabilistic tool that can be found across many disciplines,
+either used to model some system directly (like in the following example) or as part of a broader solution
+approach (\textit{e.g.} Markov Chain Monte Carlo or Markov Decision Processes). We'll forego the mathematics behind Markov chains and consider the canonical weather example.\\
+\noindent We suppose on any given day it can be sunny, cloudy, or rainy. This is referred to as the \textit{state}. 
+The important assumption we make is that the \textbf{weather tomorrow only depends on the weather today}.
+However, given the weather today, we do not know for sure what the weather tomorrow will be, \textit{i.e.} we transition
+randomly between states. Figure~\ref{fig:markov} is an example of weather-modeling Markov chain. According to this model,
+if it is sunny today, it will be rainy tomorrow with probability 0.1, cloudy tomorrow with probability 0.3,
+or sunny again tomorrow with probability 0.6.  
+
+\begin{figure}[htbp]
+    \centering
+\begin{tikzpicture}[->, >=stealth', auto, semithick, node distance=3cm]
+    \tikzstyle{state}=[circle, draw, minimum size=1.5cm, fill=none, text centered]
+    
+    \node[state]    (S)                     {Sunny};
+    \node[state]    (C) [above right of=S]  {Cloudy};
+    \node[state]    (R) [below right of=C]  {Rainy};
+    
+    \path
+    (S) edge[bend left=15]     node{0.3} (C)
+        edge[loop left]     node{0.6} (S)
+        edge[bend left=15]     node[below] {0.1} (R)
+    (C) edge[bend left=15]     node[above] {0.4} (S)
+        edge[loop above]    node{0.2} (C)
+        edge[bend left=15]     node{0.4} (R)
+    (R) edge[bend left=15]     node[below] {0.1} (S)
+        edge[bend left=15]     node[right] {0.5} (C)
+        edge[loop right]    node{0.4} (R);
+\end{tikzpicture}
+    \caption{Markov chain weather model}
+    \label{fig:markov}
+\end{figure}
+
+The problem in this section is concerned with \textit{estimating} the transition probabilities between states
+having \textit{observed} a sequence of states. In other words, it is a \textbf{statistical question}. Perhaps
+we wish to create a new weather app because we believe that our Markov model will do a better job \textit{predicting}
+the weather than the default app on our phones (a bold assumption). However, while we know what the states in our system
+are, we do not know what the transition probabilities are; \textit{i.e.,} our knowledge of the system is represented by Figure~\ref{fig:markov_unknown}.
+We could of course \textit{guess} what each probability is, but the better approach is to \textit{collect data}
+and then use this data to guess the probabilities (fun fact: statistics used to be called \textit{inverse probability}). 
+\begin{figure}[htbp]
+    \centering
+\begin{tikzpicture}[->, >=stealth', auto, semithick, node distance=3cm]
+    \tikzstyle{state}=[circle, draw, minimum size=1.5cm, fill=none, text centered]
+    
+    \node[state]    (S)                     {Sunny};
+    \node[state]    (C) [above right of=S]  {Cloudy};
+    \node[state]    (R) [below right of=C]  {Rainy};
+    
+    \path
+    (S) edge[bend left=15]     node{?} (C)
+        edge[loop left]     node{?} (S)
+        edge[bend left=15]     node[below] {?} (R)
+    (C) edge[bend left=15]     node[above] {?} (S)
+        edge[loop above]    node{?} (C)
+        edge[bend left=15]     node{?} (R)
+    (R) edge[bend left=15]     node[below] {?} (S)
+        edge[bend left=15]     node[right] {?} (C)
+        edge[loop right]    node{?} (R);
+    
+    \end{tikzpicture}
+    \caption{Markov chain weather model with unknown transition probabilities}
+    \label{fig:markov_unknown}
+\end{figure}
+
+
+For instance, perhaps we kept
+track of the weather over the past week and observed that on Monday it rained, on Tuesday it was cloudy,
+on Wednesday it was sunny, sunny again on Thursday, cloudy on Friday, and then it rained on both Saturday and
+Sunday. The methodology introduced in the problem below would be one way of estimating the probability links
+in the above state diagram.
+
+\noindent \textbf{Notes:} 
 \begin{itemize}
     \item This problem uses what Gilbert Strang would refer to as a \textit{Markov Matrix}. In 
-    more traditional texts the transpose this matrix is worked with, and it is called a \textit{stochastic matrix}.
+    more traditional, statistical texts, the transpose of this matrix is worked with, and it is called a \textit{stochastic matrix}.
+    \item There are many other methodologies for approaching this inference problem, almost all of which
+    are more accurate the majority all of the time. However, this frequentist maximum likelihood approach is often still used as
+    part of these other, better methodologies.
 \end{itemize}
+
 
 \subsubsection*{Problem}
 ~\cite{boyd_convex_optimization} \textbf{Exercise 7.5}. \textit{Markov chain estimation}. Consider a Markov chain
@@ -126,62 +210,89 @@ $\hat{P}_{i j}$ is the ratio of the number of times the state transitioned from 
 given the observed sequence and knowledge of $q$, can be expressed as a convex optimization problem.
 
 \subsubsection*{My Response}
-\noindent (a). We first clarify
+\noindent (a) Firstly, we'll let
 
 \[p_{P}(k) = \mathbf{Prob}_{y \sim P}\left(y_1 = k_1, \ldots, y_N = k_n\right)\]
-
-We seek
+denote either the \textit{joint probability density function} of the observed states, or,
+the \textit{likelihood function} of the density parameters given observed states. Which it is depends on context.
+Since we are in a statistical setting, it is the likelihood function. Furthermore, we seek to find an estimate
+of the transition probabilities between the states of our Markov chain, \textit{i.e.}, we wish to find $\hat{P} \in \mathbf{R}^{n \times n}$.
+As specified above, for this problem we will find this estimate using maximum likelihood estimation, corresponding to 
 
 \[\hat{P} = \underset{P}{\mathrm{argmax}} \; p_P(k). \]
+We first expand the likelihood function using \textit{the chain rule}
 
 \[ \begin{aligned}
     p_{P}(k) &= \mathbf{Prob}\left(y_{N} = k_n \mid y_{N-1} = k_{n-1}\right) \mathbf{Prob}\left(y_{N-1}=k_{n-1} \mid y_{N-2} = k_{n-2} \right)\\
-&\cdots \mathbf{Prob}(y_{2} = k_{2} \mid y_{1} = y_{1}) \mathbf{Prob}\left(y_1 = k_1\right).
+&\cdots \mathbf{Prob}(y_{2} = k_{2} \mid y_{1} = y_{1}) \mathbf{Prob}\left(y_1 = k_1\right),
 \end{aligned} \]
+and then use our \textit{Markov} assumption to simplify this expression to
 
-\[p_{P}(k) = P_{k_{n}k_{n-1}}P_{k_{n-1}k_{n-2}} \cdots P_{k_{2}k_{1}}\]
+\[p_{P}(k) = P_{k_{n}k_{n-1}}P_{k_{n-1}k_{n-2}} \cdots P_{k_{2}k_{1}},\]
+which is simply a product of probabilities, \textit{i.e.}, $P_{ij} \in \mathbf{R}$ (and we assume
+that we start in state $k_1$). Letting $c_{ij}$ be the \textit{number of times the state transitioned
+from $j$ to $i$}, the likelihoood function becomes
+\[p_{P}(k) = \prod_{i, j=1}^{n}P_{ij}^{c_{ij}}.\]
+For tractability purposes we now make use of the \textit{log-likelihood function}, which is simply
 
-\[p_{P}(K) = \prod_{i, j=1}^{n}P_{ij}^{c_{ij}}\]
-
-\[l(P) = \log \left( \prod_{i, j=1}^{n}P_{ij}^{c_{ij}} \right) = \sum_{i, j=1}^{n} c_{ij}\log P_{ij}\]
-
+\[l(P) = \log \left( \prod_{i, j=1}^{n}P_{ij}^{c_{ij}} \right) = \sum_{i, j=1}^{n} c_{ij}\log P_{ij}.\]
+To find the transition probability matrix $P$ which maximizes the likelihood of our observed data having occurred,
+we thus want to solve
 \[\begin{array}{lll}
 \text{maximize} \; & \sum_{i, j=1}^{n} c_{ij}\log P_{ij} & \\
 \text{subject to} & \bm{1}^T P = 1.
 \end{array}\]
+(It is critical to formulate this \textit{constrained problem}. Forgetting to include the constraint
+is a common mistake which leads to an underdetermined problem.)
 
-\[L(P, \nu) = \sum_{i, j=1}^{n} c_{ij}\log P_{ij} + \sum_{j=1}^{n} \left(\nu_j \sum_{i=1}^{n}P_{ij} \right)  \]
+\noindent To solve this equality-constrained optimization problem we simply form the Lagrangian
+
+\[L(P, \nu) = \sum_{i, j=1}^{n} c_{ij}\log P_{ij} + \sum_{j=1}^{n} \left(\nu_j \sum_{i=1}^{n}P_{ij} \right),\]
+find the partial derivatives of $L$ with respect to some probability ($P_{ij}$)
 
 \[\frac{\partial L}{\partial P_{ij}}(P, \nu) = \frac{c_{ij}}{P_{ij}} + v_{j}\]
-Setting $\frac{\partial L}{\partial P_{ij}}(P, \nu)$ equal to zero,
-\[\frac{c_{ij}}{P_{ij}} = - \nu_j \quad \Longleftrightarrow \quad P_{ij} = \frac{-c_{ij}}{v_{j}}\]
-Using the constraint 
-\[\bm{1}^T P = 1 \Longleftrightarrow \sum_{i=1}^{n}P_{ij}, \quad j = 1, \ldots n\]
-plugging in fraction we found above
+and set $\frac{\partial L}{\partial P_{ij}}(P, \nu)$ equal to zero:
+\[\frac{c_{ij}}{P_{ij}} = - \nu_j \quad \Longleftrightarrow \quad P_{ij} = \frac{-c_{ij}}{v_{j}}.\]
 
+\noindent Then, plugging this expression for $P_{ij}$ into the constraint 
+\[\bm{1}^T P = 1 \Longleftrightarrow \sum_{i=1}^{n}P_{ij}, \quad j = 1, \ldots n,\]
+we find that
 \[\sum_{i=1}^{n}\frac{-c_{ij}}{v_{j}} = 1, \quad j= 1, \ldots n \quad \Longleftrightarrow \quad v_j = \sum_{i=1}^{n}-c_{ij}, \quad j = 1, \ldots n.\]
-Furthermore we find that
-
+Therefore, our final expression for any transition probability is
 \[\begin{aligned}
     \hat{P}_{ij} = \frac{-c_{ij}}{v_{j}} = \frac{-c_{ij}}{\sum_{i=1}^{n}-c_{ij}} = \frac{c_{ij}}{\sum_{i=1}^{n}c_{ij}},
 \end{aligned}\]
 which is of course the empirical transition probability, as desired.
+
+\noindent Note that since this is a convex optimization problem (concave objective function constrained to a convex set)
+we don't need to check boundary conditions.
 % since this is a convex optimization problem (concave objective function constrained to a convex set) don't need to check boundaries, etc.
 
 \vspace{0.1cm}
 \noindent (b) To incorporate additional information about the transition probabilities that we are trying to estimate,
+we formulate
 
 \[\begin{array}{lll}
     \text{maximize} \; & \sum_{i, j=1}^{n} c_{ij}\log P_{ij} & \\
     \text{subject to} & \bm{1}^T P = 1 & \\
     & Pq = q,
     \end{array}\]
-still a convex problem. Could augment our previous Lagrangian with these additional equality constraints.
+which is still a convex problem. If we wanted to, we could augment the above Lagrangian with
+these additional constraints and find an analytical expression for this problem, but since it is not
+required, we can be satisfied knowing that CVXPY could solve this problem with even non-trivial scale data
+in under a second.
 
 \subsection{Generative Additive Model}
 
 \subsubsection*{Problem Overview and Upshot}
-% stress the background knowledge of optimization here
+This problem is straightforward (albeit the model is less so): we wish to \textit{guess} the value
+of a function which happens to be some combination of other functions and additional \textit{randomness}.
+This is the setup of modern machine learning. There are many other ML models that will
+give a better estimate of the underlying function, but a benefit to this model is that
+the problem being solved to create it is \textit{convex}, which means that we could embed the corresponding software
+onto an online system that observes and reacts to data that the function produces without worrying about
+the software failing. 
+
 \subsubsection*{Problem}
 ~\cite{EE364a-extra}\textbf{Exercise 6.17}. \textit{Fitting a generalized additive regression model}.
 A \textit{generalized additive model} has the form
@@ -215,17 +326,42 @@ Compare the estimated and true regressor functions in a $3 \times 3$ array of pl
 
 \subsubsection*{My Response}
 
-\noindent (a) 
+\noindent (a) The critical step to using convex optimization to solve this problem is recognizing that
+we wish to adjust the value of $\theta \in \mathbf{R}^{n(K+1)}$, where these function parameters 
+are found in the feature mappings according to
 
-\[f_{j}(x) = \sum_{k=0}^{K}\theta_{nk + j} b_k(x)\]
+\[f_{j}(x) = \sum_{k=0}^{K}\theta_{nk + j} b_k(x),\]
+where $b_k(x) = \max\{x-p_k, 0\} + \min\{p_k, 0\}$.
+Furthermore, letting
+\[C = \sum_{j=1}^{n(K+1)} \left| \theta_j \right| = \left\lVert \theta \right\rVert_{1},\]
+the following unconstrained optimization problem
+\[\mathrm{minimize} \quad \frac{1}{N} \sum_{i=1}^{N}\left(y^{(i)} - (\alpha + \sum_{j=1}^{n}f_j(x_j^{(i)}) ) \right)^2 + \lambda C,\]
+is convex.
 
-where $b_k(x) = \max\{x-p_k, 0\} + \min\{p_k, 0\}$
+\noindent (b) The code in algorithm~\ref{alg:gen-add} carries out this method, with the key functionality
+functionality coming from the augmented data matrix (numpy matrix \lstinline|Z|). The fit generalized additive
+model has a MSE of $0.96962$. A comparision of the estimated and true regressor functions can be found in
+figure~\ref{fig:gen_add_fit}.
 
-Let 
-\[C = \sum_{j=1}^{n(K+1)} \left| \theta_j \right| = \left\lVert \theta \right\rVert_{1} \]
-where $\theta \in \mathbf{R}^{n(K+1)}$
+\begin{algorithm}[htbp]
+    \caption{Generalized additive regression model}
+    \centering
+        \begin{lstlisting}[language=Python]
+            Z = X.copy()
+            for i in range(K):
+                Z = np.hstack((Z, np.maximum(X-p[i], 0) + np.minimum(p[i], 0)))
 
-\[\mathrm{minimize} \quad \frac{1}{N} \sum_{i=1}^{N}\left(y^{(i)} - (\alpha + \sum_{j=1}^{n}f_j(x_j^{(i)}) ) \right)^2 + \lambda C\]
+            theta = cp.Variable(n*(K+1))
+            alpha = cp.Variable(1)
+
+            C = cp.norm(theta, 1)
+            f0 = 1/N*cp.sum_squares(y - alpha - Z@theta)
+
+            prob = cp.Problem(cp.Minimize(f0 + lambda_value*C), [])
+            prob.solve()
+        \end{lstlisting}
+    \label{alg:gen-add}
+\end{algorithm}
 
 \begin{figure}[htbp]
     \centering
@@ -234,9 +370,18 @@ where $\theta \in \mathbf{R}^{n(K+1)}$
     \label{fig:gen_add_fit}
 \end{figure}
 
+\newpage
+
 \subsection{Bounding Object Position}
 
 \subsubsection*{Problem Overview and Upshot}
+The objective of this problem is straightforward: we have some number of cameras observing
+a physical space. For illustrative purposes, perhaps these cameras are part of a \textit{targeting system}.
+Furthermore, suppose that there's an object in this physical space that we wish to terminate. It is desirable
+that we can identify the physical coordinates that this object occupies. The difficulty is that while the object
+is in three dimensional space, the image plane is two dimensional. The following
+problem dives into the mathematical relationship between image space and physical space to create the tools
+necessary to use the images that the cameras take to find the smallest possible box in physical space which this object occupies.
 
 \subsubsection*{Problem}
 
@@ -297,6 +442,8 @@ be less than or qual to $\rho_i/2$. Furthermore,
 \subsection{Robust Logistic Regression}
 
 \subsubsection*{Problem Overview and Upshot}
+The logistic regression framework is a typical classification problem approach. As an example,
+perhaps a drone is collecting terrain data 
 
 \subsubsection*{Problem}
 
@@ -347,8 +494,8 @@ this generalization after reformulating the model.
 
 \noindent The robust logistic regression problem is to solve the unconstrained problem
 
-\[\mathrm{minimize} \quad \ell^{\mathrm{wc}}(\theta)=\sum_{i=1}^n \sup _{\left\|\delta_i\right\| \leq \epsilon} \log \left(1+\exp \left(-y_i \theta^T\left(x_i+\delta_i\right)\right)\right).\]
-However, while this \textit{is} a convex optimization problem, \textit{it is not} DCP compatible. This is because
+\[\mathrm{minimize} \quad \ell^{\mathrm{wc}}(\theta)=\sum_{i=1}^n \sup _{\left\|\delta_i\right\| \leq \epsilon} \log \left(1+\exp \left(-y_i \theta^T\left(x_i+\delta_i\right)\right)\right);\]
+however, while this \textit{is} a convex optimization problem, \textit{it is not} DCP compatible. This is because
 the supremum operator is an analytical expression; \textit{i.e.,} (for our purposes), it cannot be handled by a computer.
 Furthermore, we need to reformulate the problem so the supremum operator is neither in the objective function nor in any
 constraint function. To begin reformulating, we use the hint and move the supremum from the objective function
@@ -363,10 +510,10 @@ To see that this problem is equivalent to the original unconstrained problem, co
 and optimizing solely over $u$. Because the log-sum-exp function is monotonic in its input and the objective function
 is separable, we achieve the optimum over $u$ by choosing
 \[u_i = \sup \left\{-y_i \theta^T\left(x_i+\delta_i\right) \mid \left\lVert \delta_i \right\rVert \le \epsilon \right\} \]
-for $i = 1, \ldots n$. 
+for $i = 1, \ldots n$. Furthermore, then optimizing over $\theta$ yields the original, unconstrained problem.
 
 Now, as previously mentioned, having the supremum operator in the constraint function set does not
-make the problem DCP compliant. Furthermore, we continue and finish the reformulation effort by first
+make the problem DCP compatible. Furthermore, we continue and finish the reformulation effort by first
 pulling terms out of the supremum:
 \[\sup \left\{-y_i \theta^T\left(x_i+\delta_i\right) \mid \left\lVert \delta_i \right\rVert \le \epsilon \right\} \le u_i, \quad i = 1, \ldots, n,\]
 is equivalent to
@@ -374,7 +521,7 @@ is equivalent to
 and then scaling the expression within the supremum
 to recognize that 
 \[\sup \left\{ -y_i \theta^T \delta_i \mid \left\lVert \delta_i \right\rVert \le \epsilon \right\} = \sup \left\{ -\epsilon y_i \theta^T \delta_i \mid \left\lVert \delta_i \right\rVert \le 1 \right\} = \left\lVert -\epsilon y_i \theta \right\rVert_{*},\]
-where $\left\lVert \cdot \right\rVert_{*}$ is the \textit{dual norm} of whatever norm we choose to define our uncertainty set (again, more on this below).
+where $\left\lVert \cdot \right\rVert_{*}$ is the \textit{dual norm} of whatever norm we choose to define our uncertainty set.
 Therefore, we've found that our original unconstrained, non-DCP compatible robust logistic regression optimization problem
 \[\mathrm{minimize} \quad \ell^{\mathrm{wc}}(\theta)=\sum_{i=1}^n \sup _{\left\|\delta_i\right\| \leq \epsilon} \log \left(1+\exp \left(-y_i \theta^T\left(x_i+\delta_i\right)\right)\right)\]
 is equivalent to the following constrained, DCP compatible robust logistic regression optimization problem
@@ -383,6 +530,60 @@ is equivalent to the following constrained, DCP compatible robust logistic regre
     \text{subject to} & -y_i\theta^Tx_i + \left\lVert -\epsilon y_i \theta \right\rVert_{*} \le u_i, \; & i = 1, \ldots, n.
     \end{array}\]
 
+\noindent It turns out that the choice of uncertainty set (induced by our choice in norm) dramatically affects the accuracy of this robust model.
+In table~\ref{tab:logistic-percent} one can find the test error rate of a typical logistic regression model versus
+robust logistic regression models with uncertainty sets induced by $\ell_1$-, $\ell_2$-, and $\ell_\infty$-norms
+and varying values of $\theta$. In most every circumstance, at least one, if not all, of the robust models perform
+better than the vanially model (and sometimes significantly so). Table~\ref{tab:logistic} contains the raw
+classification scores of each model for each $\epsilon$ for a test data set containing $n=60$ points.
+% Conceptually,
+% choosing a 
+% \begin{itemize}
+%     \item $\ell_2$-norm corresponds to saying that a data point $x_i \in \mathbf{R}^d$ 
+%     can lie in a Euclidean ball uncertainty set with radius $\epsilon$,
+%     \item $\ell_1$-norm corresponds to saying that a data point $x_i \in \mathbf{R}^d$ 
+%     can lie in a box uncertainty set with radius $\epsilon$,
+% \end{itemize} 
+
+
+    \begin{table}[h]
+        \centering
+        \begin{tabular}{|c|c|c|c|}
+            \hline
+            & $\epsilon = 0.5$ & $\epsilon = 0.75$ & $\epsilon = 1$ \\
+            \hline
+            Non-Robust & \multicolumn{1}{>{\centering\arraybackslash}m{3cm}|}{36} & \multicolumn{1}{>{\centering\arraybackslash}m{3cm}|}{39} & \multicolumn{1}{>{\centering\arraybackslash}m{3cm}|}{35} \\
+            \hline
+            $\ell_1$ Uncertainty & \multicolumn{1}{>{\centering\arraybackslash}m{3cm}|}{47} & \multicolumn{1}{>{\centering\arraybackslash}m{3cm}|}{44} & \multicolumn{1}{>{\centering\arraybackslash}m{3cm}|}{35} \\
+            \hline
+            $\ell_2$ Uncertainty & \multicolumn{1}{>{\centering\arraybackslash}m{3cm}|}{49} & \multicolumn{1}{>{\centering\arraybackslash}m{3cm}|}{47} & \multicolumn{1}{>{\centering\arraybackslash}m{3cm}|}{41} \\
+            \hline
+            $\ell_\infty$ Uncertainty & \multicolumn{1}{>{\centering\arraybackslash}m{3cm}|}{37} & \multicolumn{1}{>{\centering\arraybackslash}m{3cm}|}{46} & \multicolumn{1}{>{\centering\arraybackslash}m{3cm}|}{41} \\
+            \hline
+        \end{tabular}
+        \caption{Number of Correct Classifications out of $n=60$}
+        \label{tab:logistic}
+    \end{table}
+
+    \begin{table}[h]
+        \centering
+        \begin{tabular}{|c|c|c|c|}
+            \hline
+            & $\epsilon = 0.5$ & $\epsilon = 0.75$ & $\epsilon = 1$ \\
+            \hline
+            Non-Robust & \multicolumn{1}{>{\centering\arraybackslash}m{3cm}|}{0.6} & \multicolumn{1}{>{\centering\arraybackslash}m{3cm}|}{0.65} & \multicolumn{1}{>{\centering\arraybackslash}m{3cm}|}{0.583} \\
+            \hline
+            $\ell_1$ Uncertainty & \multicolumn{1}{>{\centering\arraybackslash}m{3cm}|}{0.783} & \multicolumn{1}{>{\centering\arraybackslash}m{3cm}|}{0.733} & \multicolumn{1}{>{\centering\arraybackslash}m{3cm}|}{0.583} \\
+            \hline
+            $\ell_2$ Uncertainty & \multicolumn{1}{>{\centering\arraybackslash}m{3cm}|}{0.817} & \multicolumn{1}{>{\centering\arraybackslash}m{3cm}|}{0.783} & \multicolumn{1}{>{\centering\arraybackslash}m{3cm}|}{0.683} \\
+            \hline
+            $\ell_\infty$ Uncertainty & \multicolumn{1}{>{\centering\arraybackslash}m{3cm}|}{0.617} & \multicolumn{1}{>{\centering\arraybackslash}m{3cm}|}{0.767} & \multicolumn{1}{>{\centering\arraybackslash}m{3cm}|}{0.683} \\
+            \hline
+        \end{tabular}
+        \caption{Test Error Rate}
+        \label{tab:logistic-percent}
+    \end{table}
+
 \newpage
 
 \section{Design and Control}
@@ -390,7 +591,8 @@ is equivalent to the following constrained, DCP compatible robust logistic regre
 \subsection{Minimum Fuel Control}
 
 \subsubsection*{Problem Overview and Upshot}
-
+While there's some math and optimization techniques involved, the big picture of this problem is very intuitive.
+An exampel 
 \subsubsection*{Problem}
 
 \noindent~\cite{boyd_convex_optimization} \textbf{Exercise 4.16}. \textit{Minimum fuel optimal control}.
@@ -513,9 +715,14 @@ is equivalent to the following constrained, DCP compatible robust logistic regre
     \label{fig:4-16_min-fuel}
     \end{figure}
 
+\newpage
 \subsection{Path Planning with Contingencies}
 
 \subsubsection*{Problem Overview and Upshot}
+
+The problem is to develop three routes for a vehicle. Two routes are ``contingency routes''
+as they address the situation that there's an obstacle in the way of the vehicle which is only
+revealed while the vehicle is in motion.
 
 \subsubsection*{Problem}
 ~\cite{EE364a-extra} \textbf{Exercise 16.9}. \textit{Path Planning with contingencies}.
@@ -553,6 +760,8 @@ Hint. In Python, use the (default) solver ECOS to avoid warnings about inaccurat
 
 \subsubsection*{My Response}
 
+Fortunately, the problem as stated is already a DCP compatible optimization problem. The corresponding formulation is
+
 \[\begin{array}{lll}
 \text{minimize} \; & \sum_{k=1}^3 \sum_{i=2}^{N-1}\left(p_{i-1}^{(k)}-2 p_i^{(k)}+p_{i+1}^{(k)}\right)^2 & \\
 \text{subject to} & p_{i}^{(1)} = p_{i}^{(2)} = p_{i}^{(3)}, & i = 1, \ldots, S \\
@@ -561,6 +770,37 @@ Hint. In Python, use the (default) solver ECOS to avoid warnings about inaccurat
 & p^{(i)}_{1} = a, \quad p^{(i)}_{2} = b, & i = 1, 2, 3 \\
 & p^{(i)}_{N-1} = c, \quad p^{(i)}_{N} = d, & i = 1, 2, 3.
 \end{array}\]
+
+\noindent (b) The code in algorithm~\ref{alg:path-plan} is all that is required to solve the problem,
+\begin{algorithm}[htbp]
+    \caption{Path Planning Code}
+    \centering
+        \begin{lstlisting}[language=Python]
+            p = cp.Variable((3, N))
+
+            constrs = [constr for constr_tuple in
+                       [(p[0, i] == p[1, i], p[2, i] == p[1, i]) for i in range(2, S+1)]
+                       for constr in constr_tuple]
+            constrs += [p[0, O] >= h,
+                        p[1, O] <= -h]
+            constrs += [p[:, 0] == p1*np.ones(3),
+                        p[:, 1] == p2*np.ones(3),
+                        p[:, N-2] == pN_1*np.ones(3),
+                        p[:, N-1] == pN*np.ones(3)]
+            
+            f0 = cp.sum( [ cp.sum_squares( cp.vstack([p[k, i-1] - 2*p[k, i] + p[k, i+1] for i in range(2, N-2)]) ) for k in range(3)] )
+            
+            prob = cp.Problem(cp.Minimize(f0), constrs)
+            prob.solve()
+        \end{lstlisting}
+    \label{alg:path-plan}
+\end{algorithm}
+and when instatiating the model with the provided values, we find $p^* = 0.0001423$ (examining
+the paths, this low objective value makes sense as there are no sharp deviations
+along any of the paths). 
+The optimal paths can be found in figure~\ref{fig:path_plan}. For steps $i=1, \ldots, 60$ we see that
+indeed all paths follow the same trajectory, but once the object is revealed, the two contingency paths
+make the necessary adjustments to avoid the object.
 
 
 \begin{figure}[htbp]
@@ -572,7 +812,9 @@ Hint. In Python, use the (default) solver ECOS to avoid warnings about inaccurat
 
 \subsection{Output Tracking}
 
-\subsubsection*{Problem Overview and Upshot}
+\subsubsection*{Problem Overview}
+This is another problem which is best understood through an example. Specifically,
+imagine that we wish 
 
 \subsubsection*{Problem}
 
@@ -631,8 +873,60 @@ Hint. In Python, use the (default) solver ECOS to avoid warnings about inaccurat
     (with the provided data for $A$, $B$, $C$, and $y^{\text{des}}$, of course.) Using CVXPY, we obtain the optimal cost 
     $J_{\text{outout}}^{*} = 112.4157$.
     
-    \noindent (b) The Python code used to solve this problem can be found in these note's associated examples folder under 364b,
-    so it is omitted here. The cost obtained by applying MPC with 
+    \noindent (b) 
+    \begin{algorithm}[htbp]
+        \caption{Optimization Problem}
+        \centering
+            \begin{lstlisting}[language=Python]
+                def solve(T, t, x_init):
+                    x = cp.Variable((n, T+1))
+                    u = cp.Variable((m, T))
+
+                    J_output = cp.sum_squares(cp.vstack( [ C@x[:, tau] - y_des[tau + t - 1, :] 
+                                                        for tau in range(1, T+1) ] ))
+                    obj = cp.Minimize(J_output)
+
+                    constr = [x[:, 0] == x_init]
+                    for tau in range(T):
+                        constr += [ x[:, tau+1] == A@x[:, tau] + B@u[:, tau],
+                                cp.norm(u[:, tau], 'inf') <= U_max ]
+                        
+                    prob = cp.Problem(obj, constr)
+                    prob.solve()
+                    return (prob.value, u.value, x.value)
+            \end{lstlisting}
+        \label{alg:mpc-opt-problem}
+    \end{algorithm}
+    \begin{algorithm}[htbp]
+        \caption{Model Predictive Control Simulator}
+        \centering
+            \begin{lstlisting}[language=Python]
+                def run_mpc(N, T):
+                    x = np.zeros((n))
+                    U_traj = np.zeros((m, T))
+                    Y = np.zeros((p, T))
+                    J_output = 0
+                    
+                    for t in range(T):
+                        _, u, _ = solve(N, t, x)
+                        U_traj[:, t] = u[:, 0]
+                        x = A@x + B@u[:, 0]
+                        y = C@x
+                        Y[:, t] = y
+                        J_output += cp.sum_squares(y - y_des[t, :]).value
+
+                    return (J_output, Y)
+            \end{lstlisting}
+        \label{alg:mpc-sim}
+    \end{algorithm}
+    To solve this problem using a rolling look-ahead, there are two key components. One, we need
+    to solve the same optimization problem as in part (a), but just over a smaller time horizon. Two,
+    we need solve this receeding horizon optimization problem at each discretized instance in time,
+    step forward in time corresponding to the first control input in the sequence of $N$ control inputs obtained by solving the optimization problem, 
+    and then repeat this loop until we have stepped $T$ steps forward. The corresponding
+    optimization problem can be seen in algorithm~\ref{alg:mpc-opt-problem}, and the simulation
+    code can be found in algorithm~\ref{alg:mpc-sim}.\\
+    \noindent The cost obtained by running MPC with
     \begin{itemize}
         \item $N = 8$ is $379.634$,
         \item $N = 10$ is $128.13$,
@@ -648,9 +942,20 @@ Hint. In Python, use the (default) solver ECOS to avoid warnings about inaccurat
         \label{fig:364-hw7-traj-out}
     \end{figure}
 
+\newpage
 \subsection{UAV Design}
 
 \subsubsection*{Problem Overview and Upshot}
+This is an alternative optimal control problem. More specifically, it is an optimal design problem.
+While the actual problem prompt is long and contains a lot of moving pieces (which is to be expected
+given that we wish to design a UAV), it is simple to understand.
+
+\noindent We want to design an unmanned aerial vehicle. It needs to complete some number of missions
+where for each mission the distance the UAV must cover is known, the velocity it needs to fly at
+is known, and the payload that it is carrying is known. The below problem is concerned with
+designing this UAV such that one, it actually meets the requirements of physics, two, it meets
+the parameters of each mission (both these prior two are required...they are constraints), all the
+while minimizing the cost to manufacture and operate the UAV.
 
 \subsubsection*{Problem}
     \noindent~\cite{EE364a-extra} \textbf{Exercise 18.14}. \textit{Design of an unmanned aerial vehicle}.
@@ -906,7 +1211,7 @@ Hint. In Python, use the (default) solver ECOS to avoid warnings about inaccurat
 
 
     \begin{algorithm}[H]
-        \caption{UAV Design Python Code}
+        \caption{UAV Design}
         \centering
             \begin{lstlisting}[language=Python]
             ### optimization variables ###
