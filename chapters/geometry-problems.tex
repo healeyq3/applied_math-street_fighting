@@ -1,0 +1,57 @@
+\begin{chapter}{Geometric and Classification Problems}
+    ~\cite{EE364a-extra}\textbf{Exercise 8.8}. \textit{Bounding object position from multiple camera views}.
+$x \in \mathbf{R}^3$, and viewed by a set of $m$ cameras. Our goal is to find a box in $\mathbf{R}^3$,
+\[
+\mathcal{B}=\left\{z \in \mathbf{R}^3 \mid l \preceq z \preceq u\right\},
+\]
+for which we can guarantee $x \in \mathcal{B}$. We want the smallest possible such bounding box. (Although it doesn't matter, we can use volume to judge 'smallest' among boxes.)
+
+\noindent Now we describe the cameras. The object at location $x \in \mathbf{R}^3$ creates an image on the image plane of camera $i$ at location
+\[
+v_i=\frac{1}{c_i^T x+d_i}\left(A_i x+b_i\right) \in \mathbf{R}^2 .
+\]
+
+\noindent The matrices $A_i \in \mathbf{R}^{2 \times 3}$, vectors $b_i \in \mathbf{R}^2$ and $c_i \in \mathbf{R}^3$, and real numbers $d_i \in \mathbf{R}$ are known, and depend on the camera positions and orientations. We assume that $c_i^T x+d_i>0$. The $3 \times 4$ matrix
+\[
+P_i=\left[\begin{array}{ll}
+A_i & b_i \\
+c_i^T & d_i
+\end{array}\right]
+\]
+is called the camera matrix (for camera $i$ ). It is often (but not always) the case the that the first 3 columns of $P_i$ (i.e., $A_i$ stacked above $c_i^T$ ) form an orthogonal matrix, in which case the camera is called orthographic.
+We do not have direct access to the image point $v_i$; we only know the (square) pixel that it lies in. In other words, the camera gives us a measurement $\hat{v}_i$ (the center of the pixel that the image point lies in); we are guaranteed that
+\[
+\left\|v_i-\hat{v}_i\right\|_{\infty} \leq \rho_i / 2,
+\]
+where $\rho_i$ is the pixel width (and height) of camera $i$. (We know nothing else about $v_i$; it could be any point in this pixel.)
+Given the data $A_i, b_i, c_i, d_i, \hat{v}_i, \rho_i$, we are to find the smallest box $\mathcal{B}$ (i.e., find the vectors $l$ and $u$ ) that is guaranteed to contain $x$.
+In other words, find the smallest box in $\mathbf{R}^3$ that contains all points consistent with the observations from the camera.
+
+\vspace{0.1cm}
+\noindent (a) Explain how to solve this using convex or quasiconvex optimization. You must explain any transformations you use, any new variables you introduce, etc.
+If the convexity or quasiconvexity of any function in your formulation isn't obvious, be sure justify it.
+
+\vspace{0.1cm}
+\noindent (b) Solve the specific problem instance given in the file \lstinline|camera_data.m|. Be sure that your final numerical answer (i.e., $l$ and $u$ ) stands out.
+
+\vspace{0.1cm}
+\noindent \textbf{Response.} Let's summarize the prompt and understand the problem .
+
+$x$ is some object in the physical world (modeled as 3-dimensional Euclidean space). We have $m$ cameras which capture images
+of $x$. However, because
+
+Let's first formulate the constraints ensuring that our proposed box that $x$ lies in is consistent with the camera measurements;
+\textit{i.e.}, there isn't a point in the bounding box which contra
+
+\[\left\lVert v_i - \hat{v}_i \right\rVert_{\infty} \le \rho_i / 2, , \quad i = 1, \ldots, m\]
+is expanded as 
+\[\left\lVert \frac{1}{c_i^T x+d_i}\left(A_i x+b_i\right) - \hat{v}_i \right\rVert_{\infty} \le \rho_i/2, \quad i = 1, \ldots, m.\]
+The $\ell_{\infty}$-norm is requiring that the absolute value of both terms in the $\mathbf{R}^2$ vector
+\[\frac{1}{c_i^T x+d_i}\left(A_i x+b_i\right) - \hat{v}_i\]
+be less than or qual to $\rho_i/2$. Furthermore,
+
+\[-(\rho_i/2) \bm{1} \preceq \frac{1}{c_i^T x+d_i}\left(A_i x+b_i\right) - \hat{v}_i \preceq (\rho_i/2) \bm{1}, \quad i = 1, \ldots, m\]
+
+\[(\hat{v}_i - (\rho_i/2) \bm{1})(c_i^T x + d_i) \preceq A_i x + b_i \preceq (\hat{v}_i + (\rho_i/2))(c_i^Tx + d_i), \quad i = 1, \ldots, m\]
+
+\end{chapter}

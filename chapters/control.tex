@@ -85,6 +85,7 @@
     \textbf{Note to Readers:} The following exercise uses Geometric Programming (GP). Please note that
     the language of GPs has their own definition of \textit{monomials}, which does not agree with the 
     algebraic definition of a monomial. There is also an object known as a \textit{posynomial}.
+    % difference between valid GP and GP compliant
 
     \vspace{0.2cm}
     \noindent~\cite{EE364a-extra} \textbf{Exercise 18.14}. \textit{Design of an unmanned aerial vehicle}.
@@ -134,7 +135,7 @@
     and therefore readily solved.
     Identify these constraints and give the relaxed versions. Briefly explain why the relaxed constraints will be tight at the solution,
     which means by solving the GP, you've actually solved the original problem.
-    You do not need to reduce the relaxed problem to a standard form GP, or the equivalent convex problem; it's enough to express is in DGP compatible form.
+    You do not need to reduce the relaxed problem to a standard form GP, or the equivalent convex problem; it's enough to express it in DGP compatible form.
     
     \vspace{0.1cm}
     \noindent(b) Solve the relaxed problem you formulate in part (a) with data given in the provided python file.
@@ -156,44 +157,234 @@
     in \textit{standard form}. (Note that $\mathcal{D} = \mathbf{R}^n_{++}$; the constraint $x \succ 0$ is implicit.)
     
     \textbf{Most importantly}, note that the equality constraint functions must be monomials. This requirement helps direct
-    our search for non-GP compliant constraints, \textit{i.e.}, we should look for constraints, which as formulated ``verbally,''
-    would require posynomial equalities. The first such constraint is
+    our search for invalid constraints, \textit{i.e.}, we should look for constraints, which as formulated ``verbally,''
+    would require posynomial equalities. The first such constraint(s) is
 
-    \[F_k^{\mathrm{lift}} = W_k,\]
+    \[F_k^{\mathrm{lift}} = W_k, \quad k=1, \ldots, K,\]
     since 
     \[\begin{aligned}
-        W_k &= W^{\mathrm{bat}} + W^{\mathrm{eng}} + W^{\mathrm{wing}} + W^{\mathrm{pay}_k} + W^{\mathrm{base}} \\
-        &=W^{\mathrm{bat}} + W^{\mathrm{eng}} + C_W S^{1.2} + W^{\mathrm{pay}_k} + W^{\mathrm{base}},
+        W_k &= W^{\mathrm{bat}} + W^{\mathrm{eng}} + W^{\mathrm{wing}} + W^{\mathrm{pay}}_k + W^{\mathrm{base}} \\
+        &=W^{\mathrm{bat}} + W^{\mathrm{eng}} + C_W S^{1.2} + W^{\mathrm{pay}}_k + W^{\mathrm{base}},
     \end{aligned}\]
     is a \textit{posynomial} and $F_k^{\mathrm{lift}}$ is a \textit{monomial}. Because posynomials are
-    \textit{closed under division}, the proposed constraint \[F_k^{\mathrm{lift}} = W_k \Longleftrightarrow \left(F_k^{\mathrm{lift}}\right)^{-1}W_k = 1,\]
-    is a posynomial equality constraint function, which to emphasize again, is invalid for GP formulation.
+    \textit{closed under division}, the proposed constraint \[F_k^{\mathrm{lift}} = W_k \Longleftrightarrow \left(F_k^{\mathrm{lift}}\right)^{-1}W_k = 1, \quad k=1, \ldots, K,\]
+    is a posynomial equality constraint, which to emphasize again, is invalid for GP formulation.
 
-    For the same reason, the constraint
-    \[F_k^{\mathrm{drag}} = T_k\]
+    For the same reason, the constraint(s)
+    \[F_k^{\mathrm{drag}} = T_k, \quad k=1, \ldots, K,\]
     is also invalid. However, in this case, it is the force term, $F_{k}^{\mathrm{drag}}$, which is the posynomial
-    and $T_k = (1/V_k)P_k$ which is the monomial. To formulate a proper GP, we therefore make the following two relaxations
-    % add a hat?
+    and $T_k = (1/V_k)P_k$ which is the monomial. To formulate a proper GP, we therefore make the following two (or more accurately, $2K$) relaxations
     \[\begin{aligned}
-        &F_{k}^{\mathrm{lift}} = W_k \Longrightarrow F_{k}^{\mathrm{lift}} \ge W_k \\
-        &F_{k}^{\mathrm{drag}} = T_k \Longrightarrow F_{k}^{\mathrm{drag}} \le T_k.
+        W_k = F_{k}^{\mathrm{lift}}, \quad \text{and} \quad F_{k}^{\mathrm{drag}} = T_k, \quad k=1, \ldots, K
     \end{aligned}\]
+    become
+    \[
+        W_k \le F_{k}^{\mathrm{lift}}, \quad \text{and} \quad F_{k}^{\mathrm{drag}} \le T_k, \quad k=1, \ldots, K, \]
+    or equivalently (and in GP standard form)
+        \[\left(F_{k}^{\mathrm{lift}} \right)^{-1} W_k \le 1, \quad \text{and} \quad T_k^{-1}F_{k}^{\mathrm{drag}} \le 1, \quad k=1, \ldots, K,
+    \]
+    in the relaxed formulation.
 
-    Relaxed UAV design problem
+    It is now highly tempting to start writing down an optimization problem by just reading off the
+    problem specifications. \textit{This is discouraged}. Even though we have found and proposed relaxations
+    for the two originally invalid GP constraints, it is still \textit{very easy}
+    to formulate a \textit{non-DGP compatible problem}. As an example, a common (and understandable) mistake
+    would be to include the constraints
+    \[0 \le P_k, \quad k=1, \ldots, K,\]
+    in the formulation. However, \textbf{including them} would make the formulation \textbf{non-DGP compatible}.
+    All constraints, equality or inequality, must have a 1 on the right-hand side of the constraint when reduced to standard form.
+    The constraints $0 \le P_k$, $k=1, \ldots, K$ cannot be reduced to this form.
+    However, these are valid GP constraints! They are just included \textit{implicitly}
+    since the domain of the problem is $\mathbf{R}^n_{++}$. Including them \textit{explicitly} leads to a non-DGP compatible
+    formulation.
+    
+    Additionally, unlike in LPs, where additional ``linking'' constraints are harmless,
+    adding such syntactic constraints here can, again, lead to a non-DGP compatible problem. As an example,
+    consider the specification that the lift force acting on the UAV in mission $k$ is
+    \[F_k^{\text {drag }}=\frac{1}{2} \rho V_k^2 C_D\left(\alpha_k\right) S,\]
+    which as previously discussed is a \textit{posynomial}. In an LP formulation (at least, as commonly
+    taught in an operations research setting), it is encouraged (and would be totally valid) to declare $F_k^{\mathrm{drag}}$
+    as an optimization variable, include the above equality in the LP \textbf{as a constraint}, and then use $F_k^{\mathrm{drag}}$
+    throughout the remainder of the problem in constraints involving drag force. However,
+    this ``linking'' constraint is \textbf{non-DGP compatible} because it would be reduced to a posynomial equality constraint,
+    which as discussed at greath length above, is \textbf{not a valid GP constraint}. 
+    
+    Furthermore,
+    we must distinguish between actual \textit{optimization variables} and what I'll call \textit{derived optimization variables}.
+    The former are what they are always defined as: the variables that are to be chosen to minimize the objective function.
+    We will define the latter as a mathematical expression whose value is decided by the optimization variables.
+    To use a Computer Science dialect, the derived optimization variables are functions of references to the optimization variables
+    (where the function can take multiple optimization variables and even other derived optimization variables).
+    Consequently, we can use either the derived variables or the actual variables when formulating our problem.
+    As an example, the constraint
+    \[\frac{1}{2} \rho V_k^2 C_D\left(\alpha_k\right) S \le \left(1/V_k \right)P_k, \quad k = 1, \ldots, K\]
+    is equivalent to
+    \[F_k^{\text {drag }} \le T_k, \quad k=1, \ldots, K.\]
+    However, $F_k^{\text {drag }} = \frac{1}{2} \rho V_k^2 C_D\left(\alpha_k\right) S$ and $T_k = \left(1/V_k \right)P_k$, $k = 1, \ldots, K$,
+    should \textbf{not} be included in the problem constraints and $F_k^{\text {drag }}, T_k$, $k=1\ldots, K$ 
+    \textbf{are not} optimization variables. They both are merely expressions \textit{encoding} optimization variables.
+    As a final attempt to stress the difference, when building this problem with a declarative language such as CVXPY in Python,
+    the problem should be created as follows (and see Algorithm~\ref{alg:uav_code} for the actual code)
+    \begin{enumerate}
+        \item Declare optimization variables. Ex. \lstinline|opt_var = cvxpy.Variable(num_entries)| (notice the explicit
+        use of the \lstinline|Variable| keyword).
+        \item Create derived optimization variables. Ex. \lstinline|der_var = 2.5*opt_var| (this becomes a \lstinline|cvxpy.Expression|).
+        \item Create the constraints and objective using the optimization variables,
+        the derived optimization variables, or some combination of the two. Ex. \lstinline|der_var <= 5|,
+        which would be equivalent to adding the constraint \lstinline|opt_var <= 2|.
+        \item Solve the problem.
+    \end{enumerate}
+    This is a nuanced point, and perhaps is obvious
+    to readers who do not have training in OR formulating LPs, but it is critically important.
 
+    \vspace{0.1cm}
+    \noindent We now put everything together; the following is the Relaxed UAV Design Problem.
+
+    \noindent\textbf{Optimization Variables}
+    \begin{itemize}
+        \item Design Variables: $W^{\mathrm{eng}}$, $W^{\mathrm{bat}}$, $S$.
+        \item Mission Variables: $P_k$, $\alpha_k, \quad k=1, \ldots, K$.
+    \end{itemize}
+
+    \noindent\textbf{Derived Variables/CVXPY expressions}
+    \begin{itemize}
+        \item $W^{\mathrm{wing}} = C_W S^{1.2}$,
+        \item $W_k = W^{\mathrm{bat}} + W^{\mathrm{eng}} + W^{\mathrm{wing}} + W^{\mathrm{pay}}_k + W^{\mathrm{base}}$,
+        \item $F_{k}^{\mathrm{lift}} = \frac{1}{2} \rho V_k^2 C_L\left(\alpha_k\right) S, \quad k = 1, \ldots, K$,
+        \item $F_k^{\text {drag }}=\frac{1}{2} \rho V_k^2 C_D\left(\alpha_k\right) S, \quad k = 1, \ldots, K$,
+        \item $P_{\mathrm{max}} = \left(C_P^{-1} W^{\mathrm{eng}}\right)^{1/0.803}$,
+        \item $T_k = \left(1/V_k \right)P_k, \quad k=1, \ldots, K$,
+        \item $E = C_{E}W^{\mathrm{bat}}$,
+        \item $C_{\mathrm{des}} = 100W^{\mathrm{eng}} + 45W^{\mathrm{bat}} + 2W^{\mathrm{wing}}$,
+        \item $C_{\mathrm{des}} = \sum_{k=1}^{K}\left(T_k + 10\alpha_k \right)$.
+    \end{itemize}
+
+    \noindent\textbf{Relaxed Formulation}
     \[\begin{array}{lll}
-    \text{minimize} \; & C_{\mathrm{des}} + C_{\mathrm{mis}} = 100W^{\mathrm{eng}} + 45W^{\mathrm{bat}} + 2W^{\mathrm{wing}} + \sum_{k=1}^{K}\left(V_k^{-1}P_k + 10\alpha_k \right) &  \\
+    \text{minimize} \; & C_{\mathrm{des}} + C_{\mathrm{mis}} &  \\
     \text{subject to} 
                       & W_{\min }^{\mathrm{eng}} \leq W^{\mathrm{eng}} \leq W_{\max }^{\mathrm{eng}},
                       \quad W_{\min }^{\mathrm{bat}} \leq W^{\mathrm{bat}} \leq W_{\max }^{\mathrm{bat}}, 
                       \quad S_{\min } \leq S \leq S_{\max } & \\
-                      & 0 \le P_k \le P_{\mathrm{max}}, \quad 0 \le \alpha_k \le \alpha_{\mathrm{max}} \quad k = 1, \ldots, K & \\
-                      & W^{\mathrm{wing}} = C_{W}S^{1.2}, \quad W^{\mathrm{eng}} = C_P P_{\mathrm{max}}^{0.803} & \\
-                      & \frac{1}{2} \rho V_k^2 C_L\left(\alpha_k\right) S \ge W_k, \quad k = 1, \ldots K & (F_{k}^{\mathrm{lift}} \ge W_k) \\
-                      & \frac{1}{2} \rho V_k^2 C_D\left(\alpha_k\right) S \le (1/V_k)P_k, \quad k = 1, \ldots K & (F_{k}^{\mathrm{drag}} \le T_k) \\
-                    %   & \sum_{k=1}^{K} (1/V_k) P_k D_k \le C_{E}W^{\mathrm{bat}} & (\text{energy cap}) \\
-                    & (1/V_k) P_k D_k \le C_{E}W^{\mathrm{bat}}, \quad k = 1, \ldots K & (\text{energy cap})
+                      & P_k \le P_{\mathrm{max}}, \quad \alpha_k \le \alpha_{\mathrm{max}}, \quad k = 1, \ldots, K & \\
+                      & F_{k}^{\mathrm{lift}} \ge W_k, \quad k = 1, \ldots K & \\
+                      & F_{k}^{\mathrm{drag}} \le T_k, \quad k = 1, \ldots K & \\
+                        & (1/V_k) P_k D_k \le E, \quad k = 1, \ldots K. & 
     \end{array}\]
+
+    \noindent\textbf{Problem Solution and Analysis}.\\
+    \noindent Firstly, we address why the relaxed constraints, $F_{k}^{\mathrm{lift}} \ge W_k$ and $F_{k}^{\mathrm{drag}} \le T_k$,
+    $k=1, \ldots, K$, will be tight at the solution.\\
+    The tightness in the constraint $F_{k}^{\mathrm{drag}} \le T_k$ at the solution is easy to see. We proceed with a semi-formal argument.
+    Suppose that the drag inequality for mission $k$ holds strictly. That is, $F_k^{\mathrm{drag}} < T_k$. If this is the case, then we can
+    reduce the thrust for mission $k$ by decreasing the power, $P_k$, that flows from the battery to the engine
+    during that mission as $T_k$ strictly increases and strictly decreases as $P_k$ increases or decreases.
+    We are able to decrease the power because the only lower bound on $P_k$ is the implicit lower bound $P_k \ge 0$,
+    and if it is the case that $P_k \to 0$, then $F_k^{\mathrm{drag}}$ must also go to zero since it too is positive. 
+    As both terms go to zero, we end up violating the original assumption that $F_k^{\mathrm{drag}}$ is strictly less than the
+    thrust. Furthermore, being able to reduce $T_k$ contradicts the assumption that we are at the solution since shrinking $T_k$
+    lowers the mission cost, and thus the overall cost. \\
+    \noindent A nearly identical argument can be made for the tightness in the constraint $F_k^{\mathrm{lift}}$ with
+    respect to the attack angle optimization variable $\alpha_k$.
+
+    \vspace{0.3cm}
+    \noindent (b) The Python code in Algorithm~\ref{alg:uav_code} contains the core Python code
+    required to compute the optimal UAV design (it doesn't include constant instantiations and helper functions).
+    The corresponding optimal values are
+    \begin{itemize}
+        \item $C^{*}_{\mathrm{des}} = 4449.324$,
+        \item $C^{*}_{\mathrm{mis}} = 1556.587$,
+        \item $W^{\mathrm{eng}} = \SI{9.951}{\kilo\gram}$,
+        \item $W^{\mathrm{bat}} = \SI{74.06}{\kilo\gram}$,
+        \item $S = \SI{7.999}{\square\meter}$,
+        % \item $P_1 = 40158.622$W, $P_2 = 12141.967$W, $P_3 = 20017.972$W, $P_4 = 24998.3$W, and $P_5 = 8079.933$W.
+        \item the power values are
+            \[
+            \begin{aligned}P_1 = &\SI{40.159}{\kilo\watt}, \quad
+            P_2 = \SI{12.142}{\kilo\watt}, \quad
+            P_3 = \SI{20.018}{\kilo\watt}, \\
+            &P_4 = \SI{24.998}{\kilo\watt}, \quad
+            P_5 = \SI{8.080}{\kilo\watt},
+            \end{aligned}
+            \]
+        % \item The attack angles are $\alpha_1 = 0.1377\degree$, $\alpha_2 = 0.3141$, $\alpha_3 = 0.2249$, $\alpha_4 = 0.2114$, and $\alpha_5 = 0.3785$
+        \item and the attack angles are
+        \[
+            \begin{aligned}
+            \alpha_1 = \SI{0.1377}{\degree}, \quad
+            \alpha_2 = \SI{0.3141}{\degree}, \quad
+            \alpha_3 = \SI{0.2249}{\degree}, \quad
+            \alpha_4 = \SI{0.2114}{\degree}, \quad
+            \alpha_5 = \SI{0.3785}{\degree}.
+            \end{aligned}
+            \]
+    \end{itemize}
+    Finally, in table~\ref{tab:uav_tight_comparison} we see that the relaxed constraints are indeed tight.
+
+    \begin{table}[htbp]
+        \centering
+        \begin{center}
+        \begin{tabular}{ccccc}
+            \toprule
+            $k$ & $T_k$ & $F_k^\text{drag}$ & $F_k^\text{lift}$ & $W_k$ \\
+            \midrule
+            1 & \SI{489.739}{\newton} & \SI{489.739}{\newton} & \SI{269.648}{\newton} & \SI{269.646}{\newton} \\
+            2 & \SI{220.763}{\newton} & \SI{220.763}{\newton} & \SI{276.647}{\newton} & \SI{276.646}{\newton} \\
+            3 & \SI{307.969}{\newton} & \SI{307.969}{\newton} & \SI{276.648}{\newton} & \SI{276.646}{\newton} \\
+            4 & \SI{357.119}{\newton} & \SI{357.119}{\newton} & \SI{301.648}{\newton} & \SI{301.646}{\newton} \\
+            5 & \SI{168.332}{\newton} & \SI{168.332}{\newton} & \SI{253.946}{\newton} & \SI{253.946}{\newton} \\
+            \bottomrule
+        \end{tabular}
+        \end{center}
+        \caption{Tightness in Relaxed Constraints.}
+        \label{tab:uav_tight_comparison}
+    \end{table}
+
+
+    \begin{algorithm}[H]
+        \caption{UAV Design Python Code}
+        \centering
+            \begin{lstlisting}[language=Python]
+            ### optimization variables ###
+            W_eng = cp.Variable(1, pos=True)
+            W_bat = cp.Variable(1, pos=True)
+            S = cp.Variable(1, pos=True)
+            P = cp.Variable(K, pos=True)
+            alpha = cp.Variable(K, pos=True)
+            
+            ### derived expressions ###
+            W_wing = CW*S**(1.2)
+            W_k = [W_bat + W_eng + W_wing + W_base + W_pay[k] for k in range(K)]
+            P_max = ((1/CP)**(1/0.803)) * (W_eng**(1/0.803))
+            F_k_lift = [0.5*rho* V[k]**2 * C_L(alpha[k]) * S for k in range(K)]
+            F_k_drag = [0.5*rho * V[k]**2 * C_D(alpha[k])*S for k in range(K)]
+            T_k = [P[k] * (1/V[k]) for k in range(K)]
+            E = CE*W_bat
+            C_des = 100*W_eng + 45*W_bat + 2 * W_wing
+            C_mis = cp.sum([T_k[k] + 10*alpha[k] for k in range(K)])
+            ### ###
+            
+            ### constraints and objective ###
+            constraints = [W_eng_min <= W_eng, W_eng <= W_eng_max,
+                        W_bat_min <= W_bat, W_bat <= W_bat_max,
+                        S_min <= S, S <= S_max]
+            constraints += [constr for constr_tuple in [(P[k] <= P_max,
+                            alpha[k] <= alpha_max) for k in range(K)]
+                            for constr in constr_tuple]
+            constraints += [F_k_lift[k] >= W_k[k] for k in range(K)]
+            constraints += [F_k_drag[k] <= T_k[k] for k in range(K)]
+            constraints += [P[k] * D[k] * (1/V[k]) <= E for k in range(K)]
+            
+            obj = cp.Minimize(C_des + C_mis)
+            prob = cp.Problem(obj, constraints)
+            # print(prob.is_dgp())
+            prob.solve(gp=True)
+            \end{lstlisting}
+        \label{alg:uav_code}
+    \end{algorithm}
+
+
+
     % % non stochastic closed loop control
     % \noindent~\cite*{boyd_convex_optimization} \textbf{Exercise 4.17}. \textit{Optimal Activity Levels}.We consider an alternative control application: central planning of some economic activity. It's straightforward to formulate the problem as
 
@@ -271,13 +462,13 @@
      We want to write this minimum
      fuel optimal control problem as a LP. However, a LP formulation is rather restrictive,
      so let's begin by formulating this problem as a convex optimization problem. It is tempting
-     to naively claim that the formulation
+     to naively claim that the problem
     \[\begin{array}{lll}
     \text{minimize} \; & \sum_{t=0}^{N-1} f(u_t) & \\
     \text{subject to} & x_{t+1} = Ax_t + bu_t, \; & t=0, \ldots, N-1 \\
     & x_0 = 0, \quad x_{N} = x_{\text{des}}.
     \end{array}\]
-    is a convex. However, we must remember that $f$ is a piecewise function (that we are unfamiliar with \textit{e.g.}
+    is convex. However, we must remember that $f$ is a piecewise function that we are unfamiliar with (\textit{e.g.}
     it isn't a piecwise linear function). Furthermore, this proprosed formulation is not a conex optimization
     problem. Of course, observing that the components of $f$ are indeed convex, it seems highly
     plausible there's a way that $f$ can be reformulated such that the optimization problem is convex.
@@ -286,14 +477,14 @@
     Consider the graph of the fuel use map in figure~\ref{fig:fuel-map}. As stated in the legend of this figure,
     and clearly seen when observing the graph,
     the piecewise function $f$ is equivalent to $\max\{\left| a \right|, 2 \left| a \right| - 1\}$.
-    (Of course one could also provide an algebraic argument if so desired). Furthermore, 
+    (Of course one could also provide an algebraic argument if so desired.) Furthermore, 
     the optimal fuel control problem can be formulated as
 
     % Important/Helpful to map this back to 4.11
     % Actually, how would you map this to ||Ax-b||_1 approximation
     \begin{figure}[h]
         \centering
-        \includegraphics[width=\linewidth]{examples/cvx-ch4/actuator_fuel-use.pdf}
+        \includegraphics[width=\linewidth]{examples/364a/cvx-ch4/actuator_fuel-use.pdf}
         \caption{Actuator Fuel Use Map.}
         \label{fig:fuel-map}
     \end{figure}
@@ -303,7 +494,7 @@
         \text{subject to} & x_{t+1} = Ax_t + bu_t, \; & t=0, \ldots, N-1 \\
         & x_0 = 0, \quad x_{N} = x_{\text{des}},
         \end{array}\]
-    which is a valid convex optimization problem. With that being said, if our goal was
+    which is a valid convex optimization problem. If our goal was
     simply to find the optimal solution to this fuel problem and we didn't care about 
     formulating the problem as a LP, \textbf{we could end our reformulating here.} In fact,
     the optimal solution $u^* \in \mathbf{R}^{Nm}$, where $Nm = N1 = N$, plotted in figure~\ref{fig:4-16_min-fuel}
@@ -350,7 +541,7 @@
     & -y \preceq u \preceq y, & 
     \end{array}\]
     which uses this new variable to ``pull out'' the absolute value from the two other sets
-    of constraints and then is restricted in the same way we would've restricted $\left| u_t \right| \le s_t$.
+    of constraints and then is restricted in the same way we would've reformulated $\left| u_t \right| \le s_t$.
     Now, returning our LDS constraints to the formulation we have the problem
 
     \[\begin{array}{lll}
@@ -362,17 +553,149 @@
         & -y \preceq u \preceq y; & 
         \end{array}\]
     however, note that while all problem functions are linear (affine), the LDS constraints 
-    are still in the form of a linear recurrence.
+    are still in the form of a linear recurrence. Observing the pattern
+    \[\begin{aligned}
+        x_1 &= Ax_0 + bu_0 \\
+        x_2 &= Ax_1 + bu_1 \\
+        &= A(Ax_0 + bu_0)+ bu_1 = A^2x_0 + Abu_0 + bu_1 \\
+        x_3 &= A^3x_0 + A^2b_0 + Abu_1 + bu_2 \\
+        &\vdots
+    \end{aligned}\]
+    and plugging in the values for $x_0$ and $x_{\mathrm{des}}$ into the recurrence, we see that the LDS
+    constraints can be replaced with the affine equality constraints given by
+    \[Hu = x_{\mathrm{des}},\]
+    where 
+    \[H = \begin{bmatrix}
+        A^{N-1}b & A^{N-2}b & \cdots & Ab & b
+    \end{bmatrix}.\]
+
+    Therefore, our original minimum fuel control problem is equivalent to
+    \[\begin{array}{lll}
+        \text{minimize} \; & \bm{1}^T s & \\
+        \text{subject to} & Hu = x_{\mathrm{des}} \; &\\
+        & y \preceq s & \\
+        & 2y - \bm{1} \preceq s & \\
+        & -y \preceq u \preceq y, & 
+        \end{array}\]
+    
+    which is a LP.
     % appears that actuator keeps steady and then at the end moves to destination
     
     \begin{figure}[h]
         \centering
-        \includegraphics[width=\linewidth]{examples/cvx-ch4/4-16_min-fuel.pdf}
+        \includegraphics[width=\linewidth]{examples/364a/cvx-ch4/4-16_min-fuel.pdf}
         \caption{Minimum fuel actuator signal.}
         \label{fig:4-16_min-fuel}
     \end{figure}
     
     \vspace*{.5cm}
+
+    \noindent(Note that in the following, $e_3 = (0, 0, 1)$.)\\
+    \noindent~\cite{EE364a-extra}\textbf{Exercise 16.2}. \textit{Optimal Spacecraft Landing}. 
+    We consider the problem of optimizing the thrust profile for a spacecraft
+    to carry out a landing at a target position. The spacecraft dynamics are
+    \[
+    m \ddot{p}=f-m g e_3,
+    \]
+    where $m>0$ is the spacecraft mass, $p(t) \in \mathbf{R}^3$ is the spacecraft position, with 0 the target landing position and $p_3(t)$ representing height,
+    $f(t) \in \mathbf{R}^3$ is the thrust force, and $g>0$ is the gravitational acceleration.
+    (For simplicity we assume that the spacecraft mass is constant. This is not always a good assumption, since the mass decreases with fuel use.
+    We will also ignore any atmospheric friction.) We must have $p\left(T^{\mathrm{td}}\right)=0$ and $\dot{p}\left(T^{\mathrm{td}}\right)=0$,
+    where $T^{\mathrm{td}}$ is the touchdown time. The spacecraft must remain in a region given by
+    \[
+    p_3(t) \geq \alpha\left\|\left(p_1(t), p_2(t)\right)\right\|_2,
+    \]
+    where $\alpha>0$ is a given minimum glide slope. The initial position $p(0)$ and velocity $\dot{p}(0)$ are given.
+
+    \noindent The thrust force $f(t)$ is obtained from a single rocket engine on the spacecraft, with a given maximum thrust; an attitude control system rotates the spacecraft to achieve any desired direction of thrust. The thrust force is therefore characterized by the constraint $\|f(t)\|_2 \leq F^{\mathrm{max}}$. The fuel use rate is proportional to the thrust force magnitude, so the total fuel use is
+    \[
+    \int_0^{T^{td}} \gamma \left\lVert f(t) \right\rVert_{2} dt
+    \]
+    where $\gamma>0$ is the fuel consumption coefficient. The thrust force is discretized in time, i.e., it is constant over consecutive time periods of length $h>0$, with $f(t)=f_k$ for $t \in[(k-1) h, k h)$, for $k=1, \ldots, K$, where $T^{\mathrm{td}}=K h$. Therefore we have
+    \[
+    v_{k+1}=v_k+(h / m) f_k-h g e_3, \quad p_{k+1}=p_k+(h / 2)\left(v_k+v_{k+1}\right),
+    \]
+    where $p_k$ denotes $p((k-1) h)$, and $v_k$ denotes $\dot{p}((k-1) h)$. We will work with this discrete-time model.
+    For simplicity, we will impose the glide slope constraint only at the times $t=0, h, 2 h, \ldots, K h$.
+
+    \vspace{0.2cm}
+    \noindent(a) \textit{Minimum fuel descent}. Explain how to find the thrust profile $f_1, \ldots, f_K$ that minimizes fuel consumption, given the touchdown time $T^{\mathrm{td}}=K h$ and discretization time $h$. 
+    
+    \vspace{0.2cm}
+    \noindent(b) \textit{Minimum time descent}. Explain how to find the thrust profile that minimizes the touchdown time, i.e., $K$, with $h$ fixed and given.
+    Your method can involve solving several convex optimization problems.
+
+    \vspace{0.2cm}
+    \noindent(c) Carry out the methods described in parts (a) and (b) above on the problem instance with data given in \lstinline|spacecraft_landing_data.py|.
+    Report the optimal total fuel consumption for part (a), and the minimum touchdown time for part (b). The data files also contain plotting code (commented out) to help you visualize your solution. Use the code to plot the spacecraft trajectory and thrust profiles you obtained for parts (a) and (b).
+    
+    \vspace{0.2cm}
+    \noindent Remarks. If you'd like to see the ideas of this problem in action, watch these videos:
+    \begin{itemize}
+        \item \href{http://www.youtube.com/watch?v=2t15vP1PyoA}{Grasshopper Diver, Single Cam}
+        \item \href{https://www.youtube.com/watch?v=orUjSkc2pG0}{Grasshopper 24-story Hover}
+        \item \href{https://www.youtube.com/watch?v=1B6oiLNyKKI}{Falcon 9 Landing at Zone 1}
+        \item \href{https://www.youtube.com/watch?v=ZCBE8ocOkAQ}{Falcon 9 First Stage Landing}
+    \end{itemize}
+
+    \vspace{0.2cm}
+    \noindent \textbf{Response.} 
+    
+    \noindent (a). Formulating this problem is very straightforward as all
+    control specifications are already DCP compatible, \textit{i.e.}, the specified control
+    problem is convex. After discretizing the integral expression for total fuel use as
+    \[J_{\mathrm{input}} = \sum_{k=0}^{K-1}\gamma \left\lVert f_k \right\rVert_{2},\]
+    the minimum fuel descent problem can immediately be formulated as
+    \[\begin{array}{lll}
+    \text{minimize} \; & J_{\mathrm{input}} & \\
+    \text{subject to} & v_{k+1} = v_k (h/m)f_k - hge_3, & k = 0, \ldots, K-1 \\
+    & p_{k+1} = p_k + (h/2)(v_k + v_{k+1}), & k = 0, \ldots, K-1 \\
+    & \alpha \left\lVert \begin{bmatrix} (p_k)_1 \\ (p_k)_2 \end{bmatrix} \right\rVert_{2} \le (p_k)_3, & k=1, \ldots, K \\
+    & \left\lVert f_k \right\rVert_{2} \le F^{\mathrm{max}}, & k = 0, \ldots, K-1 \\
+    & v_{0} = \dot{p}(0), \quad p_0 = p(0) & \\
+    & v_{K} = 0, \quad p_{K} = 0.
+    \end{array}\]
+    (Note that we've adopted a Pythonic zero-based indexing for the formulation, \textit{i.e.},
+    the first force we apply is at $t=0$, right when we start controlling the rocket).
+
+    \vspace{0.1cm}
+    \noindent (b). Keeping the parameter $h$ fixed, we reduce the time it takes to descend by decreasing $K$,
+    the number of steps it takes to move from $(p(0), \dot{p}(0)) \to (0, 0)$. The simplest way 
+    to find $K$ is with a linear search where we start by solving the feasibility problem,
+    \[\begin{array}{lll}
+        \text{minimize} \; & 0 & \\
+        \text{subject to} & v_{k+1} = v_k (h/m)f_k - hge_3, & k = 0, \ldots, K-1 \\
+        & p_{k+1} = p_k + (h/2)(v_k + v_{k+1}), & k = 0, \ldots, K-1 \\
+        & \alpha \left\lVert \begin{bmatrix} (p_k)_1 \\ (p_k)_2 \end{bmatrix} \right\rVert_{2} \le (p_k)_3, & k=1, \ldots, K \\
+        & \left\lVert f_k \right\rVert_{2} \le F^{\mathrm{max}}, & k = 0, \ldots, K-1 \\
+        & v_{0} = \dot{p}(0), \quad p_0 = p(0) & \\
+        & v_{K} = 0, \quad p_{K} = 0,
+        \end{array}\]
+    with a $K$ which yields a feasible solution, then solving the same feasibility problem again but
+    with $K^{\mathrm{curr}} = K-1$. We continue to decrement the planning horizon, $K^{\mathrm{curr}}$ by one until the problem becomes infeasible.
+    At this point, we know that $K^{\mathrm{curr}} + 1$ and the associated solution vector $f^{*} = (f_1, \ldots, f_{K^{curr}+1})$ 
+    is the minimum number of time steps and associated thrust profile which minimizes the touchdown time.
+
+    \vspace{0.1cm}
+    \noindent (c). For part (a), the total fuel consumption is about $193.0$. For part (b),
+    we find that $K=25$ minimizes the touchdown time. The minimum fuel descent trajectory
+    and associated thrust profiles are shown in figure~\ref{fig:364a-min-fuel-desc}
+    and the minimum touchdown time trajectory and associated thrust profiles are shown in figure~\ref{fig:364a-min-touchdown-desc}.
+
+    \begin{figure}[htbp]
+        \centering
+        \includegraphics[width=\linewidth]{examples/364a/rocket_min_fuel.pdf}
+        \caption{Minimum Fuel Descent Trajectory and Thrust Profiles.}
+        \label{fig:364a-min-fuel-desc}
+    \end{figure}
+
+
+    \begin{figure}[htbp]
+        \centering
+        \includegraphics[width=\linewidth]{examples/364a/rocket_min_descent.pdf}
+        \caption{Minimum Touchdown Descent Trajectory and Thrust Profiles.}
+        \label{fig:364a-min-touchdown-desc}
+    \end{figure}
 
     \section{Model Predictive Control}
 

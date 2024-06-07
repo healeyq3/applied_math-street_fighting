@@ -1,17 +1,17 @@
 [0] Config.pm:311> INFO - This is Biber 2.16
 [0] Config.pm:314> INFO - Logfile is 'main.blg'
-[86] biber-darwin:340> INFO - === Tue Jun  4, 2024, 19:32:49
-[104] Biber.pm:415> INFO - Reading 'main.bcf'
-[194] Biber.pm:952> INFO - Found 5 citekeys in bib section 0
-[212] Biber.pm:4340> INFO - Processing section 0
-[225] Biber.pm:4531> INFO - Looking for bibtex format file 'refs.bib' for section 0
-[227] bibtex.pm:1689> INFO - LaTeX decoding ...
-[235] bibtex.pm:1494> INFO - Found BibTeX data source 'refs.bib'
-[300] Utils.pm:395> WARN - legacy year field '2007-8' in entry 'EE364b' is not an integer - this will probably not sort properly.
-[328] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[328] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[328] Biber.pm:4168> INFO - Sorting list 'anyt/global//global/global' of type 'entry' with template 'anyt' and locale 'en-US'
-[328] Biber.pm:4174> INFO - No sort tailoring available for locale 'en-US'
-[341] bbl.pm:654> INFO - Writing 'main.bbl' with encoding 'UTF-8'
-[343] bbl.pm:757> INFO - Output to main.bbl
-[344] Biber.pm:128> INFO - WARNINGS: 1
+[82] biber-darwin:340> INFO - === Thu Jun  6, 2024, 18:50:39
+[96] Biber.pm:415> INFO - Reading 'main.bcf'
+[183] Biber.pm:952> INFO - Found 5 citekeys in bib section 0
+[197] Biber.pm:4340> INFO - Processing section 0
+[207] Biber.pm:4531> INFO - Looking for bibtex format file 'refs.bib' for section 0
+[208] bibtex.pm:1689> INFO - LaTeX decoding ...
+[216] bibtex.pm:1494> INFO - Found BibTeX data source 'refs.bib'
+[271] Utils.pm:395> WARN - legacy year field '2007-8' in entry 'EE364b' is not an integer - this will probably not sort properly.
+[288] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[288] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[289] Biber.pm:4168> INFO - Sorting list 'anyt/global//global/global' of type 'entry' with template 'anyt' and locale 'en-US'
+[289] Biber.pm:4174> INFO - No sort tailoring available for locale 'en-US'
+[298] bbl.pm:654> INFO - Writing 'main.bbl' with encoding 'UTF-8'
+[300] bbl.pm:757> INFO - Output to main.bbl
+[300] Biber.pm:128> INFO - WARNINGS: 1

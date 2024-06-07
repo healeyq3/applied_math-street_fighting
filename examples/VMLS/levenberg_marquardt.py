@@ -1,7 +1,7 @@
 from typing import Callable
 
-from numpy import (array, ndarray, eye, zeros)
-from numpy.linalg import (inv, norm)
+from jax.numpy import (array, ndarray, eye, zeros)
+from jax.numpy.linalg import (inv, norm)
 
 def solve(x0: ndarray, lm0: float, max_iter: int,
           f: Callable[[ndarray], ndarray], 

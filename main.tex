@@ -5,9 +5,16 @@
 \usepackage{bm}
 \usepackage{forest}
 \usepackage{caption}
+% \usepackage{algorithm}
 \usepackage{algorithm2e}
+\usepackage{gensymb}
+\usepackage{siunitx}
+\usepackage{booktabs}
+% \usepackage[table]{xcolor} % For coloring rows and columns
 \usepackage{tikz}
 \usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
 \hypersetup{
     colorlinks=true,
     linkcolor=red,
@@ -15,6 +22,45 @@
     citecolor=green,
 }
 \RestyleAlgo{ruled}
+
+% \lstset{
+%   basicstyle=\ttfamily,
+%   keywordstyle=\color[rgb]{0.13, 0.13, 0.38}, % Keywords in navy blue
+%   commentstyle=\color[rgb]{0.5, 0.5, 0.5}, % Comments in gray
+%   stringstyle=\color[rgb]{0.63, 0.13, 0.13}, % Strings in dark red
+%   backgroundcolor=\color[rgb]{0.95, 0.95, 0.95}, % Light gray background
+%   frame=single,
+%   breaklines=true,
+%   showstringspaces=false,
+% }
+
+%New colors defined below
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+%Code listing style named "mystyle"
+\lstdefinestyle{mystyle}{
+  backgroundcolor=\color{backcolour},   commentstyle=\color{codegreen},
+  keywordstyle=\color{magenta},
+  numberstyle=\tiny\color{codegray},
+  stringstyle=\color{codepurple},
+  basicstyle=\ttfamily\footnotesize,
+  breakatwhitespace=false,         
+  breaklines=true,                 
+  captionpos=b,                    
+  keepspaces=true,                 
+  numbers=left,                    
+  numbersep=5pt,                  
+  showspaces=false,                
+  showstringspaces=false,
+  showtabs=false,                  
+  tabsize=2
+}
+
+%"mystyle" code listing set
+\lstset{style=mystyle}
 
 \usepackage[backend=biber,style=alphabetic]{biblatex}
 % Add your .bib file
@@ -76,6 +122,8 @@
 
 \include{chapters/statistical-estimation}
 
+\include{chapters/geometry-problems}
+
 % GEOMETRY/CLASSIFICATION CHAPTER
     % PROBLEMS TO FINISH PRE 6/07/24    
             % Boyd ADE 8.8 Bounding object position from multiple camera views
@@ -91,9 +139,6 @@
 % eventually need to have some high level on neural architectures (practical DL for coders: https://course.fast.ai/)
 
 \include{chapters/control}
-
-% Optimal Design
-    % Boyd ADE 18.14 Design of an unmanned aerial vehicle
 
 % Statistical Decision Theory
 
