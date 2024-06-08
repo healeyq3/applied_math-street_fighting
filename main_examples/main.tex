@@ -119,8 +119,8 @@ a clear (and in my opinion, compelling) depiction of my skillset.
 \vspace{0.2cm}
 \noindent Finally, some housekeeping.
 \begin{itemize}
-    \item Here is the repository containing this document, the larger note set that this document is a part of,
-    and all of the code used to solve problems in this document.
+    \item \href{https://github.com/healeyq3/applied_math-street_fighting}{Here} is the repository containing this document, the larger note set that this document is a part of,
+    and all of the code used to solve problems in this document. The code can be found in the ``examples'' subdirectory.
     \item There is not much exotic notation in this document. I refer a reader to~\cite{boyd_convex_optimization}
     for a summary of all notation that I use (I have adopted the style from that book). The one bit of notation
     which I've found confuses people are the generalized inequalities $\succeq$ and $\preceq$. In this document
@@ -186,7 +186,7 @@ we wish to create a new weather app because we believe that our Markov model wil
 the weather than the default app on our phones (a bold assumption). However, while we know what the states in our system
 are, we do not know what the transition probabilities are; \textit{i.e.,} our knowledge of the system is represented by Figure~\ref{fig:markov_unknown}.
 We could of course \textit{guess} what each probability is, but the better approach is to \textit{collect data}
-and then use this data to guess the probabilities (fun fact: statistics used to be called \textit{inverse probability}). 
+and then use this data to \textit{estimate} the probabilities (fun fact: statistics used to be called \textit{inverse probability}). 
 \begin{figure}[htbp]
     \centering
 \begin{tikzpicture}[->, >=stealth', auto, semithick, node distance=3cm]
@@ -290,7 +290,7 @@ and set $\frac{\partial L}{\partial P_{ij}}(P, \nu)$ equal to zero:
 \[\frac{c_{ij}}{P_{ij}} = - \nu_j \quad \Longleftrightarrow \quad P_{ij} = \frac{-c_{ij}}{v_{j}}.\]
 
 \noindent Then, plugging this expression for $P_{ij}$ into the constraint 
-\[\bm{1}^T P = \bm{1}^T \Longleftrightarrow \sum_{i=1}^{n}P_{ij}, \quad j = 1, \ldots n,\]
+\[\bm{1}^T P = \bm{1}^T \Longleftrightarrow \sum_{i=1}^{n}P_{ij}=1, \quad j = 1, \ldots n,\]
 we find that
 \[\sum_{i=1}^{n}\frac{-c_{ij}}{v_{j}} = 1, \quad j= 1, \ldots n \quad \Longleftrightarrow \quad v_j = \sum_{i=1}^{n}-c_{ij}, \quad j = 1, \ldots n.\]
 Therefore, our final expression for any transition probability is

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.8.24)  7 JUN 2024 22:25
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.8.24)  7 JUN 2024 22:42
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1081,7 +1081,7 @@ Overfull \hbox (17.62482pt too wide) detected at line 400
 [][] 
  []
 
-<../examples/364a/cvx-ch7/gen_add_regr_fit.png, id=130, 721.2546pt x 715.473pt>
+<../examples/364a/cvx-ch7/gen_add_regr_fit.png, id=131, 721.2546pt x 715.473pt>
 File: ../examples/364a/cvx-ch7/gen_add_regr_fit.png Graphic file (type png)
 <use ../examples/364a/cvx-ch7/gen_add_regr_fit.png>
 Package pdftex.def Info: ../examples/364a/cvx-ch7/gen_add_regr_fit.png  used on input line 404.
@@ -1106,7 +1106,7 @@ Overfull \hbox (17.62482pt too wide) detected at line 586
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [16] [17]
-<../examples/364a/cvx-ch4/actuator_fuel-use.pdf, id=300, 400.0458pt x 312.02145pt>
+<../examples/364a/cvx-ch4/actuator_fuel-use.pdf, id=301, 400.0458pt x 312.02145pt>
 File: ../examples/364a/cvx-ch4/actuator_fuel-use.pdf Graphic file (type pdf)
 <use ../examples/364a/cvx-ch4/actuator_fuel-use.pdf>
 Package pdftex.def Info: ../examples/364a/cvx-ch4/actuator_fuel-use.pdf  used on input line 802.
@@ -1116,7 +1116,7 @@ Package pdftex.def Info: ../examples/364a/cvx-ch4/actuator_fuel-use.pdf  used on
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [18] [19 </Users/q3/Documents/Memex2/Optimization/convex-notes/main_examples/../examples/364a/cvx-ch4/actuator_fuel-use.pdf>]
-<../examples/364a/cvx-ch4/4-16_min-fuel.pdf, id=350, 409.77882pt x 312.02145pt>
+<../examples/364a/cvx-ch4/4-16_min-fuel.pdf, id=351, 409.77882pt x 312.02145pt>
 File: ../examples/364a/cvx-ch4/4-16_min-fuel.pdf Graphic file (type pdf)
 <use ../examples/364a/cvx-ch4/4-16_min-fuel.pdf>
 Package pdftex.def Info: ../examples/364a/cvx-ch4/4-16_min-fuel.pdf  used on input line 876.
@@ -1126,7 +1126,7 @@ Overfull \hbox (17.62482pt too wide) detected at line 960
 [][] 
  []
 
-<../examples/364a/path_plan_cont.pdf, id=394, 404.31174pt x 298.29831pt>
+<../examples/364a/path_plan_cont.pdf, id=395, 404.31174pt x 298.29831pt>
 File: ../examples/364a/path_plan_cont.pdf Graphic file (type pdf)
 <use ../examples/364a/path_plan_cont.pdf>
 Package pdftex.def Info: ../examples/364a/path_plan_cont.pdf  used on input line 971.
@@ -1141,7 +1141,7 @@ Overfull \hbox (17.62482pt too wide) detected at line 1106
 [][] 
  []
 
-<../examples/364b/364b_mpc_output.pdf, id=468, 428.94283pt x 312.02145pt>
+<../examples/364b/364b_mpc_output.pdf, id=469, 428.94283pt x 312.02145pt>
 File: ../examples/364b/364b_mpc_output.pdf Graphic file (type pdf)
 <use ../examples/364b/364b_mpc_output.pdf>
 Package pdftex.def Info: ../examples/364b/364b_mpc_output.pdf  used on input line 1110.
@@ -1152,12 +1152,12 @@ Overfull \hbox (17.62482pt too wide) detected at line 1423
  []
 
 [34] [35] [36] [37]
-<../examples/364a/rocket_min_fuel.pdf, id=658, 298.78787pt x 287.58292pt>
+<../examples/364a/rocket_min_fuel.pdf, id=659, 298.78787pt x 287.58292pt>
 File: ../examples/364a/rocket_min_fuel.pdf Graphic file (type pdf)
 <use ../examples/364a/rocket_min_fuel.pdf>
 Package pdftex.def Info: ../examples/364a/rocket_min_fuel.pdf  used on input line 1527.
 (pdftex.def)             Requested size: 469.75499pt x 452.14685pt.
-<../examples/364a/rocket_min_descent.pdf, id=659, 298.78787pt x 287.58292pt>
+<../examples/364a/rocket_min_descent.pdf, id=660, 298.78787pt x 287.58292pt>
 File: ../examples/364a/rocket_min_descent.pdf Graphic file (type pdf)
 <use ../examples/364a/rocket_min_descent.pdf>
 Package pdftex.def Info: ../examples/364a/rocket_min_descent.pdf  used on input line 1535.
@@ -1178,10 +1178,10 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  101i,14n,103p,1667b,1624s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on /Users/q3/Documents/Memex2/Optimization/convex-notes/main_examples/main.pdf (41 pages, 526367 bytes).
+Output written on /Users/q3/Documents/Memex2/Optimization/convex-notes/main_examples/main.pdf (41 pages, 526521 bytes).
 PDF statistics:
- 845 PDF objects out of 1000 (max. 8388607)
- 654 compressed objects within 7 object streams
+ 846 PDF objects out of 1000 (max. 8388607)
+ 655 compressed objects within 7 object streams
  306 named destinations out of 1000 (max. 500000)
  136 words of extra memory for PDF output out of 10000 (max. 10000000)
 
