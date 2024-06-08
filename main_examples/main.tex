@@ -92,32 +92,67 @@
 \tableofcontents
 
 \section*{Document Overview}
+This collection of problems is designed to demonstrate the engineering and mathematics background
+that I developed during my time as an undergraduate student at Georgia Tech (and continue to develop
+now on my own). While every example is a ``toy problem'' in the sense that one,
+they all have associated solutions (thus differing from research), and two, this solution can be obtained within a few pages of work
+(thus differing from a larger-scope engineering project), I chose to devote time to this pursuit as \textbf{I
+believe this collection of problems demonstrates the variety of ways I could be of use to Anduril
+as a member on their Mission Autonomy or Perception teams. }
+% Additionally, this project has been a great
+% opportunity to continue developing my skills in mathematical optimization; a discipline which not
+% only has its own problems
+
+Each problem contains three parts. The first is a high-level overview of the problem; it is meant to
+be understood by people from non-technical backgrounds. The length of this description varies according
+to the complexity of the problem it is trying to summarize. The description to Problem 1.1 is the longest and most
+technically involved, so if this is discouraging, move to another problem; each problem stands on its own.
+In fact, I recommend the reader use the hyperlinked table of contents to explore the problem which seems
+most interesting to them.
+
+The second and third part of each problem are mathematically involved.
+They are, respectively, the prompt of a graduate level problem (taken from one of~\cite{boyd_convex_optimization},~\cite{EE364b}, or~\cite{EE364a-extra}) and my response/solution to that problem.
+However, while these two parts are less approachable to non-technical readers, my response to almost every one
+contains some figure or table, which when connected with the first part of the problem still yields
+a clear (and in my opinion, compelling) depiction of my skillset.
+
+\vspace{0.2cm}
+\noindent Finally, some housekeeping.
+\begin{itemize}
+    \item Here is the repository containing this document, the larger note set that this document is a part of,
+    and all of the code used to solve problems in this document.
+    \item There is not much exotic notation in this document. I refer a reader to~\cite{boyd_convex_optimization}
+    for a summary of all notation that I use (I have adopted the style from that book). The one bit of notation
+    which I've found confuses people are the generalized inequalities $\succeq$ and $\preceq$. In this document
+    (as it currently exists) these are just used to denote \textit{componentwise} inequality between vectors.
+\end{itemize}
+
 
 % Power in approaching problems with an optimization POV
 % comment on the part of each problem and knowing when it is appropriate to talk about math
-% mention markov chains and MDPs
 % problem explanation depends on length of problem solution
 % (the first problem description is long...not all are like this)
 % feel free to use the table of contents to find and example that catches your eye
 % demonstrates what I know; for more technical readers
-
-\section*{Notation}
+% include link to repo
 
 \newpage
 
-\section{Function Fitting, Statistical Estimation, and Classification}
+\section{Estimation, Fitting, Detection, and Classification}
 
 \subsection{Markov Chain Transition Probability Estimation}
 
-\subsubsection*{Problem Overview and Upshot}
+\subsubsection*{Problem Overview}
 
 Markov chains are an important, probabilistic tool that can be found across many disciplines,
 either used to model some system directly (like in the following example) or as part of a broader solution
-approach (\textit{e.g.} Markov Chain Monte Carlo or Markov Decision Processes). We'll forego the mathematics behind Markov chains and consider the canonical weather example.\\
-\noindent We suppose on any given day it can be sunny, cloudy, or rainy. This is referred to as the \textit{state}. 
+approach (\textit{e.g.} Markov Chain Monte Carlo or Markov Decision Processes). We'll forego the mathematics behind Markov chains and consider the canonical weather example
+to build intuition for this problem.\\
+\noindent Suppose on any given day it can be sunny, cloudy, or rainy. These are known as the \textit{states}
+of the Markov chain. 
 The important assumption we make is that the \textbf{weather tomorrow only depends on the weather today}.
 However, given the weather today, we do not know for sure what the weather tomorrow will be, \textit{i.e.} we transition
-randomly between states. Figure~\ref{fig:markov} is an example of weather-modeling Markov chain. According to this model,
+randomly between states. Figure~\ref{fig:markov} is an example of a Markov chain that models the weather. According to this model,
 if it is sunny today, it will be rainy tomorrow with probability 0.1, cloudy tomorrow with probability 0.3,
 or sunny again tomorrow with probability 0.6.  
 
@@ -182,15 +217,15 @@ For instance, perhaps we kept
 track of the weather over the past week and observed that on Monday it rained, on Tuesday it was cloudy,
 on Wednesday it was sunny, sunny again on Thursday, cloudy on Friday, and then it rained on both Saturday and
 Sunday. The methodology introduced in the problem below would be one way of estimating the probability links
-in the above state diagram.
+in figure~\ref{fig:markov_unknown}'s state diagram.
 
 \noindent \textbf{Notes:} 
 \begin{itemize}
     \item This problem uses what Gilbert Strang would refer to as a \textit{Markov Matrix}. In 
     more traditional, statistical texts, the transpose of this matrix is worked with, and it is called a \textit{stochastic matrix}.
     \item There are many other methodologies for approaching this inference problem, almost all of which
-    are more accurate the majority all of the time. However, this frequentist maximum likelihood approach is often still used as
-    part of these other, better methodologies.
+    are more accurate the majority of the time. However, this frequentist maximum likelihood approach is often still used as
+    part of these other, ``better'' methodologies.
 \end{itemize}
 
 
@@ -240,7 +275,7 @@ To find the transition probability matrix $P$ which maximizes the likelihood of 
 we thus want to solve
 \[\begin{array}{lll}
 \text{maximize} \; & \sum_{i, j=1}^{n} c_{ij}\log P_{ij} & \\
-\text{subject to} & \bm{1}^T P = 1.
+\text{subject to} & \bm{1}^T P = \bm{1}^T.
 \end{array}\]
 (It is critical to formulate this \textit{constrained problem}. Forgetting to include the constraint
 is a common mistake which leads to an underdetermined problem.)
@@ -255,7 +290,7 @@ and set $\frac{\partial L}{\partial P_{ij}}(P, \nu)$ equal to zero:
 \[\frac{c_{ij}}{P_{ij}} = - \nu_j \quad \Longleftrightarrow \quad P_{ij} = \frac{-c_{ij}}{v_{j}}.\]
 
 \noindent Then, plugging this expression for $P_{ij}$ into the constraint 
-\[\bm{1}^T P = 1 \Longleftrightarrow \sum_{i=1}^{n}P_{ij}, \quad j = 1, \ldots n,\]
+\[\bm{1}^T P = \bm{1}^T \Longleftrightarrow \sum_{i=1}^{n}P_{ij}, \quad j = 1, \ldots n,\]
 we find that
 \[\sum_{i=1}^{n}\frac{-c_{ij}}{v_{j}} = 1, \quad j= 1, \ldots n \quad \Longleftrightarrow \quad v_j = \sum_{i=1}^{n}-c_{ij}, \quad j = 1, \ldots n.\]
 Therefore, our final expression for any transition probability is
@@ -282,9 +317,10 @@ these additional constraints and find an analytical expression for this problem,
 required, we can be satisfied knowing that CVXPY could solve this problem with even non-trivial scale data
 in under a second.
 
-\subsection{Generative Additive Model}
+\newpage
+\subsection{Generalized Additive Model}
 
-\subsubsection*{Problem Overview and Upshot}
+\subsubsection*{Problem Overview}
 This problem is straightforward (albeit the model is less so): we wish to \textit{guess} the value
 of a function which happens to be some combination of other functions and additional \textit{randomness}.
 This is the setup of modern machine learning. There are many other ML models that will
@@ -327,7 +363,7 @@ Compare the estimated and true regressor functions in a $3 \times 3$ array of pl
 \subsubsection*{My Response}
 
 \noindent (a) The critical step to using convex optimization to solve this problem is recognizing that
-we wish to adjust the value of $\theta \in \mathbf{R}^{n(K+1)}$, where these function parameters 
+we wish to find the value of $\theta \in \mathbf{R}^{n(K+1)}$, where these function parameters 
 are found in the feature mappings according to
 
 \[f_{j}(x) = \sum_{k=0}^{K}\theta_{nk + j} b_k(x),\]
@@ -338,7 +374,7 @@ the following unconstrained optimization problem
 \[\mathrm{minimize} \quad \frac{1}{N} \sum_{i=1}^{N}\left(y^{(i)} - (\alpha + \sum_{j=1}^{n}f_j(x_j^{(i)}) ) \right)^2 + \lambda C,\]
 is convex.
 
-\noindent (b) The code in algorithm~\ref{alg:gen-add} carries out this method, with the key functionality
+\noindent (b) The code in algorithm~\ref{alg:gen-add} carries out this method, with the key
 functionality coming from the augmented data matrix (numpy matrix \lstinline|Z|). The fit generalized additive
 model has a MSE of $0.96962$. A comparision of the estimated and true regressor functions can be found in
 figure~\ref{fig:gen_add_fit}.
@@ -374,11 +410,11 @@ figure~\ref{fig:gen_add_fit}.
 
 \subsection{Bounding Object Position}
 
-\subsubsection*{Problem Overview and Upshot}
+\subsubsection*{Problem Overview}
 The objective of this problem is straightforward: we have some number of cameras observing
 a physical space. For illustrative purposes, perhaps these cameras are part of a \textit{targeting system}.
-Furthermore, suppose that there's an object in this physical space that we wish to terminate. It is desirable
-that we can identify the physical coordinates that this object occupies. The difficulty is that while the object
+Furthermore, suppose that there's an object in this physical space that we wish to terminate. Therefore,
+we need to identify the physical coordinates that this object occupies. The difficulty is that while the object
 is in three dimensional space, the image plane is two dimensional. The following
 problem dives into the mathematical relationship between image space and physical space to create the tools
 necessary to use the images that the cameras take to find the smallest possible box in physical space which this object occupies.
@@ -422,28 +458,152 @@ If the convexity or quasiconvexity of any function in your formulation isn't obv
 
 \subsubsection*{My Response}
 
-$x$ is some object in the physical world (modeled as 3-dimensional Euclidean space). We have $m$ cameras which capture images
-of $x$. However, because
-
-Let's first formulate the constraints ensuring that our proposed box that $x$ lies in is consistent with the camera measurements;
-\textit{i.e.}, there isn't a point in the bounding box which contra
+Let's first formulate the constraints ensuring that the box that we propose $x$ lies in is consistent with the camera measurements.
+Mathematically, this is expressed as
 
 \[\left\lVert v_i - \hat{v}_i \right\rVert_{\infty} \le \rho_i / 2, , \quad i = 1, \ldots, m\]
-is expanded as 
+which can then be expanded according to $v_i$'s definition
 \[\left\lVert \frac{1}{c_i^T x+d_i}\left(A_i x+b_i\right) - \hat{v}_i \right\rVert_{\infty} \le \rho_i/2, \quad i = 1, \ldots, m.\]
 The $\ell_{\infty}$-norm is requiring that the absolute value of both terms in the $\mathbf{R}^2$ vector
 \[\frac{1}{c_i^T x+d_i}\left(A_i x+b_i\right) - \hat{v}_i\]
-be less than or qual to $\rho_i/2$. Furthermore,
-
+be less than or qual to $\rho_i/2$. Furthermore, we can re-express these constraints as
 \[-(\rho_i/2) \bm{1} \preceq \frac{1}{c_i^T x+d_i}\left(A_i x+b_i\right) - \hat{v}_i \preceq (\rho_i/2) \bm{1}, \quad i = 1, \ldots, m\]
+and then as
+\[(\hat{v}_i - (\rho_i/2) \bm{1})(c_i^T x + d_i) \preceq A_i x + b_i \preceq (\hat{v}_i + (\rho_i/2)\bm{1})(c_i^Tx + d_i), \quad i = 1, \ldots, m\]
+where we can multiply through by $c_i^Tx + d_i$ as it is assumed positive.
+This is simply a set of $2m$ linear inequalities on the position $x$. 
 
-\[(\hat{v}_i - (\rho_i/2) \bm{1})(c_i^T x + d_i) \preceq A_i x + b_i \preceq (\hat{v}_i + (\rho_i/2))(c_i^Tx + d_i), \quad i = 1, \ldots, m\]
+\noindent So by using these $2m$ linear inequalities as constraints in an optimization problem we can ensure
+that a proposed position is validated by our pictures. To find the minimum box which $x$ can lie in is now simple:
+Consider a single coordinate of physical space (for instance $x_1$ we can imagine as N/S, $x_2$ as W/E,
+and $x_3$ as altitude). To find the maximum northward point along the N/S line which is consistent with our measurements we simply select
+an $x_1$ which satisfies our $2m$ inequalities, and then maximize this scalar value until right before it violates a single inequality.
+That is informal speak for saying, solve the following optimization problem
+\[\begin{array}{lll}
+\text{minimize} \; & x_1 & \\
+\text{subject to} & (\hat{v}_i - (\rho_i/2) \bm{1})(c_i^T x + d_i) \preceq A_i x + b_i, \; & i = 1, \ldots, m \\
+& A_i x + b_i \preceq (\hat{v}_i + (\rho_i/2)\bm{1})(c_i^Tx + d_i), \; & i = 1, \ldots, m.
+\end{array}\]
+The remaining five coordinates are found in the same manner.
 
+\noindent (b) See algorithms~\ref{alg:bounding-box-data},~\ref{alg:bounding-box-objs},~\ref{alg:bounding-box-solve} for an instatiation of this problem. The vectors defining the 
+minimum bounding box are
+\[l = (-0.9956, 0.2753, -0.6790), \quad u = (-0.8245, 0.3783, -0.5735).\]
+
+\begin{algorithm}[htbp]
+    \caption{Bounding Box Data}
+    \centering
+        \begin{lstlisting}[language=Python]
+            ### DATA ###
+            P1 = np.array([
+                [-0.7430, -0.2438, -0.6233, 20.0000],
+                [0.1724, -0.9696, 0.1737, -10.0000],
+                [-0.6467, 0.0216, 0.7625, 2.0000]
+            ])
+
+            P2 = np.array([
+                [-0.9247, 0.2152, -0.3140, -10.0000],
+                [0.3105, 0.9037, -0.2948, 10.0000],
+                [0.2204, -0.3701, -0.9025, 3.0000]
+            ])
+
+            P3 = np.array([
+                [-0.6026, -0.3108, -0.7350, 4.0000],
+                [-0.5440, -0.5139, 0.6633, 8.0000],
+                [-0.5839, 0.7995, 0.1406, 1.5000]
+            ])
+
+            P4 = np.array([
+                [-0.6700, 0.0028, -0.7424, -10.0000],
+                [-0.6916, 0.3612, 0.6255, 4.0000],
+                [0.2699, 0.9325, -0.2400, 4.0000]
+            ])
+
+            rho = 0.1 * np.ones((4, 1))
+
+            vhat = np.array([
+                [9.9100, -2.7400, 2.2200, -2.1200],
+                [-5.0000, 3.1400, 3.6000, 1.0300]
+            ])
+        \end{lstlisting}
+        \label{alg:bounding-box-data}
+    \end{algorithm}
+
+    \begin{algorithm}[htbp]
+        \caption{Bounding Box Objects}
+        \centering
+            \begin{lstlisting}[language=Python]
+                # Create A_i, b_i, c_i, and d_i objects
+                m=4
+                A1 = P1[0:2, 0:3]
+                A2 = P2[0:2, 0:3]
+                A3 = P3[0:2, 0:3]
+                A4 = P4[0:2, 0:3]
+                A_i = [A1, A2, A3, A4]
+
+                b1 = P1[0:2, 3].reshape((2, 1))
+                b2 = P2[0:2, 3].reshape((2, 1))
+                b3 = P3[0:2, 3].reshape((2, 1))
+                b4 = P4[0:2, 3].reshape((2, 1))
+                b_i = [b1, b2, b3, b4]
+
+                c1_T = P1[2, 0:3].reshape((1, 3))
+                c2_T = P2[2, 0:3].reshape((1, 3))
+                c3_T = P3[2, 0:3].reshape((1, 3))
+                c4_T = P4[2, 0:3].reshape((1, 3))
+                cT_i = [c1_T, c2_T, c3_T, c4_T]
+
+                d1 = P1[2, 3]
+                d2 = P2[2, 3]
+                d3 = P3[2, 3]
+                d4 = P4[2, 3]
+                d_i = [d1, d2, d3, d4]
+            \end{lstlisting}
+            \label{alg:bounding-box-objs}
+        \end{algorithm}
+
+        \begin{algorithm}[htbp]
+            \caption{Bounding Box Solution}
+            \centering
+                \begin{lstlisting}[language=Python]
+                    # solve 6 optimization problems
+            x = cp.Variable((3, 1))
+
+            constrs = [A_i[i]@x + b_i[i] <= ( vhat[:, i] + rho[i][0]/2 ).reshape((2, 1)) * (cT_i[i]@x + d_i[i] ) for i in range(m)]
+            constrs += [A_i[i]@x + b_i[i] >= ( vhat[:, i] - rho[i][0]/2 ).reshape((2, 1)) * (cT_i[i]@x + d_i[i] ) for i in range(m)]
+
+            for i in range(3):
+                obj1 = cp.Minimize(x[i, 0])
+                obj2 = cp.Maximize(x[i, 0])
+                prob1 = cp.Problem(obj1, constrs)
+                prob2 = cp.Problem(obj2, constrs)
+                prob1.solve()
+                prob2.solve()
+                print(f"l_{i+1} = {prob1.value}")
+                print(f"u_{i+1} = {prob2.value}")
+                \end{lstlisting}
+                \label{alg:bounding-box-solve}
+            \end{algorithm}
+
+
+
+\newpage
 \subsection{Robust Logistic Regression}
 
-\subsubsection*{Problem Overview and Upshot}
-The logistic regression framework is a typical classification problem approach. As an example,
-perhaps a drone is collecting terrain data 
+\subsubsection*{Problem Overview}
+Logistic regression is a common approach to solving classification problems. A good example of such a problem is
+in a medical setting. For instance, suppose we are a doctor and it is our job to determine if a patient has a disease.
+If they have the disease, it is advantageous to take medical action. If they do not have the disease, performing this
+medical action can be costly to the patient, both financially and to their overall health. Furthermore, it is critical
+that we can properly \textit{classify} whether they have this disease. Logistic regression can be used to produce
+a probability estimate that the patient has the disease (note that in the problem below the logistic models just produce binary output; that
+is, in this example, whether the patient has the disease or not. It would take no work to turn this into a probability).
+
+\noindent Now, here's a twist on the problem. While some of the ``features'' that we might use to classify the patient's condition
+might be known exactly (\textit{e.g.}, their height), perhaps our classification model also depends on some sensor readings
+of the patient's internal organs. Our sensors can only be so accurate, so it is very likely that the readings obtained
+deviate from the true value we are trying to measure by some amount (mathematically, we'll call this small deviation $\epsilon$).
+This \textit{robust logistic regression} problem addresses this uncertainty in feature data.
 
 \subsubsection*{Problem}
 
@@ -531,10 +691,10 @@ is equivalent to the following constrained, DCP compatible robust logistic regre
     \end{array}\]
 
 \noindent It turns out that the choice of uncertainty set (induced by our choice in norm) dramatically affects the accuracy of this robust model.
-In table~\ref{tab:logistic-percent} one can find the test error rate of a typical logistic regression model versus
+Table~\ref{tab:logistic-percent} contains the test error rate of a typical logistic regression model versus
 robust logistic regression models with uncertainty sets induced by $\ell_1$-, $\ell_2$-, and $\ell_\infty$-norms
-and varying values of $\theta$. In most every circumstance, at least one, if not all, of the robust models perform
-better than the vanially model (and sometimes significantly so). Table~\ref{tab:logistic} contains the raw
+and varying values of $\epsilon$. In most every circumstance, at least one, if not all, of the robust models perform
+better than the vanilla model (and sometimes significantly so). Table~\ref{tab:logistic} contains the raw
 classification scores of each model for each $\epsilon$ for a test data set containing $n=60$ points.
 % Conceptually,
 % choosing a 
@@ -585,14 +745,17 @@ classification scores of each model for each $\epsilon$ for a test data set cont
     \end{table}
 
 \newpage
-
 \section{Design and Control}
 
 \subsection{Minimum Fuel Control}
 
-\subsubsection*{Problem Overview and Upshot}
-While there's some math and optimization techniques involved, the big picture of this problem is very intuitive.
-An exampel 
+\subsubsection*{Problem Overview}
+Imagine you are piloting a commercial plane from NYC to LA. You could fly there in a fuel efficient manner,
+or you could keep your passengers on their toes and perform an aileron roll as you fly over Arizona.
+
+\noindent This problem is simply concerned with finding the control input which takes the 
+system from its starting point to its desired ending point in the most fuel efficient manner.
+
 \subsubsection*{Problem}
 
 \noindent~\cite{boyd_convex_optimization} \textbf{Exercise 4.16}. \textit{Minimum fuel optimal control}.
@@ -718,11 +881,11 @@ An exampel
 \newpage
 \subsection{Path Planning with Contingencies}
 
-\subsubsection*{Problem Overview and Upshot}
+\subsubsection*{Problem Overview}
 
-The problem is to develop three routes for a vehicle. Two routes are ``contingency routes''
-as they address the situation that there's an obstacle in the way of the vehicle which is only
-revealed while the vehicle is in motion.
+The problem is to develop three routes for a vehicle. Two routes are ``contingency routes,''
+which address the circumstance that some obstacle impedes the vehicle's optimal path once
+the vehicle has already started moving.
 
 \subsubsection*{Problem}
 ~\cite{EE364a-extra} \textbf{Exercise 16.9}. \textit{Path Planning with contingencies}.
@@ -813,8 +976,14 @@ make the necessary adjustments to avoid the object.
 \subsection{Output Tracking}
 
 \subsubsection*{Problem Overview}
-This is another problem which is best understood through an example. Specifically,
-imagine that we wish 
+
+This problem keeps the dynamics from Problem 2.1 (minimum fuel control), but 
+adds the requirement that the output produced from the system state (so perhaps a reading
+on the plane's dashboard of its coordinates) matches a predetermined path. In other words, we
+wish to provide control input to the system in order to track some desired trajectory. There's also
+an additional twist to the problem solution which would allow this same approach
+to work in a settting where there's randomness or an infinite time horizon, but these
+are unimportant for a cursory understanding.
 
 \subsubsection*{Problem}
 
@@ -862,7 +1031,7 @@ imagine that we wish
     
 \subsubsection*{My Response}
     
-    This is simply a \textit{linear} (in the dynamics) \textit{time-invariant quadratic tracking} problem.
+    \noindent (a) This is simply a \textit{linear} (in the dynamics) \textit{time-invariant quadratic tracking} problem.
     Instead of doing a theoretical analysis of controllability, etc., we can determine the feasibility
     of the control problem by formulating and attempting to solve the following convex optimization problem:
     \[\begin{array}{lll}
@@ -874,6 +1043,22 @@ imagine that we wish
     $J_{\text{outout}}^{*} = 112.4157$.
     
     \noindent (b) 
+    To solve this problem using a rolling look-ahead, there are two key components. One, we need
+    to solve the same optimization problem as in part (a), but just over a smaller time horizon. Two,
+    we need solve this receeding horizon optimization problem at each discretized instance in time,
+    step forward in time corresponding to the first control input in the sequence of $N$ control inputs obtained by solving the optimization problem, 
+    and then repeat this loop until we have stepped $T$ steps forward. The corresponding
+    optimization problem can be seen in algorithm~\ref{alg:mpc-opt-problem}, and the simulation
+    code can be found in algorithm~\ref{alg:mpc-sim}.\\
+    \noindent The cost obtained by running MPC with
+    \begin{itemize}
+        \item $N = 8$ is $379.634$,
+        \item $N = 10$ is $128.13$,
+        \item and $N=12$ is $123.62$.
+    \end{itemize}
+    Figure~\ref{fig:364-hw7-traj-out} shows the output trajectories for $N=8$, $N=10$, $N=12$,
+    the optimal output trajectory, and the desired output trajectory.
+
     \begin{algorithm}[htbp]
         \caption{Optimization Problem}
         \centering
@@ -919,21 +1104,6 @@ imagine that we wish
             \end{lstlisting}
         \label{alg:mpc-sim}
     \end{algorithm}
-    To solve this problem using a rolling look-ahead, there are two key components. One, we need
-    to solve the same optimization problem as in part (a), but just over a smaller time horizon. Two,
-    we need solve this receeding horizon optimization problem at each discretized instance in time,
-    step forward in time corresponding to the first control input in the sequence of $N$ control inputs obtained by solving the optimization problem, 
-    and then repeat this loop until we have stepped $T$ steps forward. The corresponding
-    optimization problem can be seen in algorithm~\ref{alg:mpc-opt-problem}, and the simulation
-    code can be found in algorithm~\ref{alg:mpc-sim}.\\
-    \noindent The cost obtained by running MPC with
-    \begin{itemize}
-        \item $N = 8$ is $379.634$,
-        \item $N = 10$ is $128.13$,
-        \item and $N=12$ is $123.62$.
-    \end{itemize}
-    Figure~\ref{fig:364-hw7-traj-out} shows the output trajectories for $N=8$, $N=10$, $N=12$,
-    the optimal output trajectory, and the desired output trajectory.
 
     \begin{figure}[htbp]
         \centering
@@ -945,7 +1115,7 @@ imagine that we wish
 \newpage
 \subsection{UAV Design}
 
-\subsubsection*{Problem Overview and Upshot}
+\subsubsection*{Problem Overview}
 This is an alternative optimal control problem. More specifically, it is an optimal design problem.
 While the actual problem prompt is long and contains a lot of moving pieces (which is to be expected
 given that we wish to design a UAV), it is simple to understand.
@@ -1252,9 +1422,13 @@ while minimizing the cost to manufacture and operate the UAV.
         \label{alg:uav_code}
     \end{algorithm}
 
+\newpage
 \subsection{Optimal Spacecraft Landing}
 
-\subsubsection*{Problem Overview and Upshot}
+\subsubsection*{Problem Overview}
+I recommend watching the videos linked below. This is essentially a ``toy'' version of what SpaceX
+does. (Although, it is worth noting that these solution techniques are ``in the family'' of the techniques SpaceX
+uses to land rockets; See ~\cite{Stanford-spaceX}.)
 
 \subsubsection*{Problem}
 
@@ -1362,6 +1536,8 @@ while minimizing the cost to manufacture and operate the UAV.
         \caption{Minimum Touchdown Descent Trajectory and Thrust Profiles.}
         \label{fig:364a-min-touchdown-desc}
     \end{figure}
+
+\newpage
 
 \printbibliography
 

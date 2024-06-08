@@ -2345,14 +2345,19 @@
   </bcf:bibdata>
   <bcf:section number="0">
     <bcf:citekey order="1">boyd_convex_optimization</bcf:citekey>
-    <bcf:citekey order="2">EE364a-extra</bcf:citekey>
+    <bcf:citekey order="2">EE364b</bcf:citekey>
     <bcf:citekey order="3">EE364a-extra</bcf:citekey>
-    <bcf:citekey order="4">EE364a-extra</bcf:citekey>
+    <bcf:citekey order="4">boyd_convex_optimization</bcf:citekey>
     <bcf:citekey order="5">boyd_convex_optimization</bcf:citekey>
     <bcf:citekey order="6">EE364a-extra</bcf:citekey>
-    <bcf:citekey order="7">EE364b</bcf:citekey>
+    <bcf:citekey order="7">EE364a-extra</bcf:citekey>
     <bcf:citekey order="8">EE364a-extra</bcf:citekey>
-    <bcf:citekey order="9">EE364a-extra</bcf:citekey>
+    <bcf:citekey order="9">boyd_convex_optimization</bcf:citekey>
+    <bcf:citekey order="10">EE364a-extra</bcf:citekey>
+    <bcf:citekey order="11">EE364b</bcf:citekey>
+    <bcf:citekey order="12">EE364a-extra</bcf:citekey>
+    <bcf:citekey order="13">Stanford-spaceX</bcf:citekey>
+    <bcf:citekey order="14">EE364a-extra</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="anyt">

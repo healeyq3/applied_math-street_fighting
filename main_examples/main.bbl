@@ -19,6 +19,34 @@
 
 \refsection{0}
   \datalist[entry]{anyt/global//global/global}
+    \entry{Stanford-spaceX}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=f8657a854b7a3eb7d09d74131dffa470}{%
+           family={Alliance},
+           familyi={A\bibinitperiod},
+           given={Stanford\bibnamedelima SystemX},
+           giveni={S\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+      }
+      \strng{namehash}{f8657a854b7a3eb7d09d74131dffa470}
+      \strng{fullhash}{f8657a854b7a3eb7d09d74131dffa470}
+      \strng{bibnamehash}{f8657a854b7a3eb7d09d74131dffa470}
+      \strng{authorbibnamehash}{f8657a854b7a3eb7d09d74131dffa470}
+      \strng{authornamehash}{f8657a854b7a3eb7d09d74131dffa470}
+      \strng{authorfullhash}{f8657a854b7a3eb7d09d74131dffa470}
+      \field{labelalpha}{All21}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Stephen Boyd's CVXGEN software helps guide SpaceX Falcon}
+      \field{year}{2021}
+      \verb{urlraw}
+      \verb https://systemx.stanford.edu/news/2021-01-05-000000/stephen-boyd%E2%80%99s-cvxgen-software-helps-guide-spacex-falcon
+      \endverb
+      \verb{url}
+      \verb https://systemx.stanford.edu/news/2021-01-05-000000/stephen-boyd%E2%80%99s-cvxgen-software-helps-guide-spacex-falcon
+      \endverb
+    \endentry
     \entry{EE364b}{misc}{}
       \name{author}{1}{}{%
         {{hash=ec94d94cc487dd71939a90cbeaaf47d0}{%
