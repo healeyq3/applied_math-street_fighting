@@ -16,9 +16,11 @@
 \contentsline {section}{\numberline {3.5}Calculus Composition Rules}{7}{section.3.5}%
 \contentsline {subsubsection}{Sum Rule}{7}{section*.4}%
 \contentsline {subsubsection}{Product Rule}{8}{section*.5}%
+\contentsline {subsubsection}{Chain Rule}{8}{section*.6}%
+\contentsline {subsubsection}{Scalar composed with vector value}{8}{section*.7}%
 \contentsline {section}{\numberline {3.6}Calculus Atoms}{8}{section.3.6}%
 \contentsline {subsection}{\numberline {3.6.1}Vector Functions}{8}{subsection.3.6.1}%
-\contentsline {subsubsection}{Quadratic Form Restricted Case}{9}{section*.9}%
+\contentsline {subsubsection}{Quadratic Form Restricted Case}{9}{section*.11}%
 \contentsline {subsection}{\numberline {3.6.2}Matrix Functions}{9}{subsection.3.6.2}%
 \contentsline {subsection}{\numberline {3.6.3}Summary}{9}{subsection.3.6.3}%
 \contentsline {section}{\numberline {3.7}(Bonus) Automatic Differentiation}{9}{section.3.7}%
@@ -27,33 +29,36 @@
 \contentsline {section}{\numberline {4.2}Basic Optimality Conditions}{10}{section.4.2}%
 \contentsline {section}{\numberline {4.3}Linear Optimization}{10}{section.4.3}%
 \contentsline {subsection}{\numberline {4.3.1}Reformulations}{10}{subsection.4.3.1}%
-\contentsline {subsubsection}{Problems Involving $\ell _1$- and $\ell _\infty $- norms}{10}{section*.10}%
-\contentsline {chapter}{\numberline {5}Probability Theory}{14}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Basics}{14}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}Probabilistics Objects and Notation}{14}{subsection.5.1.1}%
-\contentsline {subsection}{\numberline {5.1.2}Discrete Probabilistic Objects through a Convex Lens}{15}{subsection.5.1.2}%
-\contentsline {section}{\numberline {5.2}Sets}{16}{section.5.2}%
-\contentsline {part}{II\hspace {1em}Applications Part I}{18}{part.2}%
-\contentsline {chapter}{\numberline {6}Approximation and Fitting}{19}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Forecasting}{20}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Least Squares Data Fitting}{21}{section.6.2}%
-\contentsline {section}{\numberline {6.3}Recurrent Neural Networks}{21}{section.6.3}%
-\contentsline {chapter}{\numberline {7}Statistical Estimation}{22}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Parametric Distribution Estimation}{22}{section.7.1}%
-\contentsline {subsection}{\numberline {7.1.1}Maximum Likelihood}{22}{subsection.7.1.1}%
-\contentsline {subsubsection}{Poisson Maximum Likelihood}{22}{section*.15}%
-\contentsline {chapter}{\numberline {8}Geometric and Classification Problems}{24}{chapter.8}%
-\contentsline {part}{III\hspace {1em}Applications Part II}{26}{part.3}%
-\contentsline {chapter}{\numberline {9}Control}{27}{chapter.9}%
-\contentsline {section}{\numberline {9.1}Overview}{27}{section.9.1}%
-\contentsline {section}{\numberline {9.2}Optimal Design}{28}{section.9.2}%
-\contentsline {section}{\numberline {9.3}Basic Examples}{34}{section.9.3}%
-\contentsline {section}{\numberline {9.4}Model Predictive Control}{44}{section.9.4}%
-\contentsline {subsection}{\numberline {9.4.1}Examples}{44}{subsection.9.4.1}%
-\contentsline {part}{IV\hspace {1em}Algorithms}{47}{part.4}%
-\contentsline {chapter}{\numberline {10}Numerical Linear Algebra}{48}{chapter.10}%
-\contentsline {section}{\numberline {10.1}QR Factorization}{48}{section.10.1}%
-\contentsline {chapter}{\numberline {A}Implementation}{50}{appendix.A}%
-\contentsline {section}{\numberline {A.1}CVXPY}{50}{section.A.1}%
-\contentsline {subsection}{\numberline {A.1.1}Simulating (Linear) Dynamical Systems}{50}{subsection.A.1.1}%
-\contentsline {section}{\numberline {A.2}C++}{50}{section.A.2}%
+\contentsline {subsubsection}{Problems Involving $\ell _1$- and $\ell _\infty $- norms}{10}{section*.12}%
+\contentsline {chapter}{\numberline {5}Duality}{14}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Conjugate Function}{14}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}Examples (Conjugate Atoms)}{14}{subsection.5.1.1}%
+\contentsline {chapter}{\numberline {6}Probability Theory}{15}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Basics}{15}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}Probabilistics Objects and Notation}{15}{subsection.6.1.1}%
+\contentsline {subsection}{\numberline {6.1.2}Discrete Probabilistic Objects through a Convex Lens}{16}{subsection.6.1.2}%
+\contentsline {section}{\numberline {6.2}Sets}{17}{section.6.2}%
+\contentsline {part}{II\hspace {1em}Applications Part I}{19}{part.2}%
+\contentsline {chapter}{\numberline {7}Approximation and Fitting}{20}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Forecasting}{21}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Least Squares Data Fitting}{22}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Recurrent Neural Networks}{22}{section.7.3}%
+\contentsline {chapter}{\numberline {8}Statistical Estimation}{23}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Parametric Distribution Estimation}{23}{section.8.1}%
+\contentsline {subsection}{\numberline {8.1.1}Maximum Likelihood}{23}{subsection.8.1.1}%
+\contentsline {subsubsection}{Poisson Maximum Likelihood}{23}{section*.17}%
+\contentsline {chapter}{\numberline {9}Geometric and Classification Problems}{25}{chapter.9}%
+\contentsline {part}{III\hspace {1em}Applications Part II}{27}{part.3}%
+\contentsline {chapter}{\numberline {10}Control}{28}{chapter.10}%
+\contentsline {section}{\numberline {10.1}Overview}{28}{section.10.1}%
+\contentsline {section}{\numberline {10.2}Optimal Design}{29}{section.10.2}%
+\contentsline {section}{\numberline {10.3}Basic Examples}{35}{section.10.3}%
+\contentsline {section}{\numberline {10.4}Model Predictive Control}{45}{section.10.4}%
+\contentsline {subsection}{\numberline {10.4.1}Examples}{45}{subsection.10.4.1}%
+\contentsline {part}{IV\hspace {1em}Algorithms}{48}{part.4}%
+\contentsline {chapter}{\numberline {11}Numerical Linear Algebra}{49}{chapter.11}%
+\contentsline {section}{\numberline {11.1}QR Factorization}{49}{section.11.1}%
+\contentsline {chapter}{\numberline {A}Implementation}{51}{appendix.A}%
+\contentsline {section}{\numberline {A.1}CVXPY}{51}{section.A.1}%
+\contentsline {subsection}{\numberline {A.1.1}Simulating (Linear) Dynamical Systems}{51}{subsection.A.1.1}%
+\contentsline {section}{\numberline {A.2}C++}{51}{section.A.2}%

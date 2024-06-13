@@ -2,6 +2,15 @@
 
     % norm approximation => a way of measuring closeness
 
+    % Signal Reconstruction (~15m mark Lec 10 EE364a)
+    % principled way to choose amount of smoothing: cross-validation
+    % how do to it:
+        % take x corrupted, and extend formulation to allow it to handle NANs (/ NAs / missing value) <- supposedly very simple
+        % x hat is going to be a full signal
+        % suppose 10% is missing. Randomly yank out another 10% of data. Now do signal reconstruction
+        % every time you reconstruct, you make a prediction about the values which you did observe, but that you yanked out of training
+        % 
+
     First use that
 
     \[\text{minimize} \; f_0(x) = \left\lVert Ax - b  \right\rVert_{2}\]

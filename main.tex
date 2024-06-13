@@ -108,7 +108,16 @@
     % MOVE BACK AND FORTH BETWEEN 2&3 BASED ON WHAT YOU NEED FOR 4
 % Mathematical Optimization (mainly convex)
 \include{chapters/optimization.tex}
-% Duality
+\include{chapters/duality.tex}
+% important duality (EE364a LEC 8) note:
+    % when you restrict a problem, the dual estimate will give a lower bound
+    % on how much worse the objective will be. When you relax a problem,
+    % the dual estimate also gives a lower bound on how much better 
+    % your objective will become 
+    % remember that we are working in a minimization setting, so a lower bound in this
+    % case means that the actual solution will be equally as good or worse than the bound.
+    % (This all follows from convexity.)
+    % so duality is asymmetric
 \include{chapters/prob-theory}
 
 

@@ -248,19 +248,26 @@ given the observed sequence and knowledge of $q$, can be expressed as a convex o
 \noindent (a) Firstly, we'll let
 
 \[p_{P}(k) = \mathbf{Prob}_{y \sim P}\left(y_1 = k_1, \ldots, y_N = k_n\right)\]
-denote either the \textit{joint probability density function} of the observed states, or,
-the \textit{likelihood function} of the density parameters given observed states. Which it is depends on context.
+denote either the \textit{joint probability density function}, or,
+the \textit{likelihood function}. Which it is depends on context.
 Since we are in a statistical setting, it is the likelihood function. Furthermore, we seek to find an estimate
 of the transition probabilities between the states of our Markov chain, \textit{i.e.}, we wish to find $\hat{P} \in \mathbf{R}^{n \times n}$.
 As specified above, for this problem we will find this estimate using maximum likelihood estimation, corresponding to 
 
 \[\hat{P} = \underset{P}{\mathrm{argmax}} \; p_P(k). \]
-We first expand the likelihood function using \textit{the chain rule}
-
-\[ \begin{aligned}
-    p_{P}(k) &= \mathbf{Prob}\left(y_{N} = k_n \mid y_{N-1} = k_{n-1}\right) \mathbf{Prob}\left(y_{N-1}=k_{n-1} \mid y_{N-2} = k_{n-2} \right)\\
-&\cdots \mathbf{Prob}(y_{2} = k_{2} \mid y_{1} = y_{1}) \mathbf{Prob}\left(y_1 = k_1\right),
-\end{aligned} \]
+We first expand the likelihood function using \textit{the chain rule} (abbreviate $x_i = k_i$ to just $x_i$)
+% \[ \begin{aligned}
+%     p_{P}(k) &= \mathbf{Prob}\left(y_{N} = k_n \mid y_{N-1} = k_{n-1}\right) \mathbf{Prob}\left(y_{N-1}=k_{n-1} \mid y_{N-2} = k_{n-2} \right)\\
+% &\cdots \mathbf{Prob}(y_{2} = k_{2} \mid y_{1} = y_{1}) \mathbf{Prob}\left(y_1 = k_1\right),
+% \end{aligned} \]
+% \[\begin{aligned}
+%     p_{P}(k) = &\left( \mathbf{Prob}\left(y_N = k_n \mid y_{N-1} = k_{n-1}, \ldots, y_1 = k_1\right) \right) \\
+%     &\left( \mathbf{Prob}\left(y_{N-1} = k_{n-1} \mid y_{N-2}=k_{n-2}, \ldots, y_1 = k_1 \right) \right) \\
+%     &\cdots \left( \mathbf{Prob}(y_{2} = k_{2} \mid y_{1} = y_{1}) \mathbf{Prob}\left(y_1 = k_1\right) \right) ,
+% \end{aligned}\]
+\[\begin{aligned}
+    p_{P}(k) = & \mathbf{Prob}\left(x_N \mid x_{N-1}, \ldots x_1\right) \mathbf{Prob}\left(x_{N-1} \mid x_{N-2}, \ldots, x_1\right) \cdots \mathbf{Prob}\left(x_2 \mid x_1\right) \mathbf{Prob}\left(x_1\right)
+\end{aligned}\]
 and then use our \textit{Markov} assumption to simplify this expression to
 
 \[p_{P}(k) = P_{k_{n}k_{n-1}}P_{k_{n-1}k_{n-2}} \cdots P_{k_{2}k_{1}},\]
@@ -282,8 +289,8 @@ is a common mistake which leads to an underdetermined problem.)
 
 \noindent To solve this equality-constrained optimization problem we simply form the Lagrangian
 
-\[L(P, \nu) = \sum_{i, j=1}^{n} c_{ij}\log P_{ij} + \sum_{j=1}^{n} \left(\nu_j \sum_{i=1}^{n}P_{ij} \right),\]
-find the partial derivatives of $L$ with respect to some probability ($P_{ij}$)
+\[L(P, \nu) = \sum_{i, j=1}^{n} c_{ij}\log P_{ij} + \sum_{j=1}^{n} \left(\nu_j \sum_{i=1}^{n}P_{ij} -1\right),\]
+find the partial derivative of $L$ with respect to some probability, $P_{ij}$,
 
 \[\frac{\partial L}{\partial P_{ij}}(P, \nu) = \frac{c_{ij}}{P_{ij}} + v_{j}\]
 and set $\frac{\partial L}{\partial P_{ij}}(P, \nu)$ equal to zero:
@@ -326,7 +333,7 @@ of a function which happens to be some combination of other functions and additi
 This is the setup of modern machine learning. There are many other ML models that will
 give a better estimate of the underlying function, but a benefit to this model is that
 the problem being solved to create it is \textit{convex}, which means that we could embed the corresponding software
-onto an online system that observes and reacts to data that the function produces without worrying about
+into an online system that observes and reacts to data that the function produces without worrying about
 the software failing. 
 
 \subsubsection*{Problem}
@@ -461,7 +468,7 @@ If the convexity or quasiconvexity of any function in your formulation isn't obv
 Let's first formulate the constraints ensuring that the box that we propose $x$ lies in is consistent with the camera measurements.
 Mathematically, this is expressed as
 
-\[\left\lVert v_i - \hat{v}_i \right\rVert_{\infty} \le \rho_i / 2, , \quad i = 1, \ldots, m\]
+\[\left\lVert v_i - \hat{v}_i \right\rVert_{\infty} \le \rho_i / 2, , \quad i = 1, \ldots, m,\]
 which can then be expanded according to $v_i$'s definition
 \[\left\lVert \frac{1}{c_i^T x+d_i}\left(A_i x+b_i\right) - \hat{v}_i \right\rVert_{\infty} \le \rho_i/2, \quad i = 1, \ldots, m.\]
 The $\ell_{\infty}$-norm is requiring that the absolute value of both terms in the $\mathbf{R}^2$ vector
@@ -469,11 +476,11 @@ The $\ell_{\infty}$-norm is requiring that the absolute value of both terms in t
 be less than or qual to $\rho_i/2$. Furthermore, we can re-express these constraints as
 \[-(\rho_i/2) \bm{1} \preceq \frac{1}{c_i^T x+d_i}\left(A_i x+b_i\right) - \hat{v}_i \preceq (\rho_i/2) \bm{1}, \quad i = 1, \ldots, m\]
 and then as
-\[(\hat{v}_i - (\rho_i/2) \bm{1})(c_i^T x + d_i) \preceq A_i x + b_i \preceq (\hat{v}_i + (\rho_i/2)\bm{1})(c_i^Tx + d_i), \quad i = 1, \ldots, m\]
+\[(\hat{v}_i - (\rho_i/2) \bm{1})(c_i^T x + d_i) \preceq A_i x + b_i \preceq (\hat{v}_i + (\rho_i/2)\bm{1})(c_i^Tx + d_i), \quad i = 1, \ldots, m,\]
 where we can multiply through by $c_i^Tx + d_i$ as it is assumed positive.
 This is simply a set of $2m$ linear inequalities on the position $x$. 
 
-\noindent So by using these $2m$ linear inequalities as constraints in an optimization problem we can ensure
+\noindent So, by using these $2m$ linear inequalities as constraints in an optimization problem we can ensure
 that a proposed position is validated by our pictures. To find the minimum box which $x$ can lie in is now simple:
 Consider a single coordinate of physical space (for instance $x_1$ we can imagine as N/S, $x_2$ as W/E,
 and $x_3$ as altitude). To find the maximum northward point along the N/S line which is consistent with our measurements we simply select
@@ -609,7 +616,7 @@ This \textit{robust logistic regression} problem addresses this uncertainty in f
 
 ~\cite{EE364a-extra} \textbf{Exercise 6.29}. \textit{Robust Logistic Regresion}.
 We are given a dataset $x_i \in \mathbf{R}^d$, $y_i \in \left\{ -1, 1 \right\}$, $i = 1, \ldots, n$.
-We seek a prediction model $y \approx \hat{y}=\operatorname{sign}\left(\theta^1 x\right)$, where $\theta \in \mathbf{R}^a$ is the model parameter. In logistic regression, $\theta$ is chosen as the minimizer of the logistic loss
+We seek a prediction model $y \approx \hat{y}=\operatorname{sign}\left(\theta^T x\right)$, where $\theta \in \mathbf{R}^d$ is the model parameter. In logistic regression, $\theta$ is chosen as the minimizer of the logistic loss
 \[
 \ell(\theta)=\sum_{i=1}^n \log \left(1+\exp \left(-y_i \theta^T x_i\right)\right)
 \]
@@ -667,8 +674,7 @@ to the constraint set. The corresponding problem is,
 \end{array}\]
 where now both $\theta \in \mathbf{R}^d$ and $u \in \mathbf{R}^n$ are optimization variables.
 To see that this problem is equivalent to the original unconstrained problem, consider holding $\theta$ fixed
-and optimizing solely over $u$. Because the log-sum-exp function is monotonic in its input and the objective function
-is separable, we achieve the optimum over $u$ by choosing
+and optimizing solely over $u$. Because the log-sum-exp function is monotonic in its input and the objective function is separable, we achieve the optimum over $u$ by choosing
 \[u_i = \sup \left\{-y_i \theta^T\left(x_i+\delta_i\right) \mid \left\lVert \delta_i \right\rVert \le \epsilon \right\} \]
 for $i = 1, \ldots n$. Furthermore, then optimizing over $\theta$ yields the original, unconstrained problem.
 
@@ -1252,7 +1258,7 @@ while minimizing the cost to manufacture and operate the UAV.
     we must distinguish between actual \textit{optimization variables} and what I'll call \textit{derived optimization variables}.
     The former are what they are always defined as: the variables that are to be chosen to minimize the objective function.
     We will define the latter as a mathematical expression whose value is decided by the optimization variables.
-    To use a Computer Science dialect, the derived optimization variables are functions of references to the optimization variables
+    To (ab)use a Computer Science dialect, the derived optimization variables are functions of references to the optimization variables
     (where the function can take multiple optimization variables and even other derived optimization variables).
     Consequently, we can use either the derived variables or the actual variables when formulating our problem.
     As an example, the constraint
@@ -1482,8 +1488,7 @@ uses to land rockets; See ~\cite{Stanford-spaceX}.)
 \subsubsection*{My Response}
     
     \noindent (a). Formulating this problem is very straightforward as all
-    control specifications are already DCP compatible, \textit{i.e.}, the specified control
-    problem is convex. After discretizing the integral expression for total fuel use as
+    control specifications are already DCP compatible. After discretizing the integral expression for total fuel use as
     \[J_{\mathrm{input}} = \sum_{k=0}^{K-1}\gamma \left\lVert f_k \right\rVert_{2},\]
     the minimum fuel descent problem can immediately be formulated as
     \[\begin{array}{lll}

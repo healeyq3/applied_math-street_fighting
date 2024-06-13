@@ -1,0 +1,15 @@
+/Users/q3/Documents/Memex2/Optimization/convex-notes/examples/364b/cvxpygen_test/mpc_controller/c/build/CMakeFiles/cpg_example.dir
+/Users/q3/Documents/Memex2/Optimization/convex-notes/examples/364b/cvxpygen_test/mpc_controller/c/build/CMakeFiles/cpg.dir
+/Users/q3/Documents/Memex2/Optimization/convex-notes/examples/364b/cvxpygen_test/mpc_controller/c/build/CMakeFiles/edit_cache.dir
+/Users/q3/Documents/Memex2/Optimization/convex-notes/examples/364b/cvxpygen_test/mpc_controller/c/build/CMakeFiles/rebuild_cache.dir
+/Users/q3/Documents/Memex2/Optimization/convex-notes/examples/364b/cvxpygen_test/mpc_controller/c/build/CMakeFiles/list_install_components.dir
+/Users/q3/Documents/Memex2/Optimization/convex-notes/examples/364b/cvxpygen_test/mpc_controller/c/build/CMakeFiles/install.dir
+/Users/q3/Documents/Memex2/Optimization/convex-notes/examples/364b/cvxpygen_test/mpc_controller/c/build/CMakeFiles/install/local.dir
+/Users/q3/Documents/Memex2/Optimization/convex-notes/examples/364b/cvxpygen_test/mpc_controller/c/build/CMakeFiles/install/strip.dir
+/Users/q3/Documents/Memex2/Optimization/convex-notes/examples/364b/cvxpygen_test/mpc_controller/c/build/solver_code/CMakeFiles/ecos.dir
+/Users/q3/Documents/Memex2/Optimization/convex-notes/examples/364b/cvxpygen_test/mpc_controller/c/build/solver_code/CMakeFiles/edit_cache.dir
+/Users/q3/Documents/Memex2/Optimization/convex-notes/examples/364b/cvxpygen_test/mpc_controller/c/build/solver_code/CMakeFiles/rebuild_cache.dir
+/Users/q3/Documents/Memex2/Optimization/convex-notes/examples/364b/cvxpygen_test/mpc_controller/c/build/solver_code/CMakeFiles/list_install_components.dir
+/Users/q3/Documents/Memex2/Optimization/convex-notes/examples/364b/cvxpygen_test/mpc_controller/c/build/solver_code/CMakeFiles/install.dir
+/Users/q3/Documents/Memex2/Optimization/convex-notes/examples/364b/cvxpygen_test/mpc_controller/c/build/solver_code/CMakeFiles/install/local.dir
+/Users/q3/Documents/Memex2/Optimization/convex-notes/examples/364b/cvxpygen_test/mpc_controller/c/build/solver_code/CMakeFiles/install/strip.dir

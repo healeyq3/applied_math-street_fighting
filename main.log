@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.8.24)  7 JUN 2024 14:27
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.8.24)  12 JUN 2024 06:46
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -933,7 +933,7 @@ File: biblatex.cfg
 \c@theorem=\count488
 \@quotelevel=\count489
 \@quotereset=\count490
- (/Users/q3/Documents/Memex2/Optimization/convex-notes/main.aux (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/chapter1.aux) (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/linear-algebra.aux) (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/matrix-calculus.aux) (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/optimization.aux) (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/prob-theory.aux) (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/.aux) (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/approximation_fitting.aux) (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/statistical-estimation.aux) (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/geometry-problems.aux) (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/control.aux) (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/linear-algebra-algos.aux) (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/appendixA.aux))
+ (/Users/q3/Documents/Memex2/Optimization/convex-notes/main.aux (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/chapter1.aux) (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/linear-algebra.aux) (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/matrix-calculus.aux) (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/optimization.aux) (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/duality.aux) (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/prob-theory.aux) (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/.aux) (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/approximation_fitting.aux) (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/statistical-estimation.aux) (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/geometry-problems.aux) (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/control.aux) (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/linear-algebra-algos.aux) (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/appendixA.aux))
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 88.
@@ -1067,7 +1067,7 @@ LaTeX Font Info:    Font shape `U/lasy/b/n' in size <7> not available
 {/usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (/Users/q3/Documents/Memex2/Optimization/convex-notes/main.tocpdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.37 ...}Approximation and Fitting}{19}{chapter.6}
+l.38 ...bjects and Notation}{15}{subsection.6.1.1}
                                                   % [1
 
 ])
@@ -1127,21 +1127,31 @@ l.111     \[
                                                   
 l.111     \[
             \left| a_k^Tx - b_k \right| \le t, \quad k = 1, \ldots, m.\]] [12]) [13]
+\openout2 = `chapters/duality.aux'.
+
+ (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/duality.tex
+Chapter 5.
+) [14
+
+
+
+
+]
 \openout2 = `chapters/prob-theory.aux'.
 
  (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/prob-theory.tex
-Chapter 5.
-[14
+Chapter 6.
+[15
 
 
 
 
-] [15]
+] [16]
 Overfull \hbox (2.1543pt too wide) in paragraph at lines 110--111
 []\OT1/cmr/m/n/12 The ex-pres-sion (\OT1/cmr/m/it/12 lin-ear func-tion $\OMS/cmsy/m/n/12 ^^@$ \OT1/cmr/m/it/12 con-vex quadratic func-tion\OT1/cmr/m/n/12 ) is a \OT1/cmr/m/it/12 con-cave quadratic
  []
 
-[16]) [17] [18
+[17]) [18] [19
 
 
 
@@ -1153,34 +1163,34 @@ No file chapters/.tex.
 \openout2 = `chapters/approximation_fitting.aux'.
 
 (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/approximation_fitting.tex
-Chapter 6.
-[19
+Chapter 7.
+[20
 
 
 
 
 
-] [20]) [21]
+] [21]) [22]
 \openout2 = `chapters/statistical-estimation.aux'.
 
  (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/statistical-estimation.tex
-Chapter 7.
-[22
+Chapter 8.
+[23
 
 
 
 
-]) [23]
+]) [24]
 \openout2 = `chapters/geometry-problems.aux'.
 
  (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/geometry-problems.tex
-Chapter 8.
-[24
+Chapter 9.
+[25
 
 
 
 
-]) [25] [26
+]) [26] [27
 
 
 
@@ -1188,19 +1198,19 @@ Chapter 8.
 \openout2 = `chapters/control.aux'.
 
  (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/control.tex
-Chapter 9.
-[27
+Chapter 10.
+[28
 
 
-] [28] [29] [30] [31] [32] (/usr/local/texlive/2021/texmf-dist/tex/latex/listings/lstlang1.sty
+] [29] [30] [31] [32] [33] (/usr/local/texlive/2021/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2020/03/24 1.8d listings language file
 )
 Overfull \hbox (17.62482pt too wide) detected at line 384
 [][] 
  []
 
-[33] [34] [35]
-<examples/364a/cvx-ch4/actuator_fuel-use.pdf, id=508, 400.0458pt x 312.02145pt>
+[34] [35] [36]
+<examples/364a/cvx-ch4/actuator_fuel-use.pdf, id=531, 400.0458pt x 312.02145pt>
 File: examples/364a/cvx-ch4/actuator_fuel-use.pdf Graphic file (type pdf)
 <use examples/364a/cvx-ch4/actuator_fuel-use.pdf>
 Package pdftex.def Info: examples/364a/cvx-ch4/actuator_fuel-use.pdf  used on input line 486.
@@ -1209,25 +1219,25 @@ Package pdftex.def Info: examples/364a/cvx-ch4/actuator_fuel-use.pdf  used on in
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[36] [37 </Users/q3/Documents/Memex2/Optimization/convex-notes/examples/364a/cvx-ch4/actuator_fuel-use.pdf>] [38]
-<examples/364a/cvx-ch4/4-16_min-fuel.pdf, id=567, 409.77882pt x 312.02145pt>
+[37] [38 </Users/q3/Documents/Memex2/Optimization/convex-notes/examples/364a/cvx-ch4/actuator_fuel-use.pdf>] [39]
+<examples/364a/cvx-ch4/4-16_min-fuel.pdf, id=589, 409.77882pt x 312.02145pt>
 File: examples/364a/cvx-ch4/4-16_min-fuel.pdf Graphic file (type pdf)
 <use examples/364a/cvx-ch4/4-16_min-fuel.pdf>
 Package pdftex.def Info: examples/364a/cvx-ch4/4-16_min-fuel.pdf  used on input line 585.
 (pdftex.def)             Requested size: 469.75499pt x 357.71254pt.
- [39 </Users/q3/Documents/Memex2/Optimization/convex-notes/examples/364a/cvx-ch4/4-16_min-fuel.pdf>] [40]
-<examples/364a/rocket_min_fuel.pdf, id=610, 298.78787pt x 287.58292pt>
+ [40 </Users/q3/Documents/Memex2/Optimization/convex-notes/examples/364a/cvx-ch4/4-16_min-fuel.pdf>] [41]
+<examples/364a/rocket_min_fuel.pdf, id=632, 298.78787pt x 287.58292pt>
 File: examples/364a/rocket_min_fuel.pdf Graphic file (type pdf)
 <use examples/364a/rocket_min_fuel.pdf>
 Package pdftex.def Info: examples/364a/rocket_min_fuel.pdf  used on input line 686.
 (pdftex.def)             Requested size: 469.75499pt x 452.14685pt.
-<examples/364a/rocket_min_descent.pdf, id=611, 298.78787pt x 287.58292pt>
+<examples/364a/rocket_min_descent.pdf, id=633, 298.78787pt x 287.58292pt>
 File: examples/364a/rocket_min_descent.pdf Graphic file (type pdf)
 <use examples/364a/rocket_min_descent.pdf>
 Package pdftex.def Info: examples/364a/rocket_min_descent.pdf  used on input line 694.
 (pdftex.def)             Requested size: 469.75499pt x 452.14685pt.
- [41] [42 </Users/q3/Documents/Memex2/Optimization/convex-notes/examples/364a/rocket_min_fuel.pdf>] [43 </Users/q3/Documents/Memex2/Optimization/convex-notes/examples/364a/rocket_min_descent.pdf>] [44]
-<examples/364b/364b_mpc_output.pdf, id=669, 428.94283pt x 312.02145pt>
+ [42] [43 </Users/q3/Documents/Memex2/Optimization/convex-notes/examples/364a/rocket_min_fuel.pdf>] [44 </Users/q3/Documents/Memex2/Optimization/convex-notes/examples/364a/rocket_min_descent.pdf>] [45]
+<examples/364b/364b_mpc_output.pdf, id=691, 428.94283pt x 312.02145pt>
 File: examples/364b/364b_mpc_output.pdf Graphic file (type pdf)
 <use examples/364b/364b_mpc_output.pdf>
 Package pdftex.def Info: examples/364b/364b_mpc_output.pdf  used on input line 783.
@@ -1236,7 +1246,7 @@ Package pdftex.def Info: examples/364b/364b_mpc_output.pdf  used on input line 7
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-) [45] [46 </Users/q3/Documents/Memex2/Optimization/convex-notes/examples/364b/364b_mpc_output.pdf>] [47
+) [46] [47 </Users/q3/Documents/Memex2/Optimization/convex-notes/examples/364b/364b_mpc_output.pdf>] [48
 
 
 
@@ -1244,11 +1254,11 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 \openout2 = `chapters/linear-algebra-algos.aux'.
 
  (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/linear-algebra-algos.tex
-Chapter 10.
-) [48
+Chapter 11.
+) [49
 
 
-] [49
+] [50
 
 
 
@@ -1257,29 +1267,29 @@ Chapter 10.
 
  (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/appendixA.tex
 Appendix A.
-) [50
+) [51
 
 
-] (/Users/q3/Documents/Memex2/Optimization/convex-notes/main.aux (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/chapter1.aux) (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/linear-algebra.aux) (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/matrix-calculus.aux) (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/optimization.aux) (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/prob-theory.aux) (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/.aux) (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/approximation_fitting.aux) (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/statistical-estimation.aux) (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/geometry-problems.aux) (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/control.aux) (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/linear-algebra-algos.aux) (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/appendixA.aux))
+] (/Users/q3/Documents/Memex2/Optimization/convex-notes/main.aux (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/chapter1.aux) (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/linear-algebra.aux) (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/matrix-calculus.aux) (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/optimization.aux) (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/duality.aux) (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/prob-theory.aux) (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/.aux) (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/approximation_fitting.aux) (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/statistical-estimation.aux) (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/geometry-problems.aux) (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/control.aux) (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/linear-algebra-algos.aux) (/Users/q3/Documents/Memex2/Optimization/convex-notes/chapters/appendixA.aux))
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 255F3FAAC7E00B88A5BDBE1AD7753CAA;7729.
+(rerunfilecheck)             Checksum: 6932C76B828901AD8B4CCD9FB3D10829;8177.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 44238 strings out of 478994
- 943430 string characters out of 5858184
- 2113826 words of memory out of 5000000
- 60862 multiletter control sequences out of 15000+600000
+ 44257 strings out of 478994
+ 944054 string characters out of 5858184
+ 2116405 words of memory out of 5000000
+ 60868 multiletter control sequences out of 15000+600000
  426788 words of font info for 122 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  124i,14n,121p,1653b,1642s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on /Users/q3/Documents/Memex2/Optimization/convex-notes/main.pdf (51 pages, 395593 bytes).
+{/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
+Output written on /Users/q3/Documents/Memex2/Optimization/convex-notes/main.pdf (52 pages, 403812 bytes).
 PDF statistics:
- 833 PDF objects out of 1000 (max. 8388607)
- 661 compressed objects within 7 object streams
- 175 named destinations out of 1000 (max. 500000)
- 446 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 860 PDF objects out of 1000 (max. 8388607)
+ 686 compressed objects within 7 object streams
+ 181 named destinations out of 1000 (max. 500000)
+ 470 words of extra memory for PDF output out of 10000 (max. 10000000)
 
